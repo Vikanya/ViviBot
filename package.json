@@ -6,7 +6,7 @@
 
   "scripts": {
 
-    "start": "node bot.js"
+    "start": "node ViviBot.js"
 
   },
 
