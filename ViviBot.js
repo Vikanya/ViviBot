@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
-const prefix = require('./config.json');
-
+const {prefix, token} = require('./config.json');
 const client = new Discord.Client();
 
 
@@ -10,7 +9,7 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
-	if (message.content === prefix + 'ping') {
+	if (message.content ===  `${prefix}ping`) {
 		message.reply('pong');
 	}
 });
