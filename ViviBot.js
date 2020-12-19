@@ -33,7 +33,7 @@ client.on('message', message => {
 	}
 	else if (command === 'avatar') {
 		if (!message.mentions.users.size) {
-			message.channel.send('Your avatar ' + message.author.displayAvatarURL({ dynamic: true }));
+			message.channel.send('Your avatar ' + message.author.displayAvatarURL({ format: 'png', dynamic: true }));
 			// return message.channel.send('Your avatar: ' + message.author.displayAvatarURL({ format: "png", dynamic: true }));
 		}
 		/*
