@@ -52,19 +52,19 @@ client.on('message', message => {
 			command.execute(message, args);
 		} catch (error) {
 			console.error(error);
-			message.reply('There was an error trying to execute that command!');
+			message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
 		}
 	}
-	else {
-		if (message.mentions.users.size) {
-			/* message.channel.send(message.mentions.users.first() + ' and ' + client.user
-				+ ' test ' + (message.mentions.users.first().equals(client.user)));*/
-			if (message.mentions.users.first().equals(client.user)) {
-				return message.channel.send(':robot: *Fired up and ready to serve.*');
-			}
+	else if (message.startsWith('http')){
+		message.react('😎');
+	}
+	else if (message.mentions.users.size) {
+		/* message.channel.send(message.mentions.users.first() + ' and ' + client.user
+			+ ' test ' + (message.mentions.users.first().equals(client.user)));*/
+		if (message.mentions.users.first().equals(client.user)) {
+			return message.channel.send(':robot: *Fired up and ready to serve.*');
 		}
 	}
-
 });
 
 client.login(process.env.BOT_TOKEN);
