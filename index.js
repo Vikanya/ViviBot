@@ -56,7 +56,25 @@ client.on('message', message => {
 		}
 	}
 	else if (message.content.startsWith('http')){
-		message.react('😎');
+		try {
+			message.react('😎');
+			
+			const filter = (reaction, user) => {
+				return ['😎'].includes(reaction.emoji.name) && user.id === message.author.id;
+			};
+
+			message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+			.then(collected => {
+				const reaction = collected.first();
+
+				message.channel.send('you reacted');
+			})
+			.catch(collected => {
+				message.reply('you reacted with neither a thumbs up, nor a thumbs down.');
+			});
+		} catch (error) {
+			console.error(error);
+		}
 	}
 	else if (message.mentions.users.size) {
 		/* message.channel.send(message.mentions.users.first() + ' and ' + client.user
