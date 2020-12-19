@@ -9,11 +9,11 @@ module.exports = {
 		const { commands } = message.client;
 
 		if (!args.length) {
-			data.push('__Command list :__');
-			data.push(commands.map(command => command.name).join(', '));
-			data.push(`\nUse \`${prefix}help [command name]\` to get info on a specific command`);
+			data.push('__**Command list :**__');
+			data.push(commands.map(command => command.name).join('\n'));
+			data.push(`\nUse \'${prefix}help [command name]\' to get info on a specific command`);
 
-			return message.channel.send(data, { split: true, code: true });	
+			return message.channel.send(data, { split: true });	
 		}
 		else {
 			const name = args[0].toLowerCase();
@@ -23,7 +23,7 @@ module.exports = {
 				return message.reply('There\'s no command with this name or alias');
 			}
 
-			data.push(`__**Name:** ${command.name}__`);
+			data.push(`__**Name:**__ ${command.name}\n`);
 
 			if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
 			if (command.description) data.push(`**Description:** ${command.description}`);
