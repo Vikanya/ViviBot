@@ -11,6 +11,7 @@
   "dependencies": {
     "discord.js": "^12.5.1",
     "express": "^4.17.1",
+    "websocket": "^1.0.33",
     "eslint": "^7.16.0"
   }
 }
