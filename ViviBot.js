@@ -32,8 +32,9 @@ client.on('message', message => {
 		}
 	}
 	else if (command === 'avatar') {
+		message.channel.send('Your avatar');
 		if (!message.mentions.users.size) {
-			return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: 'png', dynamic: true })}>`);
+			return message.channel.send('Your avatar: ' + message.author.displayAvatarURL({ format: 'png', dynamic: true }));
 		}
 
 		const avatarList = message.mentions.users.map(user => {
