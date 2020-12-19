@@ -1,7 +1,8 @@
 module.exports = {
 	name: 'avatar',
 	aliases: ['icon', 'pfp'],
-	description: 'Displays mentioned users\' avatars.',
+	description: 'Displays mentioned users\' avatars. If no mentions, display command user\'s avatar.',
+	usage: '[user] [user] etc...',
 	execute(message, args) {
 			
 			if (!message.mentions.users.size) {

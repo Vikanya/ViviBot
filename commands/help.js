@@ -1,19 +1,35 @@
+const prefix = process.env.PREFIX;
+
 module.exports = {
 	name: 'help',
-	description: 'Deletes x amount of messages.',
-	args: true,
+	description: 'List all commands or gives info bout a specific command.',
+	usage: '[command name]'
 	execute(message, args) {
-		const amount = parseInt(args[0]) + 1;
+		const data = [];
+		const { commands } = message.client;
 
-		if (isNaN(amount)) {
-			return message.reply('that doesn\'t seem to be a valid number.');
-		} else if (amount <= 1 || amount > 100) {
-			return message.reply('you need to input a number between 1 and 99.');
+		if (!args.length) {
+			data.push('__Command list :__');
+			data.push(commands.map(command => command.name).join(', '));
+			data.push(`\nUse \`${prefix}help [command name]\` to get info on a specific command`);
+
+			return message.channel.send(data, { split: true, code: true });	
 		}
+		else {
+			const name = args[0].toLowerCase();
+			const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
-		message.channel.bulkDelete(amount, true).catch(err => {
-			console.error(err);
-			message.channel.send('there was an error trying to prune messages in this channel!');
-		});
+			if (!command) {
+				return message.reply('There\'s no command with this name or alias');
+			}
+
+			data.push(`__**Name:** ${command.name}__`);
+
+			if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
+			if (command.description) data.push(`**Description:** ${command.description}`);
+			if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
+
+			message.channel.send(data, { split: true });
+		}
 	},
 };
