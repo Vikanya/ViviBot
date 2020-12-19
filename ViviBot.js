@@ -9,8 +9,8 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
-	if (message.content === `${prefix}ping`) {
-		message.reply('pong');
+	if (message.content.startsWith(prefix + 'ping')) {
+		message.reply('pong ' + message.content.slice(prefix.length + 4));
 	}
 });
 
