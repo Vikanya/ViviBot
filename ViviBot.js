@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const prefix = process.env.PREFIX;
 const client = new Discord.Client();
 
 
@@ -9,8 +9,17 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
-	if (message.content.startsWith(prefix + 'ping')) {
-		message.reply('pong ' + message.content.slice(prefix.length + 4));
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).trim().split(' ');
+	const command = args.shift().toLowerCase();
+	if (command === 'ping') {
+		if (args.length) {
+			message.reply('pong ' + args);
+		}
+		else {
+			message.reply('pong');
+		}
 	}
 });
 
