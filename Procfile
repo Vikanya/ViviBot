@@ -1,1 +1,1 @@
-worker: node ViviBot.js
+worker: node index.js
