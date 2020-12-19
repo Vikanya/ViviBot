@@ -13,8 +13,8 @@ client.on('message', message => {
 
 	if (message.mentions.users.size) {
 		message.channel.send(message.mentions.users.first() + ' and ' + client.user 
-			+ ' test ' + (message.mentions.users[0] === client.user));
-		if (message.mentions.users[0] === client.user) {
+			+ ' test ' + (message.mentions.users.first().equals(client.user)));
+		if (message.mentions.users.first().equals(client.user)) {
 			return message.channel.send(':robot: Fired up and ready to serve.');
 		}
 	}
