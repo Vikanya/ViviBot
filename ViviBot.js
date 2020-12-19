@@ -12,8 +12,8 @@ client.on('message', message => {
 	if (message.author.bot) return;
 
 	if (message.mentions.users.size) {
-		message.channel.send(message.mentions.users.first() + ' and ' + client.user +
-			message.mentions.users[0] === client.user);
+		message.channel.send(message.mentions.users.first() + ' and ' + client.user 
+			+ ' test ' + (message.mentions.users[0] === client.user));
 		if (message.mentions.users[0] === client.user) {
 			return message.channel.send(':robot: Fired up and ready to serve.');
 		}
