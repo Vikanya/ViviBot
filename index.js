@@ -22,7 +22,7 @@ client.on('ready', () => {
 client.on('message', message => {
 	if (message.author.bot) return;
 	if (message.channel.type === 'dm') {
-		message.reply('Don\'t talk to me');
+		return message.reply('Don\'t talk to me');
 	}
 	
 
