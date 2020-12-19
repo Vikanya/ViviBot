@@ -12,15 +12,15 @@ client.on('message', message => {
 	if (message.author.bot) return;
 
 	if (message.mentions.users.size) {
-		message.channel.send(message.mentions.users.first() + ' and ' + client.user 
-			+ ' test ' + (message.mentions.users.first().equals(client.user)));
+		/* message.channel.send(message.mentions.users.first() + ' and ' + client.user
+			+ ' test ' + (message.mentions.users.first().equals(client.user)));*/
 		if (message.mentions.users.first().equals(client.user)) {
-			return message.channel.send(':robot: Fired up and ready to serve.');
+			return message.channel.send(':robot: *Fired up and ready to serve.*');
 		}
 	}
 
 	if (!message.content.startsWith(prefix)) return;
-	
+
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 	if (command === 'ping') {
