@@ -9,9 +9,16 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
+	if (message.mentions.users.size) {
+		message.channel.send(message.mentions.users[0] + ' and ' + client.user);
+		if (message.mentions.users[0] === client.user) {
+			return message.channel.send(':robot: Fired up and ready to serve.');
+		}
+	}
+
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(' ');
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 	if (command === 'ping') {
 		if (args.length) {
