@@ -55,7 +55,7 @@ client.on('message', message => {
 			message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
 		}
 	}
-	else if (message.startsWith('http')){
+	else if (message.content.startsWith('http')){
 		message.react('😎');
 	}
 	else if (message.mentions.users.size) {
