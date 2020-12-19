@@ -27,26 +27,15 @@ client.on('message', message => {
 	if (message.content.startsWith(prefix)) {
 		const args = message.content.slice(prefix.length).trim().split(/ +/);
 		const command = args.shift().toLowerCase();
-		if (command === 'ping') {
-			if (args.length) {
-				message.reply('pong ' + args);
-			}
-			else {
-				message.reply('pong');
-			}
-		}
-		else if (command === 'avatar') {
-			if (!message.mentions.users.size) {
-				return message.channel.send('Your avatar: ' + message.author.displayAvatarURL({ format: "png", dynamic: true }));
-			}
-			const avatarList = message.mentions.users.map(user => {
-				return `${user.username}'s avatar: <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
-			});
+		
+		if (!client.commands.has(command)) return;
 
-			// send the entire array of strings as a message
-			// by default, discord.js will `.join()` the array with `\n`
-			message.channel.send(avatarList);
-		}		
+		try {
+			client.commands.get(command).execute(message, args);
+		} catch (error) {
+			console.error(error);
+			message.reply('there was an error trying to execute that command!');
+		}
 	}
 	else {
 		if (message.mentions.users.size) {
