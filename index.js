@@ -61,13 +61,14 @@ client.on('message', message => {
 
 		if (!youtubeEmbed) return;
 
-		message.channel.send('found an embed from youtube in ' + message.url);
+		message.channel.guild.channels.cache.find((id, chan) => 
+			chan.isText() && chan.name.toLowerCase() === "releases-list").send('found an embed from youtube in ' + message.url);
 
 		try {
-			message.react('😎');
+			message.react('❌');
 			
 			const filter = (reaction, user) => {
-				return ['😎'].includes(reaction.emoji.name) && user.id === message.author.id;
+				return ['❌'].includes(reaction.emoji.name) && user.id === message.author.id;
 			};
 
 			message.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
@@ -77,7 +78,7 @@ client.on('message', message => {
 				message.channel.send('you reacted');
 			})
 			.catch(collected => {
-				message.reply('you reacted with neither a thumbs up, nor a thumbs down.');
+				message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
 			});
 		} catch (error) {
 			console.error(error);
