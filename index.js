@@ -56,7 +56,7 @@ client.on('message', message => {
 		}
 	}
 	else if (message.content.startsWith('http')){
-		if (!message.embeds || message.channel) return;
+		if (!message.embeds/* || message.channel*/) return;
 		const youtubeEmbed = message.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
 
 		if (!youtubeEmbed) return;
