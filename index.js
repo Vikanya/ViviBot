@@ -56,6 +56,11 @@ client.on('message', message => {
 		}
 	}
 	else if (message.content.startsWith('http')){
+		if (!message.embeds) return;
+		message.channel.send('found an embed from ' + message.embeds[0].provider);
+		const youtubeEmbed = message.embeds.find(embed => embed && embed.provider === 'youtube');
+
+		//if ()
 		try {
 			message.react('😎');
 			
@@ -63,7 +68,7 @@ client.on('message', message => {
 				return ['😎'].includes(reaction.emoji.name) && user.id === message.author.id;
 			};
 
-			message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+			message.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
 			.then(collected => {
 				const reaction = collected.first();
 
