@@ -57,10 +57,12 @@ client.on('message', message => {
 	}
 	else if (message.content.startsWith('http')){
 		if (!message.embeds) return;
-		message.channel.send('found an embed from ' + message.embeds[0].provider.name);
-		const youtubeEmbed = message.embeds.find(embed => embed && embed.provider.name === 'youtube');
+		const youtubeEmbed = message.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
 
-		//if ()
+		if (!youtubeEmbed) return;
+
+		message.channel.send('found an embed from youtube');
+
 		try {
 			message.react('😎');
 			
