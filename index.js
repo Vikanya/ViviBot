@@ -68,7 +68,7 @@ client.on('message', message => {
 			const newMessage = message.channel.guild.channels.cache
 				.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
 				.send(youtubeEmbed.url + '\nclique là pour la discussion => ' + message.url);
-		}, 10);
+		}, 10000);
 		
 /*
 		try {
