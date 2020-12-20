@@ -61,7 +61,7 @@ client.on('message', message => {
 
 		if (!youtubeEmbed) return;
 
-		await const newMessage = message.channel.guild.channels.cache
+		const newMessage = message.channel.guild.channels.cache
 			.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
 			.send(youtubeEmbed.url + '\noriginal mesage : ' + message.url)
 			.then(mess => mess.react('❌'));
