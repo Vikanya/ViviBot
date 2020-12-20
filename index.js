@@ -62,7 +62,7 @@ client.on('message', message => {
 		if (!youtubeEmbed) return;
 
 		message.channel.guild.channels.cache.find((id, chan) => 
-			chan.isText() && chan.name.toLowerCase() === "releases-list").send('found an embed from youtube in ' + message.url);
+			chan.type === 'text' && chan.name.toLowerCase() === "releases-list").send('found an embed from youtube in ' + message.url);
 
 		try {
 			message.react('❌');
