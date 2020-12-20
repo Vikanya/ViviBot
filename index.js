@@ -61,7 +61,7 @@ client.on('message', message => {
 
 		if (!youtubeEmbed) return;
 
-		message.channel.send('found an embed from youtube in ' + message.id);
+		message.channel.send('found an embed from youtube in ' + message.url);
 
 		try {
 			message.react('😎');
