@@ -61,13 +61,13 @@ client.on('message', message => {
 
 		if (!youtubeEmbed) return;
 
-		message.channel.guild.channels.cache
+		await const newMessage = message.channel.guild.channels.cache
 			.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
-			.send('found an embed from youtube in ' + message.url);
+			.send(youtubeEmbed.url + '\noriginal mesage : ' + message.url)
+			.then(mess => mess.react('❌'));
 		
-
+/*
 		try {
-			message.react('❌');
 			
 			const filter = (reaction, user) => {
 				return ['❌'].includes(reaction.emoji.name) && user.id === message.author.id;
@@ -84,7 +84,7 @@ client.on('message', message => {
 			});
 		} catch (error) {
 			console.error(error);
-		}
+		}*/
 	}
 	else if (message.mentions.users.size) {
 		/* message.channel.send(message.mentions.users.first() + ' and ' + client.user
