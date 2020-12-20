@@ -56,13 +56,13 @@ client.on('message', message => {
 		}
 	}
 	else if (message.content.startsWith('http')){
-		console.log('before timeout');
+		//console.log('before timeout');
 		setTimeout(function(){ 
-			console.log(message.embeds.length);
+			//console.log(message.embeds.length);
 			if (!message.embeds || message.channel.name.toLowerCase() !== 'releases') return;
 			const youtubeEmbed = message.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
 
-			console.log(youtubeEmbed);
+			//console.log(youtubeEmbed);
 			if (!youtubeEmbed) return;
 
 			const newMessage = message.channel.guild.channels.cache
