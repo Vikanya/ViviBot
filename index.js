@@ -57,13 +57,15 @@ client.on('message', message => {
 	}
 	else if (message.content.startsWith('http')){
 		if (!message.embeds || message.channel.name.toLowerCase() !== 'releases') return;
-		const youtubeEmbed = message.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
+		setTimeout(function(){ 
+			const youtubeEmbed = message.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
 
-		if (!youtubeEmbed) return;
+			if (!youtubeEmbed) return;
 
-		const newMessage = message.channel.guild.channels.cache
-			.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
-			.send(youtubeEmbed.url + '\nclique là pour la discussion => ' + message.url);
+			const newMessage = message.channel.guild.channels.cache
+				.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
+				.send(youtubeEmbed.url + '\nclique là pour la discussion => ' + message.url);
+		}, 10);
 		
 /*
 		try {
