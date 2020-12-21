@@ -131,9 +131,9 @@ client.on('message', message => {
 		/* message.channel.send(message.mentions.users.first() + ' and ' + client.user
 			+ ' test ' + (message.mentions.users.first().equals(client.user)));*/
 		if (message.mentions.users.first().equals(client.user)) {
-			const resultMessage = message.cleanContent.trim().replace(client.user.username, '').replace('@', '').toLowerCase().trim();
+			const resultMessage = message.cleanContent.replace(client.user.username, '').replace('@', '').toLowerCase().replace(' ', '').trim();
 			console.log('\'' + message.cleanContent + '\' remove \'' + (client.user.username) + '\' = \'' + resultMessage + '\'');
-			if (resultMessage.trim() === 'merci') return message.reply('de rien :Finger_Guns:');
+			if (resultMessage === 'merci') return message.reply('de rien :Finger_Guns:');
 			return message.channel.send(':robot: *Fired up and ready to serve.*');
 		}
 	}
