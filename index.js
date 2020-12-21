@@ -133,7 +133,7 @@ client.on('message', message => {
 		if (message.mentions.users.first().equals(client.user)) {
 			let resultMessage = message.cleanContent.replace(client.user.username, '').replace('@', '').toLowerCase().replace(' ', '').trim();
 			console.log('\'' + message.cleanContent + '\' remove \'' + (client.user.username) 
-				+ '\' = \'' + resultMessage + '\' & \'' + 'merci' + '\'' + ' ' + (resultMessage.toLowerCase().includes('merci'.toLowerCase()));
+				+ '\' = \'' + resultMessage + '\' & \'' + 'merci' + '\'' + ' ' + (resultMessage.toLowerCase().includes('merci'.toLowerCase())));
 			console.log(resultMessage);
 			if (resultMessage.toLowerCase().includes('merci'.toLowerCase()) {
 				return message.reply('de rien :Finger_Guns:');
