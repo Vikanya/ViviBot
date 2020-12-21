@@ -98,14 +98,15 @@ client.on('message', message => {
 			const newMessage = message.reply('👮‍♂️ Pour garder ce channel clean, on évite les messages de discussion.'
 				+ '\nPour parler d\'une release, clique sur le lien à côté de celle ci dans ce channel.'
 				+ '\n\nUne fois le message lu, clique sur la react ✔ pour effacer ce mesage et le tien.'
-				+ '\n(Ils seront automatiquement effacés dans 100s)').then(mess => mess.react('✔'));
+				+ '\n(Ils seront automatiquement effacés dans 100s)').then(newMessage => newMessage.react('✔'));
+			
 			
 			try {
 				const filter = (reaction, user) => {
 					return ['✔'].includes(reaction.emoji.name) && user.id === message.author.id;
 				};
 
-				message.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
+				newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
 				.then(collected => {
 					const reaction = collected.first();
 
