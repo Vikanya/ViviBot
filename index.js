@@ -56,13 +56,10 @@ client.on('message', message => {
 		}
 	}
 	else if (message.content.startsWith('http')){
-		//console.log('before timeout');
 		setTimeout(function(){ 
-			//console.log(message.embeds.length);
 			if (!message.embeds || message.channel.name.toLowerCase() !== 'releases') return;
 			const youtubeEmbed = message.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
 
-			//console.log(youtubeEmbed);
 			if (!youtubeEmbed) return;
 
 			const newMessage = message.channel.guild.channels.cache
@@ -70,7 +67,7 @@ client.on('message', message => {
 				.send(youtubeEmbed.url + '\nclique là pour la discussion => ' + message.url);
 		}, 10000);
 		
-/*
+		/*
 		try {
 			
 			const filter = (reaction, user) => {
@@ -89,6 +86,40 @@ client.on('message', message => {
 		} catch (error) {
 			console.error(error);
 		}*/
+	}
+	else if (message.channel.name.toLowerCase() === 'releases-list') {
+		setTimeout(function(){ 
+			const wrongMessage = false;
+			if (!message.embeds) wrongMessage = true;
+			const youtubeEmbed = message.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
+
+			if (!youtubeEmbed) wrongMessage = true;
+
+			const newMessage = message.reply('👮‍♂️ Pour garder ce channel clean, on évite les messages de discussion.'
+				+ '\nPour parler d\'une release, clique sur le lien à côté de celle ci dans ce channel.'
+				+ '\n\nUne fois le message lu, clique sur la react ✔ pour effacer ce mesage et le tien.'
+				+ '\n(Ils seront automatiquement effacés dans 100s)').then(mess => mess.react('✔'));
+			
+			try {
+				const filter = (reaction, user) => {
+					return ['✔'].includes(reaction.emoji.name) && user.id === message.author.id;
+				};
+
+				message.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
+				.then(collected => {
+					const reaction = collected.first();
+
+					message.delete();
+					newMessage.delete();
+				})
+				.catch(collected => {
+					message.delete();
+					newMessage.delete();
+				});
+			} catch (error) {
+				console.error(error);
+			}
+		}, 10000);
 	}
 	else if (message.mentions.users.size) {
 		/* message.channel.send(message.mentions.users.first() + ' and ' + client.user
