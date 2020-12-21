@@ -134,7 +134,7 @@ client.on('message', message => {
 			let resultMessage = message.cleanContent.replace(client.user.username, '').replace('@', '').toLowerCase().trim();
 			
 			if (resultMessage.includes('merci')) {
-				return message.reply('de rien ' + message.guild.emojis.find(emoji => emoji.name === "viviDisgust"));
+				return message.reply('de rien <:viviDisgust:696754743409770588>');
 			}
 			return message.channel.send(':robot: *Fired up and ready to serve.*');
 		}
