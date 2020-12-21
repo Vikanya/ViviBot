@@ -89,7 +89,7 @@ client.on('message', message => {
 	}
 	else if (message.channel.name.toLowerCase() === 'releases-list') {
 		setTimeout(function(){ 
-			const wrongMessage = false;
+			let wrongMessage = false;
 			if (!message.embeds) wrongMessage = true;
 			const youtubeEmbed = message.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
 
