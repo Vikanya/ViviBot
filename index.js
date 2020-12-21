@@ -131,7 +131,7 @@ client.on('message', message => {
 			+ ' test ' + (message.mentions.users.first().equals(client.user)));*/
 		if (message.mentions.users.first().equals(client.user)) {
 			const resultMessage = message.cleanContent.replace('@' + client.user.username, '').trim().toLowerCase();
-			console.log(message.cleanContent + ' remove ' + client.user.username + ' = ' + resultMessage);
+			console.log('\'' + message.cleanContent + '\' remove \'' + ('@' + client.user.username) + '\' = \'' + resultMessage + '\'');
 			if (resultMessage === 'merci') return message.reply('de rien :Finger_Guns:');
 			return message.channel.send(':robot: *Fired up and ready to serve.*');
 		}
