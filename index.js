@@ -96,7 +96,7 @@ client.on('message', message => {
 
 			if (!youtubeEmbed) wrongMessage = true;
 
-			console.log('message supprimé : ' + message.content + ' from ' + messagege.author.username);
+			console.log('message supprimé : ' + message.content + ' from ' + message.author.username);
 			message.reply('👮‍♂️ Pour garder ce channel clean, on évite les messages de discussion.'
 				+ '\nPour parler d\'une release, clique sur le lien à côté de celle ci dans ce channel.'
 				+ '\n\nUne fois le message lu, clique sur la react ✔ pour effacer ce mesage et le tien.'
