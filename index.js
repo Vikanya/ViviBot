@@ -135,7 +135,7 @@ client.on('message', message => {
 			console.log('\'' + message.cleanContent + '\' remove \'' + (client.user.username) 
 				+ '\' = \'' + resultMessage + '\' & \'' + 'merci' + '\'' + ' ' + (resultMessage.toLowerCase().includes('merci'.toLowerCase())));
 			console.log(resultMessage);
-			if (resultMessage.toLowerCase().includes('merci'.toLowerCase()) {
+			if (resultMessage.toLowerCase().includes('merci'.toLowerCase())) {
 				return message.reply('de rien :Finger_Guns:');
 			}
 			return message.channel.send(':robot: *Fired up and ready to serve.*');
