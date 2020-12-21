@@ -65,7 +65,7 @@ client.on('message', message => {
 			const newMessage = message.channel.guild.channels.cache
 				.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
 				.send(youtubeEmbed.url + '\nclique là pour la discussion => ' + message.url);
-		}, 10000);
+		}, 5000);
 		
 		/*
 		try {
@@ -95,11 +95,11 @@ client.on('message', message => {
 
 			if (!youtubeEmbed) wrongMessage = true;
 
-			const newMessage = message.reply('👮‍♂️ Pour garder ce channel clean, on évite les messages de discussion.'
+			message.reply('👮‍♂️ Pour garder ce channel clean, on évite les messages de discussion.'
 				+ '\nPour parler d\'une release, clique sur le lien à côté de celle ci dans ce channel.'
 				+ '\n\nUne fois le message lu, clique sur la react ✔ pour effacer ce mesage et le tien.'
-				+ '\n(Ils seront automatiquement effacés dans 100s)').then(newMessage => newMessage.react('✔'))
-					.then(newMessage => {
+				+ '\n(Ils seront automatiquement effacés dans 100s)').then(newMessage => {
+						newMessage.react('✔');
 						try {
 							const filter = (reaction, user) => {
 								return ['✔'].includes(reaction.emoji.name) && user.id === message.author.id;
@@ -123,7 +123,7 @@ client.on('message', message => {
 
 			
 			
-		}, 10000);
+		}, 5000);
 	}
 	else if (message.mentions.users.size) {
 		/* message.channel.send(message.mentions.users.first() + ' and ' + client.user
