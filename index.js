@@ -1,6 +1,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const prefix = process.env.PREFIX;
+const EMBED_WAIT = 3000;
 
 const client = new Discord.Client();
 
@@ -65,7 +66,7 @@ client.on('message', message => {
 			const newMessage = message.channel.guild.channels.cache
 				.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
 				.send(youtubeEmbed.url + '\nclique là pour la discussion => ' + message.url);
-		}, 5000);
+		}, EMBED_WAIT);
 		
 		/*
 		try {
@@ -123,7 +124,7 @@ client.on('message', message => {
 
 			
 			
-		}, 5000);
+		}, EMBED_WAIT);
 	}
 	else if (message.mentions.users.size) {
 		/* message.channel.send(message.mentions.users.first() + ' and ' + client.user
