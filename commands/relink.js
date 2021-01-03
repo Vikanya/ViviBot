@@ -5,8 +5,12 @@ module.exports = {
 	usage: '<message link>',
 	execute(message, args) {
 		console.log(args);
-		const channelID = args[0].substr(29);
+		let IDs =  args[0].substr(29).split('/');
+		console.log(IDs);
+		const channelID = IDs[1];
+		const messageID = IDs[2];
 		console.log(channelID);
+		console.log(messageID);
 
 /*
 		if (isNaN(amount)) {
