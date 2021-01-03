@@ -5,7 +5,7 @@ module.exports = {
 	usage: '<message link>',
 	execute(message, args) {
 		console.log(args);
-		const channelID = args.substr(29);
+		const channelID = args[0].substr(29);
 		console.log(channelID);
 
 /*
