@@ -12,6 +12,19 @@ module.exports = {
 		console.log(channelID);
 		console.log(messageID);
 
+		const channel = message.channel.guild.channels.resolve(channelID);
+		console.log('channel : ' + channelID);
+		const linkedMessage = channel.fetch(messageID);
+		console.log('linked message : ' + linkedMessage);
+
+		if (!linkedMessage.embeds) return;
+		const youtubeEmbed = linkedMessage.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
+
+		if (!youtubeEmbed) return;
+
+		const newMessage = linkedMessage.channel.guild.channels.cache
+			.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
+			.send(youtubeEmbed.url + '\nclique là pour la discussion => ' + linkedMessage.url);
 /*
 		if (isNaN(amount)) {
 			return message.reply('that doesn\'t seem to be a valid number.');

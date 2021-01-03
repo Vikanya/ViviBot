@@ -56,7 +56,8 @@ client.on('message', message => {
 			message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
 		}
 	}
-	else if (message.content.startsWith('http')){
+	/// ------------------------------------------------- CHECK FOR YOUTUBE EMBEDS ------------------------------------------------
+	else if (message.content.includes('http')){
 		setTimeout(function(){ 
 			if (!message.embeds || message.channel.name.toLowerCase() !== 'releases') return;
 			const youtubeEmbed = message.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
@@ -68,26 +69,8 @@ client.on('message', message => {
 				.send(youtubeEmbed.url + '\nclique là pour la discussion => ' + message.url);
 		}, EMBED_WAIT);
 		
-		/*
-		try {
-			
-			const filter = (reaction, user) => {
-				return ['❌'].includes(reaction.emoji.name) && user.id === message.author.id;
-			};
-
-			message.awaitReactions(filter, { max: 1, time: 600000, errors: ['time'] })
-			.then(collected => {
-				const reaction = collected.first();
-
-				message.channel.send('you reacted');
-			})
-			.catch(collected => {
-				message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
-			});
-		} catch (error) {
-			console.error(error);
-		}*/
 	}
+	/// --------------------------------------------- CHECK MESSAGES IN WRONG CHANNEL ---------------------------------------------
 	else if (message.channel.name.toLowerCase() === 'releases-list') {
 		setTimeout(function(){ 
 			let wrongMessage = false;
@@ -127,9 +110,8 @@ client.on('message', message => {
 			
 		}, EMBED_WAIT);
 	}
+	/// ---------------------------------------------------- CHECK BOT MENTIONS ---------------------------------------------------
 	else if (message.mentions.users.size) {
-		/* message.channel.send(message.mentions.users.first() + ' and ' + client.user
-			+ ' test ' + (message.mentions.users.first().equals(client.user)));*/
 		if (message.mentions.users.first().equals(client.user)) {
 			let resultMessage = message.cleanContent.replace(client.user.username, '').replace('@', '').toLowerCase().trim();
 			
