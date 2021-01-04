@@ -10,7 +10,7 @@ module.exports = {
 		}
 		else 
 		{
-			let newCommandName = args.pop();
+			let newCommandName = args.shift();
 			let remainingArgs = '';
 			args.forEach(element => remainingArgs += element + ' ');
 			keyv.get(newCommandName).then(resultGet => {
