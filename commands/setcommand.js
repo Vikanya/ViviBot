@@ -64,6 +64,7 @@ module.exports = {
 
 									newMessage.awaitReactions(filter, { max: 100, time: 100000, errors: ['time'] })
 									.then(collected => {
+										console.log('eye collected : ' + eyed);
 										if (eyed)
 										{
 											newMessage.edit('Cette commande existe déjà, react ✔ pour la remplacer, ❌ pour annuler'
