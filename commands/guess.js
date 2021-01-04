@@ -9,10 +9,10 @@ module.exports = {
 		.then(html => {
 		    const $ = cheerio.load(html)
 		    const title = $("meta[property='og:title']")[0] || $("meta[name='twitter:title']")
-		    const table = $("meta[id='table_1']")[0]
+		    const table = $("table[id='table_1']")[0]
 
 		    console.log(title ? title.attribs.content : "no title")
-		    console.log(table ? table.attribs.content : "no description")
+		    console.log(table ? table.attribs.content : "no table")
 		});
 	},
 };
