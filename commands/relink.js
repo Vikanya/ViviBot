@@ -19,8 +19,10 @@ module.exports = {
 
 		if (!linkedMessage.embeds) return;
 		const youtubeEmbed = linkedMessage.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
+		console.log('found an embed : ' + youtubeEmbed);
 
 		if (!youtubeEmbed) return;
+		console.log('youtube');
 
 		const newMessage = linkedMessage.channel.guild.channels.cache
 			.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
