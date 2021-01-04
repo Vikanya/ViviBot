@@ -5,7 +5,7 @@ const prefix = process.env.PREFIX;
 const EMBED_WAIT = 5000;
 
 const client = new Discord.Client();
-const keyv = new Keyv('postgresql://user:pass@localhost:5432/dbname');
+const keyv = new Keyv(process.env.DATABASE_URL);
 keyv.on('error', err => console.error('Keyv connection error:', err));
 
 client.commands = new Discord.Collection();
