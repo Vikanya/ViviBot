@@ -16,7 +16,7 @@ module.exports = {
 		console.log('channel : ' + channel);
 		channel.fetch(messageID).then(linkedMessage => 
 		{
-			console.log('linked message : ' + linkedMessage);
+			console.log('linked message : ' + linkedMessage.content);
 
 			if (!linkedMessage.embeds) return;
 			const youtubeEmbed = linkedMessage.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
