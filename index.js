@@ -40,9 +40,8 @@ client.on('message', message => {
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 		if (!command)
-		{
+		{/// --------------------------------- handle commands from setcommand ---------------------------------
 			const result = keyv.get(commandName).then(result => {
-				console.log(result);
 				if (result)
 				{
 					message.channel.send(result);				
