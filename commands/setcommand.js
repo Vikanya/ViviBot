@@ -64,6 +64,7 @@ module.exports = {
 									newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
 									.then(collected => {
 										newMessage.edit('current command : \n' + resultGet);
+										newMessage.reactions.cache.get('👀').remove();
 									})
 									.catch(err => console.log('error : ' + err));
 								} catch (error) {
