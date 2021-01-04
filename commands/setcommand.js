@@ -13,6 +13,17 @@ module.exports = {
 			let newCommandName = args.shift();
 			let remainingArgs = '';
 			args.forEach(element => remainingArgs += element + ' ');
+			if (remainingArgs === 'delete')
+			{
+				if (keyv.delete(newCommandName))
+				{
+					return message.reply(newCommandName + ' command deleted.');
+				}
+				else 
+				{
+					return message.reply(newCommandName + ' doesn\'t exist.');
+				}
+			}
 			keyv.get(newCommandName).then(resultGet => {
 				if (resultGet)
 				{
