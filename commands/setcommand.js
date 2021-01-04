@@ -80,6 +80,7 @@ module.exports = {
 					const result = keyv.set(newCommandName, remainingArgs);
 					if (result)
 					{
+						console.log('new command ' + newCommandName + ' : ' + remainingArgs);
 						message.reply(newCommandName + ' command successfully set !');
 					}
 					else
