@@ -27,6 +27,7 @@ module.exports = {
 									newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
 									.then(collected => {
 										const result = keyv.set(newCommandName, remainingArgs);
+										console.log('new command ' + newCommandName + ' : ' + remainingArgs);
 										if (result)
 										{
 											newMessage.edit(newCommandName + ' command successfully set !');
