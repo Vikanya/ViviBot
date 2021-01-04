@@ -4,13 +4,16 @@ module.exports = {
 	args: true,
 	usage: '<command name> <message>',
 	execute(message, args, keyv) {
-		if (args.length != 2)
+		if (args.length < 2)
 		{
 			message.reply('You need 2 arguments for this command. (type \'!help setcommand\' for more info)');
 		}
 		else 
 		{
-			keyv.get(args[0]).then(resultGet => {
+			let newCommandName = args.pop();
+			let remainingArgs = '';
+			args.forEach(element => remainingArgs += element + ' ');
+			keyv.get(newCommandName).then(resultGet => {
 				if (resultGet)
 				{
 					message.reply('Cette commande existe déjà, react ✔ pour la remplacer, ❌ pour annuler'
@@ -23,10 +26,10 @@ module.exports = {
 
 									newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
 									.then(collected => {
-										const result = keyv.set(args[0], args[1]);
+										const result = keyv.set(newCommandName, remainingArgs);
 										if (result)
 										{
-											newMessage.edit(args[0] + ' command successfully set !');
+											newMessage.edit(newCommandName + ' command successfully set !');
 										}
 										else
 										{
@@ -74,10 +77,10 @@ module.exports = {
 				}
 				else 
 				{
-					const result = keyv.set(args[0], args[1]);
+					const result = keyv.set(newCommandName, remainingArgs);
 					if (result)
 					{
-						message.reply(args[0] + ' command successfully set !');
+						message.reply(newCommandName + ' command successfully set !');
 					}
 					else
 					{
