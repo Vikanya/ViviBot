@@ -10,7 +10,7 @@ module.exports = {
 		}
 		else 
 		{
-			keyv.get(args[0]).then(result => {
+			keyv.get(args[0]).then(resultGet => {
 				console.log(resultGet);
 				if (resultGet)
 				{
