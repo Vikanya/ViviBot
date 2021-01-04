@@ -15,7 +15,7 @@ module.exports = {
 			let remainingArgs = '';
 			args.forEach(element => remainingArgs += element + ' ');
 			remainingArgs = remainingArgs.trim();
-			console.log(message.author.username + '/ ' + remainingArgs + ' : ' + newCommandName);
+			console.log(message.author.username + ' try set command / ' + remainingArgs + ' : ' + newCommandName);
 			/// ----------------------------------------------------- DELETE COMMANDS -----------------------------------------------------
 			if (remainingArgs.localeCompare('delete') == 0)
 			{
