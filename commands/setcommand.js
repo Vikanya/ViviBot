@@ -62,7 +62,7 @@ module.exports = {
 										return ['👀'].includes(reaction.emoji.name) && user.id === message.author.id;
 									};
 
-									newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
+									newMessage.awaitReactions(filter, { max: 2, time: 100000, errors: ['time'] })
 									.then(collected => {
 										console.log('eye collected : ' + eyed);
 										if (eyed)
@@ -72,7 +72,7 @@ module.exports = {
 										}
 										else 
 										{
-											newMessage.edit(resultGet);
+											newMessage.edit('current command : 'resultGet);
 										}
 										eyed = !eyed;
 									})
