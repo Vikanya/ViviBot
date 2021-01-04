@@ -14,19 +14,23 @@ module.exports = {
 
 		const channel = message.channel.guild.channels.resolve(channelID);
 		console.log('channel : ' + channel);
-		const linkedMessage = channel.fetch(messageID);
-		console.log('linked message : ' + linkedMessage);
+		channel.fetch(messageID).then(linkedMessage => 
+		{
+			console.log('linked message : ' + linkedMessage);
 
-		if (!linkedMessage.embeds) return;
-		const youtubeEmbed = linkedMessage.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
-		console.log('found an embed : ' + youtubeEmbed);
+			if (!linkedMessage.embeds) return;
+			const youtubeEmbed = linkedMessage.embeds.find(embed => embed && embed.provider.name.toLowerCase() === 'youtube');
+			console.log('found an embed : ' + youtubeEmbed);
 
-		if (!youtubeEmbed) return;
-		console.log('youtube');
+			if (!youtubeEmbed) return;
+			console.log('youtube');
 
-		const newMessage = linkedMessage.channel.guild.channels.cache
-			.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
-			.send(youtubeEmbed.url + '\nclique là pour la discussion => ' + linkedMessage.url);
+			const newMessage = linkedMessage.channel.guild.channels.cache
+				.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
+				.send(youtubeEmbed.url + '\nclique là pour la discussion => ' + linkedMessage.url);
+
+		});
+
 /*
 		if (isNaN(amount)) {
 			return message.reply('that doesn\'t seem to be a valid number.');
