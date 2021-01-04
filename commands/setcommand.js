@@ -11,7 +11,7 @@ module.exports = {
 		}
 		else 
 		{
-			let newCommandName = args.shift();
+			let newCommandName = args.shift().toLowerCase();
 			let remainingArgs = '';
 			args.forEach(element => remainingArgs += element + ' ');
 			remainingArgs = remainingArgs.trim();
