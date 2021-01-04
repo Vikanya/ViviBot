@@ -72,7 +72,7 @@ module.exports = {
 										}
 										else 
 										{
-											newMessage.edit('current command : 'resultGet);
+											newMessage.edit('current command : ' + resultGet);
 										}
 										eyed = !eyed;
 									})
