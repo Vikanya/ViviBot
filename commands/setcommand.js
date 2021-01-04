@@ -49,9 +49,9 @@ module.exports = {
 									newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
 									.then(collected => {
 										newMessage.edit('Command edition aborted.');
+										newMessage.reactions.removeAll();
 									})
 									.catch(err => console.log('error : ' + err));
-									newMessage.reactions.removeAll();
 								} catch (error) {
 									console.error(error);
 								}
