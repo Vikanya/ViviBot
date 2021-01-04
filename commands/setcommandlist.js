@@ -6,7 +6,7 @@ module.exports = {
 		{
 			keyv.opts.store.query('SELECT * FROM keyv;').then(keys => {
 				let finalString = '';
-				keys.forEach(element => finalString += element.key + ', ');
+				keys.forEach(element => finalString += element.key.toString() + ', ');
 				console.log(finalString);				
 			});
 		}
