@@ -15,7 +15,7 @@ module.exports = {
 			let remainingArgs = '';
 			args.forEach(element => remainingArgs += element + ' ');
 			console.log(remainingArgs);
-			if (remainingArgs === 'delete')
+			if (remainingArgs.localeCompare('delete') == 0)
 			{
 				if (keyv.delete(newCommandName))
 				{
