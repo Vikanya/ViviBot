@@ -29,7 +29,7 @@ module.exports = {
 						return message.reply(newCommandName + ' doesn\'t exist.');
 					}	
 				});
-				
+				return;
 			}
 			keyv.get(newCommandName).then(resultGet => {
 				if (resultGet)
