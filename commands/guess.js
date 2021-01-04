@@ -12,7 +12,7 @@ module.exports = {
 		    const table = $("table[id='table_1']")[0]
 
 		    console.log(title ? title.attribs.content : "no title")
-		    console.log(table ? table : "no table")
+		    console.log(table ? table.children : "no table")
 		});
 	},
 };
