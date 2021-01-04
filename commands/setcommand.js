@@ -1,14 +1,9 @@
-const Keyv = require('keyv');
-
-const keyv = new Keyv();
-keyv.on('error', err => console.error('Keyv connection error:', err));
-
 module.exports = {
 	name: 'setcommand',
 	description: 'creates/changes a command that will make the bot say <something>.',
 	args: true,
 	usage: '<command name> <message>',
-	execute(message, args) {
+	execute(message, args, keyv) {
 		if (args.length != 2)
 		{
 			message.reply('You need 2 arguments for this command. (type \'!help setcommand\' for more info)');
