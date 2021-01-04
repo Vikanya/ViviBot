@@ -13,7 +13,7 @@ module.exports = {
 		console.log(messageID);
 
 		const channel = message.channel.guild.channels.resolve(channelID);
-		console.log('channel : ' + channelID);
+		console.log('channel : ' + channel);
 		const linkedMessage = channel.fetch(messageID);
 		console.log('linked message : ' + linkedMessage);
 
