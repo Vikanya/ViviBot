@@ -19,16 +19,17 @@ module.exports = {
 			/// ----------------------------------------------------- DELETE COMMANDS -----------------------------------------------------
 			if (remainingArgs.localeCompare('delete') == 0)
 			{
-				console.log('test : ' + keyv.get(newCommandName));
-				if (keyv.get(newCommandName))
-				{
-					keyv.delete(newCommandName);
-					return message.reply(newCommandName + ' command deleted.');
-				}
-				else 
-				{
-					return message.reply(newCommandName + ' doesn\'t exist.');
-				}
+				keyv.delete(newCommandName).then (delResult => {
+					if (delResult)
+					{
+						return message.reply(newCommandName + ' command deleted.');
+					}
+					else 
+					{
+						return message.reply(newCommandName + ' doesn\'t exist.');
+					}	
+				});
+				
 			}
 			keyv.get(newCommandName).then(resultGet => {
 				if (resultGet)
