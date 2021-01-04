@@ -14,6 +14,7 @@ module.exports = {
 				console.log(resultGet);
 				if (resultGet)
 				{
+					let eyed = false;
 					message.reply('Cette commande existe déjà, react ✔ pour la remplacer, ❌ pour annuler'
 						+ ', ou 👀 pour voir la commande actuelle.').then(newMessage => {
 								newMessage.react('✔');
@@ -33,6 +34,8 @@ module.exports = {
 										{
 											newMessage.edit('There was an error setting the command');
 										}
+										newMessage.reactions.removeAll();
+										return;
 									})
 									.catch(console.error);
 								} catch (error) {
@@ -50,6 +53,8 @@ module.exports = {
 										newMessage.edit('Command edition aborted.');
 									})
 									.catch(console.error);
+									newMessage.reactions.removeAll();
+									return;
 								} catch (error) {
 									console.error(error);
 								}
@@ -60,9 +65,18 @@ module.exports = {
 										return ['👀'].includes(reaction.emoji.name) && user.id === message.author.id;
 									};
 
-									newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
+									newMessage.awaitReactions(filter, { max: 100, time: 100000, errors: ['time'] })
 									.then(collected => {
-										newMessage.edit(resultGet);
+										if (eyed)
+										{
+											newMessage.edit('Cette commande existe déjà, react ✔ pour la remplacer, ❌ pour annuler'
+															+ ', ou 👀 pour voir la commande actuelle.');
+										}
+										else 
+										{
+											newMessage.edit(resultGet);
+										}
+										eyed = !eyed;
 									})
 									.catch(console.error);
 								} catch (error) {
