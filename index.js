@@ -69,6 +69,7 @@ client.on('message', message => {
 			console.log(message.author.username + ' ' + message.content);
 			return message.reply('Don\'t talk to me');
 		}
+		return;
 	}
 	
 
