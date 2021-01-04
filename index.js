@@ -41,12 +41,13 @@ client.on('message', message => {
 
 		if (!command)
 		{
-			const result = keyv.get(commandName);
-			console.log(result);
-			if (result)
-			{
-				message.channel.send(result);				
-			}
+			const result = keyv.get(commandName).then(result => {
+				console.log(result);
+				if (result)
+				{
+					message.channel.send(result);				
+				}
+			});
 		}
 		else 
 		{
