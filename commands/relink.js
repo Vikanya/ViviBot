@@ -9,8 +9,8 @@ module.exports = {
 		console.log(IDs);
 		const channelID = IDs[1];
 		const messageID = IDs[2];
-		console.log(channelID);
-		console.log(messageID);
+		console.log('channelID : ' + channelID);
+		console.log('messageID : ' + messageID);
 
 		const channel = message.channel.guild.channels.resolve(channelID);
 		console.log('channel : ' + channel);
