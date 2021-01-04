@@ -4,7 +4,8 @@ module.exports = {
 	execute(message, args, keyv) {
 		try
 		{
-			console.log(keyv.opts.store.query('SELECT * FROM keyv;'));
+			const keys = await keyv.opts.store.query('SELECT * FROM keyv;');
+			console.log(keys);
 		}
 		catch (error) 
 		{
