@@ -12,7 +12,7 @@ module.exports = {
 		    const table = $("table[id='table_1']")[0]
 
 		    console.log(title ? title.attribs.content : "no title")
-		    console.log(table ? table.children[5] : "no table")
+		    console.log(table ? table.querySelector("tr[id='table_2_row_413']") : "no table")
 		});
 	},
 };
