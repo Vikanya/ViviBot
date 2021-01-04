@@ -1,9 +1,12 @@
 const fs = require('fs');
 const Discord = require('discord.js');
+const Keyv = require('keyv');
 const prefix = process.env.PREFIX;
 const EMBED_WAIT = 3000;
 
 const client = new Discord.Client();
+const keyv = new Keyv();
+keyv.on('error', err => console.error('Keyv connection error:', err));
 
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -22,11 +25,13 @@ client.on('ready', () => {
 
 client.on('message', message => {
 	if (message.author.bot) return;
+
 	if (message.channel.type === 'dm') {
 		return message.reply('Don\'t talk to me');
 	}
 	
 
+	/// ----------------------------------------------------- HANDLE COMMANDS -----------------------------------------------------
 	if (message.content.startsWith(prefix)) {
 		const args = message.content.slice(prefix.length).trim().split(/ +/);
 		const commandName = args.shift().toLowerCase();
@@ -34,26 +39,34 @@ client.on('message', message => {
 		const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-		if (!command) return;
+		if (!command)
+		{
+			const result = keyv.get(commandName);
+			console.log(result);
+			if (result)
+			{
+				message.channel.send(result);				
+			}
+		}
+		else 
+		{
+			if (command.args && !args.length) {
+				let reply = `You didn't provide any arguments, ${message.author}  ᵇᵒˡᵒˢˢ`;
+				
+				if (command.usage) {
+					reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+				}
 
-
-
-		if (command.args && !args.length) {
-			let reply = `You didn't provide any arguments, ${message.author}  ᵇᵒˡᵒˢˢ`;
-			
-			if (command.usage) {
-				reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+				return message.channel.send(reply);
 			}
 
-			return message.channel.send(reply);
-		}
-
-		
-		try {
-			command.execute(message, args);
-		} catch (error) {
-			console.error(error);
-			message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
+			
+			try {
+				command.execute(message, args);
+			} catch (error) {
+				console.error(error);
+				message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
+			}
 		}
 	}
 	/// ------------------------------------------------- CHECK FOR YOUTUBE EMBEDS ------------------------------------------------
