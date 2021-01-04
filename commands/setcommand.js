@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'setcommand',
-	description: 'creates/changes a command that will make the bot say <something>.',
+	description: 'creates/changes a command that will make the bot say <message>. '
+	     			+ 'Replace <message> with \'delete\' to delete a command.',
 	args: true,
 	usage: '<command name> <message>',
 	execute(message, args, keyv) {
@@ -13,6 +14,7 @@ module.exports = {
 			let newCommandName = args.shift();
 			let remainingArgs = '';
 			args.forEach(element => remainingArgs += element + ' ');
+			console.log(remainingArgs);
 			if (remainingArgs === 'delete')
 			{
 				if (keyv.delete(newCommandName))
