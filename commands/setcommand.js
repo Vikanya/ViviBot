@@ -13,7 +13,6 @@ module.exports = {
 			keyv.get(args[0]).then(resultGet => {
 				if (resultGet)
 				{
-					let eyed = false;
 					message.reply('Cette commande existe déjà, react ✔ pour la remplacer, ❌ pour annuler'
 						+ ', ou 👀 pour voir la commande actuelle.').then(newMessage => {
 								newMessage.react('✔');
@@ -62,19 +61,9 @@ module.exports = {
 										return ['👀'].includes(reaction.emoji.name) && user.id === message.author.id;
 									};
 
-									newMessage.awaitReactions(filter, { max: 2, time: 100000, errors: ['time'] })
+									newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
 									.then(collected => {
-										console.log('eye collected : ' + eyed);
-										if (eyed)
-										{
-											newMessage.edit('Cette commande existe déjà, react ✔ pour la remplacer, ❌ pour annuler'
-															+ ', ou 👀 pour voir la commande actuelle.');
-										}
-										else 
-										{
-											newMessage.edit('current command : ' + resultGet);
-										}
-										eyed = !eyed;
+										newMessage.edit('current command : \n' + resultGet);
 									})
 									.catch(err => console.log('error : ' + err));
 								} catch (error) {
