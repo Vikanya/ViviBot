@@ -5,7 +5,9 @@ module.exports = {
 		try
 		{
 			keyv.opts.store.query('SELECT * FROM keyv;').then(keys => {
-				console.log(keys);
+				let finalString = '';
+				keys.forEach(element => finalString += element.key + ', ');
+				console.log(finalString);				
 			});
 		}
 		catch (error) 
