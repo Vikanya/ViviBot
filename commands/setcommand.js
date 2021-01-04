@@ -15,7 +15,8 @@ module.exports = {
 			let remainingArgs = '';
 			args.forEach(element => remainingArgs += element + ' ');
 			remainingArgs = remainingArgs.trim();
-			console.log(remainingArgs + ' : ' + remainingArgs.localeCompare('delete'));
+			console.log(message.author.username + '/ ' + remainingArgs + ' : ' + newCommandName);
+			/// ----------------------------------------------------- DELETE COMMANDS -----------------------------------------------------
 			if (remainingArgs.localeCompare('delete') == 0)
 			{
 				if (keyv.delete(newCommandName))
@@ -29,6 +30,7 @@ module.exports = {
 			}
 			keyv.get(newCommandName).then(resultGet => {
 				if (resultGet)
+			/// ----------------------------------------------------- REPLACE COMMANDS -----------------------------------------------------
 				{
 					message.reply('Cette commande existe déjà, react ✔ pour la remplacer, ❌ pour annuler'
 						+ ', ou 👀 pour voir la commande actuelle.').then(newMessage => {
@@ -41,7 +43,7 @@ module.exports = {
 									newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
 									.then(collected => {
 										const result = keyv.set(newCommandName, remainingArgs);
-										console.log('new command ' + newCommandName + ' : ' + remainingArgs);
+										console.log(message.author.username + '/ ' + 'new command ' + newCommandName + ' : ' + remainingArgs);
 										if (result)
 										{
 											newMessage.edit(newCommandName + ' command successfully set !');
@@ -92,10 +94,11 @@ module.exports = {
 				}
 				else 
 				{
+			/// ----------------------------------------------------- NEW COMMANDS -----------------------------------------------------
 					const result = keyv.set(newCommandName, remainingArgs);
 					if (result)
 					{
-						console.log('new command ' + newCommandName + ' : ' + remainingArgs);
+						console.log(message.author.username + '/ ' + 'new command ' + newCommandName + ' : ' + remainingArgs);
 						message.reply(newCommandName + ' command successfully set !');
 					}
 					else

@@ -1,19 +1,20 @@
 module.exports = {
 	name: 'setcommandlist',
-	description: 'Lists all commands added with the !setcommand command.',
+	description: 'Lists all commands added with !setcommand.',
 	execute(message, args, keyv) {
 		try
 		{
 			keyv.opts.store.query('SELECT * FROM keyv;').then(keys => {
 				let finalString = '';
 				keys.forEach(element => finalString += element.key.toString().replace('keyv:', '') + ', ');
-				console.log(finalString);				
+				//console.log(finalString);
+				return message.reply(finalString);
 			});
 		}
 		catch (error) 
 		{
 			console.error(error);
-			message.reply('En fait c\'est pas possible avec le système que j\'utilise.');
+			message.reply('Oups y a un truc qui a raté');
 		}
 	},
 };
