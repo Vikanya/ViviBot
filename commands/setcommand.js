@@ -19,8 +19,9 @@ module.exports = {
 			/// ----------------------------------------------------- DELETE COMMANDS -----------------------------------------------------
 			if (remainingArgs.localeCompare('delete') == 0)
 			{
-				if (keyv.delete(newCommandName))
+				if (keyv.get(newCommandName))
 				{
+					keyv.delete(newCommandName);
 					return message.reply(newCommandName + ' command deleted.');
 				}
 				else 
