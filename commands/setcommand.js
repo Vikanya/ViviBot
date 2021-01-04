@@ -35,9 +35,8 @@ module.exports = {
 											newMessage.edit('There was an error setting the command');
 										}
 										newMessage.reactions.removeAll();
-										return;
 									})
-									.catch(console.error);
+									.catch(err => console.log('error : ' + err));
 								} catch (error) {
 									console.error(error);
 								}
@@ -52,9 +51,8 @@ module.exports = {
 									.then(collected => {
 										newMessage.edit('Command edition aborted.');
 									})
-									.catch(console.error);
+									.catch(err => console.log('error : ' + err));
 									newMessage.reactions.removeAll();
-									return;
 								} catch (error) {
 									console.error(error);
 								}
@@ -78,7 +76,7 @@ module.exports = {
 										}
 										eyed = !eyed;
 									})
-									.catch(console.error);
+									.catch(err => console.log('error : ' + err));
 								} catch (error) {
 									console.error(error);
 								}
