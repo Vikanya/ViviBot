@@ -27,8 +27,48 @@ client.on('message', message => {
 	if (message.author.bot) return;
 
 	if (message.channel.type === 'dm') {
-		console.log(message.author + ' ' + message.content);
-		return message.reply('Don\'t talk to me');
+		/// ------------------------------------------------ HANDLE COMMANDS IN DM ------------------------------------------------
+		if (message.content.startsWith(prefix)) {
+			const args = message.content.slice(prefix.length).trim().split(/ +/);
+			const commandName = args.shift().toLowerCase();
+			
+			const command = client.commands.get(commandName)
+			|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+			if (!command)
+			{/// ---------------------------- handle commands from setcommand in dm ----------------------------
+				keyv.get(commandName).then(result => {
+					if (result)
+					{
+						return message.channel.send(result);				
+					}
+				});
+			}
+			else 
+			{
+				if (command.args && !args.length) {
+					let reply = `You didn't provide any arguments, ${message.author}  ᵇᵒˡᵒˢˢ`;
+					
+					if (command.usage) {
+						reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+					}
+
+					return message.channel.send(reply);
+				}
+				
+				try {
+					command.execute(message, args, keyv);
+				} catch (error) {
+					console.error(error);
+					message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
+				}
+			}
+		}
+		else 
+		{
+			console.log(message.author + ' ' + message.content);
+			return message.reply('Don\'t talk to me');
+		}
 	}
 	
 
@@ -42,10 +82,10 @@ client.on('message', message => {
 
 		if (!command)
 		{/// --------------------------------- handle commands from setcommand ---------------------------------
-			const result = keyv.get(commandName).then(result => {
+			keyv.get(commandName).then(result => {
 				if (result)
 				{
-					message.channel.send(result);				
+					return message.channel.send(result);				
 				}
 			});
 		}
