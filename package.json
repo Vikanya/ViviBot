@@ -18,7 +18,9 @@
   "homepage": "https://github.com/Vikanya/ViviBot#readme",
   "dependencies": {
     "@keyv/postgres": "^1.0.16",
+    "cheerio": "^1.0.0-rc.5",
     "discord.js": "^12.5.1",
-    "keyv": "^4.0.3"
+    "keyv": "^4.0.3",
+    "node-fetch": "^2.6.1"
   }
 }
