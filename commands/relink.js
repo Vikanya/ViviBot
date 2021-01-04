@@ -14,7 +14,7 @@ module.exports = {
 
 		const channel = message.channel.guild.channels.resolve(channelID);
 		console.log('channel : ' + channel);
-		channel.fetch(messageID).then(linkedMessage => 
+		channel.messages.fetch(messageID).then(linkedMessage => 
 		{
 			console.log('linked message : ' + linkedMessage.content);
 
