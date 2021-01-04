@@ -1,4 +1,8 @@
-const fs = require('fs');
+const Keyv = require('keyv');
+
+const keyv = new Keyv();
+keyv.on('error', err => console.error('Keyv connection error:', err));
+
 module.exports = {
 	name: 'setcommand',
 	description: 'creates/changes a command that will make the bot say <something>.',
