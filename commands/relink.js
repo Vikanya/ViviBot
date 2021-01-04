@@ -29,7 +29,7 @@ module.exports = {
 				.find(chan => chan.type === 'text' && chan.name.toLowerCase() === "releases-list")
 				.send(youtubeEmbed.url + '\nclique là pour la discussion => ' + linkedMessage.url);
 
-		});
+		}).catch(console.error);
 
 /*
 		if (isNaN(amount)) {
