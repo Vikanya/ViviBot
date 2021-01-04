@@ -65,8 +65,8 @@ client.on('message', message => {
 			}
 		}
 		else 
-		{
-			console.log(message.author + ' ' + message.content);
+		{/// -------------------------------------------------- HANDLE OTHER DMS --------------------------------------------------
+			console.log(message.author.name + ' ' + message.content);
 			return message.reply('Don\'t talk to me');
 		}
 	}
