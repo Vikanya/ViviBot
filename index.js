@@ -27,7 +27,7 @@ client.on('message', message => {
 	if (message.author.bot) return;
 
 	if (message.channel.type === 'dm') {
-		console.log(message.content);
+		console.log(message.author + ' ' + message.content);
 		return message.reply('Don\'t talk to me');
 	}
 	
