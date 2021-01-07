@@ -6,8 +6,9 @@ module.exports = {
 	description: 'Chantier',
 	execute(message, args, keyv) {
 		
+		console.log('try fetch');
 
-		fetch('args').then(res => res.text())
+		fetch(args).then(res => res.text())
 		.then(html => {
 		    const $ = cheerio.load(html)
 		    const title = $("meta[property='og:title']")[0] || $("meta[name='twitter:title']")
