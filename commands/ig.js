@@ -13,18 +13,21 @@ module.exports = {
 		
 		console.log('try fetch ' + args);
 
-		fetch('https://www.instagram.com/p/CJvyagtFR_k/?__a=1').then(res => res.text())
+
+		fetch('https://imginn.com/p/CJvyagtFR_k/').then(res => res.text())
 		.then(html => {
 		    console.log(html)
 		    const $ = cheerio.load(html)
 		    const title = $("meta[property='og:title']")[0] || $("meta[name='twitter:title']")
 		    const table = $("table[id='table_1']")[0]
 
-		    console.log(title ? title.attribs.content : "no title")
-		    console.log(table ? table : "no table")
+		    //console.log(title ? title.attribs.content : "no title")
+		    //console.log(table ? table : "no table")
 		});
 
-/*d
+
+
+/*
 		userInstagram.getPostData('CD9EMe5sHP5')
 		  .then(post => console.log('result ' + post))
 		  .catch(console.error)
