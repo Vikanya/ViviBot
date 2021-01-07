@@ -13,10 +13,10 @@ module.exports = {
 		fetch(args).then(res => res.text())
 		.then(html => {
 		    const $ = cheerio.load(html)
-		    const title = $("meta[property='og:title']")[0] || $("meta[name='twitter:title']")
+		    const title = $("a[class='sqdOP yWX7d     _8A5w5   ZIAjV ']")[0]
 		    const thumbnail = $("img[data-testid='user-avatar']")[0]
 
-		    console.log(title ? title.attribs.content : "no title")
+		    console.log(title ? title : "no title")
 		    console.log(thumbnail ? thumbnail : "no thumbnail")
 
 		    const instaEmbed = new new Discord.MessageEmbed()
