@@ -8,10 +8,12 @@ module.exports = {
 	usage: '<instagram link>',
 	execute(message, args, keyv) {
 		
-		console.log('try fetch');
+		console.log('try fetch ' + args);
 
 		fetch(args).then(res => res.text())
 		.then(html => {
+
+			console.log(html);
 		    const $ = cheerio.load(html)
 		    const title = $("a[class='sqdOP yWX7d     _8A5w5   ZIAjV ']")[0]
 		    const thumbnail = $("img[data-testid='user-avatar']")[0]
