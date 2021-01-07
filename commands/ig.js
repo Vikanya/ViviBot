@@ -2,8 +2,10 @@ const fetch = require("node-fetch")
 const cheerio = require("cheerio")
 
 module.exports = {
-	name: 'guess',
-	description: 'Chantier',
+	name: 'ig',
+	description: 'Embeds an instagram link.',
+	args: true,
+	usage: '<instagram link>',
 	execute(message, args, keyv) {
 		
 		console.log('try fetch');
@@ -20,7 +22,7 @@ module.exports = {
 		    const instaEmbed = new new Discord.MessageEmbed()
 				.setColor('#000000')
 				.setTitle(title)
-				.setURL('https://discord.js.org/')
+				.setURL(args)
 				.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
 				.setDescription('Some description here')
 				.setThumbnail(thumbnail.src)
