@@ -3,6 +3,7 @@ const cheerio = require("cheerio")
 
 module.exports = {
 	name: 'ig',
+	aliases: ['insta', 'instagram'],
 	description: 'Embeds an instagram link.',
 	args: true,
 	usage: '<instagram link>',
@@ -21,7 +22,7 @@ module.exports = {
 		    console.log(title ? title : "no title")
 		    console.log(thumbnail ? thumbnail : "no thumbnail")
 
-		    const instaEmbed = new new Discord.MessageEmbed()
+		    const instaEmbed = new Discord.MessageEmbed()
 				.setColor('#000000')
 				.setTitle(title)
 				.setURL(args)
