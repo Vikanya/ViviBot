@@ -10,7 +10,7 @@ module.exports = {
 		
 		console.log('try fetch ' + args);
 
-		userInstagram.getPostData('CJvyagtFR_k')
+		userInstagram.getPostData('CD9EMe5sHP5')
 		  .then(post => console.log('result ' + post))
 		  .catch(console.error)
 
