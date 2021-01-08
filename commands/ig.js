@@ -94,7 +94,7 @@ module.exports = {
 
 					
 					console.log('create collector');
-					collector = message.createReactionCollector(filter, { time: 100000 });
+					collector = await message.createReactionCollector(filter, { time: 100000 });
 					collector.on('collect', (reaction, user) => 
 					{
 						console.log('reaction ');
