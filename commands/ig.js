@@ -92,9 +92,9 @@ module.exports = {
 							return reaction.emoji.name === EMOJI_ARRAY[index];
 						};
 
-						/*
+						
 						console.log('create collector');
-						collector = message.createReactionCollector(filter);
+						collector = message.createReactionCollector(filter, { time: 1000000 });
 						collector.on('collect', (reaction, user) => 
 						{
 							console.log('reaction ');
@@ -112,9 +112,9 @@ module.exports = {
 
 							newMessage.edit(instaEmbed);
 						});
-						*/
-	
 						
+	
+						/*
 						newMessage.awaitReactions(filter, { time: 1000000, errors: ['time'] })
 						.then(function(collected) {
 							console.log('reaction ' + imageURLs[index]);
@@ -142,6 +142,7 @@ module.exports = {
 							}
 						})
 						.catch(err => console.log('error : ' + err));
+						*/
 
 					} catch (error) {
 						console.error(error);
