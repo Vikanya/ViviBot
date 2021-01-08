@@ -4,7 +4,7 @@ const fetch = require("node-fetch")
 const cheerio = require("cheerio")
 const Discord = require('discord.js');
 const DESC_LENGTH = 50;
-const EMOJI_ARRAY = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '	4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟']
+const EMOJI_ARRAY = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟']
 
 module.exports = {
 	name: 'ig',
@@ -89,12 +89,14 @@ module.exports = {
 					await newMessage.react(EMOJI_ARRAY[index]);
 					try {
 						const filter = (reaction, user) => {
-							return [EMOJI_ARRAY[index]].includes(reaction.emoji.name);
+							return reaction.emoji.name === EMOJI_ARRAY[index];
 						};
 
+						console.log('create collector');
 						const collector = message.createReactionCollector(filter);
 						collector.on('collect', r => 
 						{
+							console.log('reaction ');
 							if (imageURLs[index].split('/').contains('e35'))
 							{
 								instaEmbed.setImage(imageURLs[index]).setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
