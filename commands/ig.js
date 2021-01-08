@@ -117,8 +117,8 @@ module.exports = {
 						
 						newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
 						.then(function(collected) {
-							console.log('reaction ');
-							if (imageURLs[index].split('/').contains('e35'))
+							console.log('reaction ' + imageURLs[index]);
+							if (imageURLs[index].split('/').includes('e35'))
 							{
 								instaEmbed.setImage(imageURLs[index]).setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 							}
