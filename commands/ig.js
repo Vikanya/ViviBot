@@ -43,9 +43,9 @@ module.exports = {
 		    //console.log(author.attr('alt'));
 		    //console.log(author.attr('src'));
 
-		    const images = $("div[class='downloads']").find('a');
+		    const images = $("div[class='downloads']");
 		    console.log(images);
-		    const imageURLs = $(images).map(node => {
+		    const imageURLs = $(images).find('a').map(node => {
 		    	const str = node.attr('href').slice(0, -5);
 		    	console.log(str);
 		    	return str;
