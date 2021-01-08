@@ -115,8 +115,8 @@ module.exports = {
 						*/
 	
 						
-						newMessage.awaitReactions(filter)
-						.then(async function(collected) {
+						newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
+						.then(function(collected) {
 							console.log('reaction ');
 							if (imageURLs[index].split('/').contains('e35'))
 							{
@@ -131,11 +131,11 @@ module.exports = {
 							}
 
 							newMessage.edit(instaEmbed);
-							
+
 							const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has());
 							try {
 								for (const reaction of userReactions.values()) {
-									await reaction.users.remove(userId);
+									reaction.users.remove(userId);
 								}
 							} catch (error) {
 								console.error('Failed to remove reactions.');
