@@ -54,7 +54,7 @@ module.exports = {
 		    })
 		    */
 		    const imageURLs = $("div[class='downloads']").find('a').map(function() {
-		    	const str = $(this).attr('href');
+		    	const str = $(this).attr('href').slice(0, -5);
 		    	console.log(str);
 		    	return str;
 		    }).get()
@@ -75,7 +75,7 @@ module.exports = {
 					{ name: 'Inline field title', value: 'Some value here', inline: true },
 				)*/
 				//.addField('Inline field title', 'Some value here', true)
-				.setImage('https://i.imgur.com/wSTFkRM.png')
+				.setImage(imageURLs[0])
 				//.setTimestamp()
 				.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
 
