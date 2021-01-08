@@ -19,11 +19,10 @@ module.exports = {
 		    console.log(html)
 		    const $ = cheerio.load(html)
 		    const title = $("div[class='fullname']")[0]
-		    const table = $("table[id='table_1']")[0]
 
 		    console.log('1 : ' + title ? title : "no title")
-		    console.log('2 : ' + title ? title.find('a').text() : "no title")
-		    console.log('3 : ' + title ? title.find('a').attr('href') : "no title")
+		    console.log('2 : ' + title ? $(title).find('a').text() : "no title")
+		    //console.log('3 : ' + title ? title.find('a').attr('href') : "no title")
 		    //console.log(table ? table : "no table")
 		});
 
