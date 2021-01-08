@@ -115,19 +115,19 @@ module.exports = {
 						*/
 	
 						
-						newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
+						newMessage.awaitReactions(filter, { max: 1, time: 1000000, errors: ['time'] })
 						.then(function(collected) {
 							console.log('reaction ' + imageURLs[index]);
 							if (imageURLs[index].split('/').includes('e35'))
 							{
-								instaEmbed.setImage(imageURLs[index]).setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+								instaEmbed.setImage(imageURLs[index]).setFooter('Picture ' + (index+1), 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 							}
 							else 
 							{
 								const videoThumb = $("video[src='" + imageURLs[index] + "']");
 								console.log('video ' + videoThumb);
-								instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '', true)
-									.setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+								instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', 'Your text here: [link](' + imageURLs[index] + ')', true)
+									.setFooter('Picture ' + (index+1), 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 							}
 
 							newMessage.edit(instaEmbed);
