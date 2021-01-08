@@ -40,14 +40,14 @@ module.exports = {
 
 		    const author = $("div[class='user']").find('div a img');
 		    console.log(author);
-		    console.log(author.alt());
-		    console.log(author.src());
+		    console.log(author.attr('alt'));
+		    console.log(author.attr('src'));
 
 		    const instaEmbed = new Discord.MessageEmbed()
 				.setColor('#000000')
 				.setTitle(titleText)
 				.setURL('https://www.instagram.com/p/' + code)
-				.setAuthor(author.alt(), author.src(), 'https://www.instagram.com/' + author.alt())
+				.setAuthor(author.attr('alt'), author.attr('src'), 'https://www.instagram.com/' + author.attr('alt'))
 				.setDescription('Some description here')
 				.setThumbnail('https://i.imgur.com/wSTFkRM.png')
 				.addFields(
