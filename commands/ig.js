@@ -82,7 +82,7 @@ module.exports = {
 				//.setTimestamp()
 				.setFooter('Picture 1', 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 
-
+			//const collectors = new ReactionCollector();
 			message.channel.send(instaEmbed).then(async function(newMessage) {
 
 				imageURLs.forEach(async function(element, index) {
@@ -93,8 +93,8 @@ module.exports = {
 						};
 
 						console.log('create collector');
-						const collector = message.createReactionCollector(filter);
-						collector.on('collect', r => 
+						collector = message.createReactionCollector(filter);
+						collector.on('collect', (reaction, user) => 
 						{
 							console.log('reaction ');
 							if (imageURLs[index].split('/').contains('e35'))
