@@ -85,7 +85,7 @@ module.exports = {
 
 			message.channel.send(instaEmbed).then(async function(newMessage) {
 
-				imageURLs.forEach(async function(element, index) => {
+				imageURLs.forEach(async function(element, index) {
 					await newMessage.react(EMOJI_ARRAY[index]);
 					try {
 						const filter = (reaction, user) => {
