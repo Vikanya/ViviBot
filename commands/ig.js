@@ -20,16 +20,16 @@ module.exports = {
 		let code;
 		if (argArray.length == 1)
 		{
-			console.log('just the code');
+			//console.log('just the code');
 			code = argArray[0];
 		}
 		else
 		{
-			console.log('full link');
+			//console.log('full link');
 			code = argArray[argArray.indexOf('p')+1];
 		}
-		console.log('code is : ' + code);
-		console.log('link is : ' + 'https://imginn.com/p/' + code + '/');
+		//console.log('code is : ' + code);
+		//console.log('link is : ' + 'https://imginn.com/p/' + code + '/');
 
 
 		fetch('https://imginn.com/p/' + code + '/').then(res => res.text())
@@ -38,14 +38,14 @@ module.exports = {
 		    const $ = cheerio.load(html)
 		    const title = $("div[class='fullname']")[0]
 		    const titleText = $(title).find('a').text();
-		    console.log('2 : ' + titleText)
+		    //console.log('2 : ' + titleText)
 
 		    const author = $("div[class='user']").find('div a img');
 		    //console.log(author);
 		    //console.log(author.attr('alt'));
 		    //console.log(author.attr('src'));
 
-/*
+			/*
 		    const images = $("div[class='downloads']").find('a');
 		    console.log(images);
 		    const imageURLs = images;
@@ -57,7 +57,7 @@ module.exports = {
 		    */
 		    const imageURLs = $("div[class='downloads']").find('a').map(function() {
 		    	const str = $(this).attr('href').slice(0, -5);
-		    	console.log(str);
+		    	//console.log(str);
 		    	return str;
 		    }).get()
 
@@ -65,7 +65,7 @@ module.exports = {
 
 
 		    const instaEmbed = new Discord.MessageEmbed()
-				.setColor('#000000')
+				.setColor('#833AB4')
 				.setTitle(titleText)
 				.setURL('https://www.instagram.com/p/' + code)
 				.setAuthor(author.attr('alt'), author.attr('src'), 'https://www.instagram.com/' + author.attr('alt'))
@@ -78,9 +78,9 @@ module.exports = {
 					{ name: 'Inline field title', value: 'Some value here', inline: true },
 				)*/
 				//.addField('Inline field title', 'Some value here', true)
-				.setImage(imageURLs[0]);
+				.setImage(imageURLs[0])
 				//.setTimestamp()
-				//.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+				.setFooter('Picture 1', 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 
 
 			message.channel.send(instaEmbed).then(async function(newMessage) {
@@ -89,14 +89,33 @@ module.exports = {
 					await newMessage.react(EMOJI_ARRAY[index]);
 					try {
 						const filter = (reaction, user) => {
-							return [EMOJI_ARRAY[index]].includes(reaction.emoji.name) && user.id === message.author.id;
+							return [EMOJI_ARRAY[index]].includes(reaction.emoji.name);
 						};
 
-						newMessage.awaitReactions(filter, { max: 1, time: 1000000, errors: ['time'] })
-						.then(async function(collected) {
-							instaEmbed.setImage(imageURLs[index]);
+						const collector = message.createReactionCollector(filter);
+						collector.on('collect', r => 
+						{
+							if (imageURLs[index].split('/').contains('e35'))
+							{
+								instaEmbed.setImage(imageURLs[index]).setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+							}
+							else 
+							{
+								const videoThumb = $("video[src='" + imageURLs[index] + "']");
+								console.log('video ' + videoThumb);
+								instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '', true)
+									.setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+							}
+
 							newMessage.edit(instaEmbed);
-							const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has(userId));
+						});
+
+						/*
+						newMessage.awaitReactions(filter, { max: 10, time: 1000000, errors: ['time'] })
+						.then(async function(collected) {
+							instaEmbed.setImage(imageURLs[index]).setFooter('Picture ' + index);
+							newMessage.edit(instaEmbed);
+							const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has());
 							try {
 								for (const reaction of userReactions.values()) {
 									await reaction.users.remove(userId);
@@ -105,23 +124,20 @@ module.exports = {
 								console.error('Failed to remove reactions.');
 							}
 						})
-						.catch(err => console.log('error : ' + err));
+						.catch(err => console.log('error : ' + err));*/
 					} catch (error) {
 						console.error(error);
 					}
 				});
 			});
 		});
-
-
-
-/*
+		/*
 		userInstagram.getPostData('CD9EMe5sHP5')
 		  .then(post => console.log('result ' + post))
 		  .catch(console.error)
-*/
+		*/
 
-/*
+		/*
 		new Promise(async (resolve, reject) => {
 		    const URL = shortcode;
 		    const REQUEST_PARAMETERS = {
@@ -204,6 +220,7 @@ module.exports = {
 	      	});
 
 	  	});
-*/
+		*/
 	},
+
 };
