@@ -32,19 +32,22 @@ module.exports = {
 
 		fetch('https://imginn.com/p/' + code + '/').then(res => res.text())
 		.then(html => {
-		    console.log(html)
+		    //console.log(html)
 		    const $ = cheerio.load(html)
 		    const title = $("div[class='fullname']")[0]
 		    const titleText = $(title).find('a').text();
-
-		    console.log('1 : ' + title ? title : "no title")
 		    console.log('2 : ' + titleText)
+
+		    const author = $("div[class='user']").find('div a img');
+		    console.log(author);
+		    console.log(author.alt());
+		    console.log(author.src());
 
 		    const instaEmbed = new Discord.MessageEmbed()
 				.setColor('#000000')
 				.setTitle(titleText)
-				.setURL('https://discord.js.org/')
-				.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+				.setURL('https://www.instagram.com/p/' + code)
+				.setAuthor(author.alt(), author.src(), 'https://www.instagram.com/' + author.alt())
 				.setDescription('Some description here')
 				.setThumbnail('https://i.imgur.com/wSTFkRM.png')
 				.addFields(
