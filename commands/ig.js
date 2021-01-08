@@ -115,7 +115,7 @@ module.exports = {
 						*/
 	
 						
-						newMessage.awaitReactions(filter, { max: 10, time: 1000000, errors: ['time'] })
+						newMessage.awaitReactions(filter, { time: 1000000, errors: ['time'] })
 						.then(function(collected) {
 							console.log('reaction ' + imageURLs[index]);
 							if (imageURLs[index].split('/').includes('e35'))
