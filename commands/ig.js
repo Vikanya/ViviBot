@@ -39,26 +39,35 @@ module.exports = {
 		    console.log('2 : ' + titleText)
 
 		    const author = $("div[class='user']").find('div a img');
-		    console.log(author);
-		    console.log(author.attr('alt'));
-		    console.log(author.attr('src'));
+		    //console.log(author);
+		    //console.log(author.attr('alt'));
+		    //console.log(author.attr('src'));
+
+		    const images = $("div[class='downloads']").find('a');
+		    console.log(images);
+		    const imageURLs = images.map(node => {
+		    	const str = node.attr('href').slice(0, -5);
+		    	console.log(str);
+		    	return str;
+		    });
+		    console.log(imageURLs);
 
 		    const instaEmbed = new Discord.MessageEmbed()
 				.setColor('#000000')
 				.setTitle(titleText)
 				.setURL('https://www.instagram.com/p/' + code)
 				.setAuthor(author.attr('alt'), author.attr('src'), 'https://www.instagram.com/' + author.attr('alt'))
-				.setDescription('Some description here')
-				.setThumbnail('https://i.imgur.com/wSTFkRM.png')
-				.addFields(
+				//.setDescription('Some description here')
+				//.setThumbnail('https://i.imgur.com/wSTFkRM.png')
+				/*.addFields(
 					{ name: 'Regular field title', value: 'Some value here' },
 					{ name: '\u200B', value: '\u200B' },
 					{ name: 'Inline field title', value: 'Some value here', inline: true },
 					{ name: 'Inline field title', value: 'Some value here', inline: true },
-				)
-				.addField('Inline field title', 'Some value here', true)
+				)*/
+				//.addField('Inline field title', 'Some value here', true)
 				.setImage('https://i.imgur.com/wSTFkRM.png')
-				.setTimestamp()
+				//.setTimestamp()
 				.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
 
 			message.channel.send(instaEmbed);
