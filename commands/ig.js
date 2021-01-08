@@ -86,7 +86,7 @@ module.exports = {
 
 			message.channel.send(instaEmbed).then(async function(newMessage) {
 
-				await newMessage.react(EMOJI_ARRAY[0]);
+				/*await newMessage.react(EMOJI_ARRAY[0]);
 				try {
 					const filter = (reaction, user) => {
 						return reaction.emoji.name === EMOJI_ARRAY[0];
@@ -98,7 +98,7 @@ module.exports = {
 					collector.on('collect', (reaction, user) => 
 					{
 						console.log('reaction ');
-						if (imageURLs[0].split('/').contains('e35'))
+						if (imageURLs[0].split('/').includes('e35'))
 						{
 							instaEmbed.setImage(imageURLs[0]).setFooter('Picture ' + 0, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 						}
@@ -116,8 +116,8 @@ module.exports = {
 				catch (error) 
 				{
 					console.error(error);
-				}
-				/*
+				}*/
+				
 				imageURLs.forEach(async function(element, index) {
 					await newMessage.react(EMOJI_ARRAY[index]);
 					try {
@@ -127,11 +127,11 @@ module.exports = {
 
 						
 						console.log('create collector');
-						collector = message.createReactionCollector(filter, { time: 100000 });
+						let collector = await newMessage.createReactionCollector(filter, { time: 100000 });
 						collector.on('collect', (reaction, user) => 
 						{
 							console.log('reaction ');
-							if (imageURLs[index].split('/').contains('e35'))
+							if (imageURLs[index].split('/').includes('e35'))
 							{
 								instaEmbed.setImage(imageURLs[index]).setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 							}
@@ -174,13 +174,13 @@ module.exports = {
 								console.error('Failed to remove reactions.');
 							}
 						})
-						.catch(err => console.log('error : ' + err));
+						.catch(err => console.log('error : ' + err));*/
 						
 
 					} catch (error) {
 						console.error(error);
 					}
-				});*/
+				});
 			});
 		});
 		/*
