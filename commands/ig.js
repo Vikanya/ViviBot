@@ -4,13 +4,14 @@ const fetch = require("node-fetch")
 const cheerio = require("cheerio")
 const Discord = require('discord.js');
 const DESC_LENGTH = 50;
+const EMOJI_ARRAY = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '	4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟']
 
 module.exports = {
 	name: 'ig',
 	aliases: ['insta', 'instagram'],
 	description: 'Embeds an instagram post.',
 	args: true,
-	usage: '<full instagram link or instagram post ID (the 11 character code at the end of the link)>',
+	usage: '<full instagram link or instagram post ID (the 11 characters code at the end of the link)>',
 	execute(message, args, keyv) {
 		
 		console.log('try fetch ' + args);
@@ -77,11 +78,39 @@ module.exports = {
 					{ name: 'Inline field title', value: 'Some value here', inline: true },
 				)*/
 				//.addField('Inline field title', 'Some value here', true)
-				.setImage(imageURLs[0])
+				.setImage(imageURLs[0]);
 				//.setTimestamp()
 				//.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
 
-			message.channel.send(instaEmbed);
+
+			message.channel.send(instaEmbed).then(async function(newMessage) {
+
+				imageURLs.forEach((element, index) => {
+					await newMessage.react(EMOJI_ARRAY[index]);
+					try {
+						const filter = (reaction, user) => {
+							return [EMOJI_ARRAY[index]].includes(reaction.emoji.name) && user.id === message.author.id;
+						};
+
+						newMessage.awaitReactions(filter, { max: 1, time: 1000000, errors: ['time'] })
+						.then(collected => {
+							instaEmbed.setImage(imageURLs[index]);
+							newMessage.edit(instaEmbed);
+							const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has(userId));
+							try {
+								for (const reaction of userReactions.values()) {
+									await reaction.users.remove(userId);
+								}
+							} catch (error) {
+								console.error('Failed to remove reactions.');
+							}
+						})
+						.catch(err => console.log('error : ' + err));
+					} catch (error) {
+						console.error(error);
+					}
+				});
+			});
 		});
 
 
