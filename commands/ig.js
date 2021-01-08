@@ -148,10 +148,10 @@ module.exports = {
 
 							try {
 								for (const reaction of newMessage.reactions.cache.values()) {
-									reaction.users.forEach(function (user) {
+									reaction.users.forEach(function (user, index) {
 										if (user.id != newMessage.user.id)
 										{
-											user.remove(userId);											
+											reaction.users.remove(user);
 										}
 									});
 								}
