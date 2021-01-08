@@ -37,7 +37,7 @@ module.exports = {
 		    const titleText = $(title).find('a').text();
 
 		    console.log('1 : ' + title ? title : "no title")
-		    console.log('2 : ' + titleText : "no title text")
+		    console.log('2 : ' + titleText)
 
 		    const instaEmbed = new Discord.MessageEmbed()
 				.setColor('#000000')
