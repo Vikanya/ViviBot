@@ -93,7 +93,7 @@ module.exports = {
 						};
 
 						newMessage.awaitReactions(filter, { max: 1, time: 1000000, errors: ['time'] })
-						.then(collected => {
+						.then(async function(collected) {
 							instaEmbed.setImage(imageURLs[index]);
 							newMessage.edit(instaEmbed);
 							const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has(userId));
