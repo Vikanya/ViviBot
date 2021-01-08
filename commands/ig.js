@@ -2,6 +2,7 @@
 //const axios = require('axios');
 const fetch = require("node-fetch")
 const cheerio = require("cheerio")
+const Discord = require('discord.js');
 
 module.exports = {
 	name: 'ig',
