@@ -6,24 +6,58 @@ const cheerio = require("cheerio")
 module.exports = {
 	name: 'ig',
 	aliases: ['insta', 'instagram'],
-	description: 'Embeds an instagram link.',
+	description: 'Embeds an instagram post.',
 	args: true,
-	usage: '<instagram link>',
+	usage: '<full instagram link or instagram post ID (the 11 character code at the end of the link)>',
 	execute(message, args, keyv) {
 		
 		console.log('try fetch ' + args);
 
+		const argArray = args[0].split('/');
+		let code;
+		if (argArray.length == 1)
+		{
+			console.log('just the code');
+			code = argArray[0];
+		}
+		else
+		{
+			console.log('full link');
+			code = argArray[argArray.indexOf('p')+1];
+		}
+		console.log('code is : ' + code);
+		console.log('link is : ' + 'https://imginn.com/p/' + code + '/');
 
-		fetch('https://imginn.com/p/CJvyagtFR_k/').then(res => res.text())
+
+		fetch('https://imginn.com/p/' + code + '/').then(res => res.text())
 		.then(html => {
 		    console.log(html)
 		    const $ = cheerio.load(html)
 		    const title = $("div[class='fullname']")[0]
+		    const titleText = $(title).find('a').text();
 
 		    console.log('1 : ' + title ? title : "no title")
-		    console.log('2 : ' + title ? $(title).find('a').text() : "no title")
-		    //console.log('3 : ' + title ? title.find('a').attr('href') : "no title")
-		    //console.log(table ? table : "no table")
+		    console.log('2 : ' + titleText : "no title text")
+
+		    const instaEmbed = new Discord.MessageEmbed()
+				.setColor('#000000')
+				.setTitle(titleText)
+				.setURL('https://discord.js.org/')
+				.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+				.setDescription('Some description here')
+				.setThumbnail('https://i.imgur.com/wSTFkRM.png')
+				.addFields(
+					{ name: 'Regular field title', value: 'Some value here' },
+					{ name: '\u200B', value: '\u200B' },
+					{ name: 'Inline field title', value: 'Some value here', inline: true },
+					{ name: 'Inline field title', value: 'Some value here', inline: true },
+				)
+				.addField('Inline field title', 'Some value here', true)
+				.setImage('https://i.imgur.com/wSTFkRM.png')
+				.setTimestamp()
+				.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+
+			message.channel.send(instaEmbed);
 		});
 
 
