@@ -3,6 +3,7 @@
 const fetch = require("node-fetch")
 const cheerio = require("cheerio")
 const Discord = require('discord.js');
+const DESC_LENGTH = 20;
 
 module.exports = {
 	name: 'ig',
@@ -59,6 +60,7 @@ module.exports = {
 		    	return str;
 		    }).get()
 
+		    const desc = $("div[class='desc']").text();
 
 
 		    const instaEmbed = new Discord.MessageEmbed()
@@ -66,7 +68,7 @@ module.exports = {
 				.setTitle(titleText)
 				.setURL('https://www.instagram.com/p/' + code)
 				.setAuthor(author.attr('alt'), author.attr('src'), 'https://www.instagram.com/' + author.attr('alt'))
-				.setDescription($("div[class='desc']").text())
+				.setDescription((desc.length > DESC_LENGTH) ? desc.substring(0, DESC_LENGTH) + '...' : desc)
 				//.setThumbnail('https://i.imgur.com/wSTFkRM.png')
 				/*.addFields(
 					{ name: 'Regular field title', value: 'Some value here' },
