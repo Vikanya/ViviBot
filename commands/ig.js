@@ -54,7 +54,7 @@ module.exports = {
 		    })
 		    */
 		    const imageURLs = $("div[class='downloads']").find('a').map(function() {
-		    	const str = this.attr('href');
+		    	const str = $(this).attr('href');
 		    	console.log(str);
 		    	return str;
 		    }).get()
