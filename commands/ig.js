@@ -92,6 +92,7 @@ module.exports = {
 							return reaction.emoji.name === EMOJI_ARRAY[index];
 						};
 
+						/*
 						console.log('create collector');
 						collector = message.createReactionCollector(filter);
 						collector.on('collect', (reaction, user) => 
@@ -111,12 +112,26 @@ module.exports = {
 
 							newMessage.edit(instaEmbed);
 						});
-
-						/*
-						newMessage.awaitReactions(filter, { max: 10, time: 1000000, errors: ['time'] })
+						*/
+	
+						
+						newMessage.awaitReactions(filter)
 						.then(async function(collected) {
-							instaEmbed.setImage(imageURLs[index]).setFooter('Picture ' + index);
+							console.log('reaction ');
+							if (imageURLs[index].split('/').contains('e35'))
+							{
+								instaEmbed.setImage(imageURLs[index]).setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+							}
+							else 
+							{
+								const videoThumb = $("video[src='" + imageURLs[index] + "']");
+								console.log('video ' + videoThumb);
+								instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '', true)
+									.setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+							}
+
 							newMessage.edit(instaEmbed);
+							
 							const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has());
 							try {
 								for (const reaction of userReactions.values()) {
@@ -126,7 +141,8 @@ module.exports = {
 								console.error('Failed to remove reactions.');
 							}
 						})
-						.catch(err => console.log('error : ' + err));*/
+						.catch(err => console.log('error : ' + err));
+
 					} catch (error) {
 						console.error(error);
 					}
