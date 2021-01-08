@@ -3,7 +3,7 @@
 const fetch = require("node-fetch")
 const cheerio = require("cheerio")
 const Discord = require('discord.js');
-const DESC_LENGTH = 20;
+const DESC_LENGTH = 50;
 
 module.exports = {
 	name: 'ig',
