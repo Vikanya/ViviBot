@@ -66,7 +66,7 @@ module.exports = {
 				.setTitle(titleText)
 				.setURL('https://www.instagram.com/p/' + code)
 				.setAuthor(author.attr('alt'), author.attr('src'), 'https://www.instagram.com/' + author.attr('alt'))
-				//.setDescription('Some description here')
+				.setDescription($("div[class='desc']").text())
 				//.setThumbnail('https://i.imgur.com/wSTFkRM.png')
 				/*.addFields(
 					{ name: 'Regular field title', value: 'Some value here' },
@@ -77,7 +77,7 @@ module.exports = {
 				//.addField('Inline field title', 'Some value here', true)
 				.setImage(imageURLs[0])
 				//.setTimestamp()
-				.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+				//.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
 
 			message.channel.send(instaEmbed);
 		});
