@@ -156,7 +156,7 @@ module.exports = {
 									});
 								}
 							} catch (error) {
-								console.error('Failed to remove reactions.');
+								console.error(error);
 							}
 						});
 						
