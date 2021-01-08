@@ -45,7 +45,7 @@ module.exports = {
 
 		    const images = $("div[class='downloads']").find('a');
 		    console.log(images);
-		    const imageURLs = images.map(node => {
+		    const imageURLs = $(images).map(node => {
 		    	const str = node.attr('href').slice(0, -5);
 		    	console.log(str);
 		    	return str;
