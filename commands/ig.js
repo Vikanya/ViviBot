@@ -43,6 +43,7 @@ module.exports = {
 		    //console.log(author.attr('alt'));
 		    //console.log(author.attr('src'));
 
+/*
 		    const images = $("div[class='downloads']").find('a');
 		    console.log(images);
 		    const imageURLs = images;
@@ -51,6 +52,14 @@ module.exports = {
 		    	console.log(str);
 		    	imageURLs[index] = str;
 		    })
+		    */
+		    const imageURLs = $("div[class='downloads']").find('a').map(function() {
+		    	const str = this.attr(href);
+		    	console.log(str);
+		    	return str;
+		    }).get()
+
+
 
 		    const instaEmbed = new Discord.MessageEmbed()
 				.setColor('#000000')
