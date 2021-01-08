@@ -153,7 +153,7 @@ module.exports = {
 										{
 											user.remove(userId);											
 										}
-									}
+									});
 								}
 							} catch (error) {
 								console.error('Failed to remove reactions.');
