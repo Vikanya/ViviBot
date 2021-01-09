@@ -159,7 +159,7 @@ module.exports = {
 										if (user.id != newMessage.author.id)
 										{
 											console.log(' a+ ');
-											await reaction.users.remove(user.value);
+											await reaction.users.remove(user);
 										}
 									});
 								}
