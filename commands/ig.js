@@ -130,6 +130,7 @@ module.exports = {
 						let collector = await newMessage.createReactionCollector(filter, { time: 1000000 });
 						collector.on('collect', async function (reaction, user) 
 						{
+							collector.resetTimer();
 							//console.log('reaction ');
 							if (imageURLs[index].split('/').includes('e35'))
 							{
@@ -169,6 +170,10 @@ module.exports = {
 								console.error(error);
 							}
 						});
+
+						collector.on('end', (collected, reason) => {
+							console.log(collected);
+				        });
 						
 	
 						/*
