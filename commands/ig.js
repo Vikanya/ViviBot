@@ -71,19 +71,18 @@ module.exports = {
 				.setAuthor(author.attr('alt'), author.attr('src'), 'https://www.instagram.com/' + author.attr('alt'))
 				.setDescription((desc.length > DESC_LENGTH) ? desc.substring(0, DESC_LENGTH) + '...' : desc)
 				.setImage(imageURLs[0])
-				.setFooter('__Picture__ 0', 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 
 			if (imageURLs[0].split('/').includes('e35'))
 			{
 				instaEmbed.fields = [];
 				instaEmbed.setImage(imageURLs[0])
-					.setFooter('Picture ' + 0, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+					.setFooter('__Picture__ ' + 0, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 			}
 			else 
 			{
 				const videoThumb = $("video[src='" + imageURLs[0] + "']");
 				instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '[link](' + imageURLs[0] + ')', true)
-					.setFooter('Picture ' + 0, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+					.setFooter('__Picture__ ' + 0, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 			}
 			//const collectors = new ReactionCollector();
 
@@ -103,11 +102,11 @@ module.exports = {
 							for (let i = 0; i < imageURLs.length; i++) {
 								if (i == index)
 								{
-									picNumString += '**' + i + '**';
+									picNumString += '**' + i + '** ';
 								}
 								else 
 								{
-									picNumString += i;
+									picNumString += i + ' ';
 								}
 							}
 
