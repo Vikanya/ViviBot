@@ -126,11 +126,11 @@ module.exports = {
 						};
 
 						
-						console.log('create collector');
+						//console.log('create collector');
 						let collector = await newMessage.createReactionCollector(filter, { time: 100000 });
 						collector.on('collect', async function (reaction, user) 
 						{
-							console.log('reaction ');
+							//console.log('reaction ');
 							if (imageURLs[index].split('/').includes('e35'))
 							{
 								instaEmbed.fields = [];
@@ -149,18 +149,18 @@ module.exports = {
 
 
 							const userReactions = await newMessage.reactions.cache.filter(reaction => {
-								console.log(reaction.count);
+								//console.log(reaction.count);
 								return (reaction.count > 0);
 							});
 							try {
-								console.log(userReactions + ' try ' + userReactions);
+								//console.log(userReactions + ' try ' + userReactions);
 								for (const reaction of userReactions.values()) {
 									reaction.users.cache.forEach(async function(user, index)
 									{
-										console.log(user.id + ' vs ' + newMessage.author.id);
+										//console.log(user.id + ' vs ' + newMessage.author.id);
 										if (user.id != newMessage.author.id)
 										{
-											console.log(' a+ ');
+											//console.log(' a+ ');
 											await reaction.users.remove(user);
 										}
 									});
