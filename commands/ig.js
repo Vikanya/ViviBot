@@ -70,53 +70,24 @@ module.exports = {
 				.setURL('https://www.instagram.com/p/' + code)
 				.setAuthor(author.attr('alt'), author.attr('src'), 'https://www.instagram.com/' + author.attr('alt'))
 				.setDescription((desc.length > DESC_LENGTH) ? desc.substring(0, DESC_LENGTH) + '...' : desc)
-				//.setThumbnail('https://i.imgur.com/wSTFkRM.png')
-				/*.addFields(
-					{ name: 'Regular field title', value: 'Some value here' },
-					{ name: '\u200B', value: '\u200B' },
-					{ name: 'Inline field title', value: 'Some value here', inline: true },
-					{ name: 'Inline field title', value: 'Some value here', inline: true },
-				)*/
-				//.addField('Inline field title', 'Some value here', true)
 				.setImage(imageURLs[0])
-				//.setTimestamp()
-				.setFooter('Picture 1', 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+				.setFooter('Picture 0', 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 
+			if (imageURLs[0].split('/').includes('e35'))
+			{
+				instaEmbed.fields = [];
+				instaEmbed.setImage(imageURLs[0])
+					.setFooter('Picture ' + 0, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+			}
+			else 
+			{
+				const videoThumb = $("video[src='" + imageURLs[0] + "']");
+				instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '[link](' + imageURLs[0] + ')', true)
+					.setFooter('Picture ' + 0, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+			}
 			//const collectors = new ReactionCollector();
 
 			message.channel.send(instaEmbed).then(async function(newMessage) {
-
-				/*await newMessage.react(EMOJI_ARRAY[0]);
-				try {
-					const filter = (reaction, user) => {
-						return reaction.emoji.name === EMOJI_ARRAY[0];
-					};
-
-					
-					console.log('create collector');
-					let collector = await newMessage.createReactionCollector(filter, { time: 100000 });
-					collector.on('collect', (reaction, user) => 
-					{
-						console.log('reaction ');
-						if (imageURLs[0].split('/').includes('e35'))
-						{
-							instaEmbed.setImage(imageURLs[0]).setFooter('Picture ' + 0, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
-						}
-						else 
-						{
-							const videoThumb = $("video[src='" + imageURLs[0] + "']");
-							console.log('video ' + videoThumb);
-							instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '', true)
-								.setFooter('Picture ' + 0, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
-						}
-
-						newMessage.edit(instaEmbed);
-					});
-				}
-				catch (error) 
-				{
-					console.error(error);
-				}*/
 				
 				imageURLs.forEach(async function(element, index) {
 					await newMessage.react(EMOJI_ARRAY[index]);
