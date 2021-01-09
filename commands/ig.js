@@ -148,7 +148,7 @@ module.exports = {
 
 							const userReactions = newMessage.reactions.cache.filter(reaction => reaction.users.cache.length > 1);
 							try {
-								console.log(userReactions + ' try ' + userReactions.length);
+								console.log(userReactions + ' try ' + userReactions.array.length);
 								for (const reaction of userReactions.values()) {
 									reaction.users.cache.forEach(async function(user, index)
 									{
