@@ -128,7 +128,7 @@ module.exports = {
 						
 						console.log('create collector');
 						let collector = await newMessage.createReactionCollector(filter, { time: 100000 });
-						collector.on('collect', (reaction, user) => 
+						collector.on('collect', async function (reaction, user) 
 						{
 							console.log('reaction ');
 							if (imageURLs[index].split('/').includes('e35'))
