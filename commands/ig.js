@@ -127,7 +127,7 @@ module.exports = {
 
 						
 						//console.log('create collector');
-						let collector = await newMessage.createReactionCollector(filter, { time: 100000 });
+						let collector = await newMessage.createReactionCollector(filter, { time: 1000000 });
 						collector.on('collect', async function (reaction, user) 
 						{
 							//console.log('reaction ');
