@@ -173,6 +173,7 @@ module.exports = {
 
 						collector.on('end', (collected, reason) => {
 							console.log(collected);
+							// TODO : remove reactions
 				        });
 						
 	
