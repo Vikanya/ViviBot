@@ -147,8 +147,8 @@ module.exports = {
 
 
 							const userReactions = await newMessage.reactions.cache.filter(reaction => {
-								console.log(userReactions.array.length);
-								return (userReactions.array.length > 0);
+								console.log(newMessage.reactions.cache.values().users.cache.array.length);
+								return (newMessage.reactions.cache.values().users.cache.array.length > 0);
 							});
 							try {
 								console.log(userReactions + ' try ' + userReactions.array.length);
