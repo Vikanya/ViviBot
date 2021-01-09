@@ -89,99 +89,104 @@ module.exports = {
 
 			message.channel.send(instaEmbed).then(async function(newMessage) {
 				
-				imageURLs.forEach(async function(element, index) {
-					await newMessage.react(EMOJI_ARRAY[index]);
-					try {
-						const filter = (reaction, user) => {
-							return reaction.emoji.name === EMOJI_ARRAY[index];
-						};
+				if (imageURLs.length > 1)
+				{
+					imageURLs.forEach(async function(element, index) 
+					{
+						await newMessage.react(EMOJI_ARRAY[index]);
+						try {
+							const filter = (reaction, user) => {
+								return reaction.emoji.name === EMOJI_ARRAY[index];
+							};
 
-						
-						//console.log('create collector');
-						let collector = await newMessage.createReactionCollector(filter, { time: 1000000 });
-						collector.on('collect', async function (reaction, user) 
-						{
-							collector.resetTimer();
-							//console.log('reaction ');
-							if (imageURLs[index].split('/').includes('e35'))
+							
+							//console.log('create collector');
+							let collector = await newMessage.createReactionCollector(filter, { time: 1000000 });
+							collector.on('collect', async function (reaction, user) 
 							{
-								instaEmbed.fields = [];
-								instaEmbed.setImage(imageURLs[index])
-									.setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
-							}
-							else 
-							{
-								const videoThumb = $("video[src='" + imageURLs[index] + "']");
-								//console.log('video ' + videoThumb);
-								instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '[link](' + imageURLs[index] + ')', true)
-									.setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
-							}
+								collector.resetTimer();
+								//console.log('reaction ');
+								if (imageURLs[index].split('/').includes('e35'))
+								{
+									instaEmbed.fields = [];
+									instaEmbed.setImage(imageURLs[index])
+										.setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+								}
+								else 
+								{
+									instaEmbed.fields = [];
+									const videoThumb = $("video[src='" + imageURLs[index] + "']");
+									//console.log('video ' + videoThumb);
+									instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '[link](' + imageURLs[index] + ')', true)
+										.setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+								}
 
-							newMessage.edit(instaEmbed);
+								newMessage.edit(instaEmbed);
 
 
-							const userReactions = await newMessage.reactions.cache.filter(reaction => {
-								//console.log(reaction.count);
-								return (reaction.count > 0);
-							});
-							try {
-								//console.log(userReactions + ' try ' + userReactions);
-								for (const reaction of userReactions.values()) {
-									reaction.users.cache.forEach(async function(user, index)
-									{
-										//console.log(user.id + ' vs ' + newMessage.author.id);
-										if (user.id != newMessage.author.id)
+								const userReactions = await newMessage.reactions.cache.filter(reaction => {
+									//console.log(reaction.count);
+									return (reaction.count > 0);
+								});
+								try {
+									//console.log(userReactions + ' try ' + userReactions);
+									for (const reaction of userReactions.values()) {
+										reaction.users.cache.forEach(async function(user, index)
 										{
-											//console.log(' a+ ');
-											await reaction.users.remove(user);
-										}
-									});
+											//console.log(user.id + ' vs ' + newMessage.author.id);
+											if (user.id != newMessage.author.id)
+											{
+												//console.log(' a+ ');
+												await reaction.users.remove(user);
+											}
+										});
+									}
+								} catch (error) {
+									console.error(error);
 								}
-							} catch (error) {
-								console.error(error);
-							}
-						});
+							});
 
-						collector.on('end', (collected, reason) => {
-							console.log(collected);
-							// TODO : remove reactions
-				        });
-						
-	
-						/*
-						newMessage.awaitReactions(filter, { time: 100000, errors: ['time'] })
-						.then(function(collected) {
-							console.log('reaction ' + imageURLs[index]);
-							if (imageURLs[index].split('/').includes('e35'))
-							{
-								instaEmbed.setImage(imageURLs[index]).setFooter('Picture ' + (index+1), 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
-							}
-							else 
-							{
-								const videoThumb = $("video[src='" + imageURLs[index] + "']");
-								console.log('video ' + videoThumb);
-								instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '[link](' + imageURLs[index] + ')', true)
-									.setFooter('Picture ' + (index+1), 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
-							}
-
-							newMessage.edit(instaEmbed);
-
-							const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has());
-							try {
-								for (const reaction of userReactions.values()) {
-									reaction.users.remove(userId);
+							collector.on('end', (collected, reason) => {
+								console.log(collected);
+								// TODO : remove reactions
+					        });
+							
+		
+							/*
+							newMessage.awaitReactions(filter, { time: 100000, errors: ['time'] })
+							.then(function(collected) {
+								console.log('reaction ' + imageURLs[index]);
+								if (imageURLs[index].split('/').includes('e35'))
+								{
+									instaEmbed.setImage(imageURLs[index]).setFooter('Picture ' + (index+1), 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 								}
-							} catch (error) {
-								console.error('Failed to remove reactions.');
-							}
-						})
-						.catch(err => console.log('error : ' + err));*/
-						
+								else 
+								{
+									const videoThumb = $("video[src='" + imageURLs[index] + "']");
+									console.log('video ' + videoThumb);
+									instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '[link](' + imageURLs[index] + ')', true)
+										.setFooter('Picture ' + (index+1), 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+								}
 
-					} catch (error) {
-						console.error(error);
-					}
-				});
+								newMessage.edit(instaEmbed);
+
+								const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has());
+								try {
+									for (const reaction of userReactions.values()) {
+										reaction.users.remove(userId);
+									}
+								} catch (error) {
+									console.error('Failed to remove reactions.');
+								}
+							})
+							.catch(err => console.log('error : ' + err));*/
+							
+
+						} catch (error) {
+							console.error(error);
+						}
+					});
+				}
 			});
 		});
 		/*
