@@ -140,18 +140,18 @@ module.exports = {
 
 
 								const userReactions = await newMessage.reactions.cache.filter(reaction => {
-									//console.log(reaction.count);
+									console.log(reaction.count);
 									return (reaction.count > 0);
 								});
 								try {
-									//console.log(userReactions + ' try ' + userReactions);
+									console.log(userReactions + ' try ' + userReactions);
 									for (const reaction of userReactions.values()) {
 										reaction.users.cache.forEach(async function(user, index)
 										{
-											//console.log(user.id + ' vs ' + newMessage.author.id);
+											console.log(user.id + ' vs ' + newMessage.author.id);
 											if (user.id != newMessage.author.id)
 											{
-												//console.log(' a+ ');
+												console.log(' a+ ');
 												await reaction.users.remove(user);
 											}
 										});
