@@ -99,6 +99,18 @@ module.exports = {
 								return reaction.emoji.name === EMOJI_ARRAY[index];
 							};
 
+							const picNumString = '';
+							for (let i = 0; i < imageURLs.length; i++) {
+								if (i == index)
+								{
+									picNumString += i;
+								}
+								else 
+								{
+									picNumString += '**' + i + '**';
+								}
+							}
+
 							
 							//console.log('create collector');
 							let collector = await newMessage.createReactionCollector(filter, { time: 1000000 });
@@ -110,7 +122,7 @@ module.exports = {
 								{
 									instaEmbed.fields = [];
 									instaEmbed.setImage(imageURLs[index])
-										.setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+										.setFooter('Picture ' + picNumString, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 								}
 								else 
 								{
@@ -118,7 +130,7 @@ module.exports = {
 									const videoThumb = $("video[src='" + imageURLs[index] + "']");
 									//console.log('video ' + videoThumb);
 									instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '[link](' + imageURLs[index] + ')', true)
-										.setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+										.setFooter('Picture ' + picNumString, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 								}
 
 								newMessage.edit(instaEmbed);
