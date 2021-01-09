@@ -134,7 +134,7 @@ module.exports = {
 							if (imageURLs[index].split('/').includes('e35'))
 							{
 								instaEmbed.fields = [];
-								instaEmbed.setImage(imageURLs[index]).
+								instaEmbed.setImage(imageURLs[index])
 									.setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 							}
 							else 
