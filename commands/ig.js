@@ -138,7 +138,7 @@ module.exports = {
 							else 
 							{
 								const videoThumb = $("video[src='" + imageURLs[index] + "']");
-								console.log('video ' + videoThumb);
+								//console.log('video ' + videoThumb);
 								instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '[link](' + imageURLs[index] + ')', true)
 									.setFooter('Picture ' + index, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 							}
@@ -148,12 +148,14 @@ module.exports = {
 
 							const userReactions = newMessage.reactions.cache.filter(reaction => reaction.users.cache.length > 1);
 							try {
-								console.log('try');
+								console.log('try ' + userReactions.length);
 								for (const reaction of userReactions.values()) {
 									reaction.users.cache.forEach(async function(user, index)
 									{
+										console.log(user.value.id + ' vs ' + newMessage.author.id);
 										if (user.value.id != newMessage.author.id)
 										{
+											console.log(' a+ ');
 											await reaction.users.remove(user.value);
 										}
 									});
