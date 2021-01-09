@@ -146,7 +146,10 @@ module.exports = {
 							newMessage.edit(instaEmbed);
 
 
-							const userReactions = newMessage.reactions.cache.filter(reaction => reaction.users.cache.length > 1);
+							const userReactions = newMessage.reactions.cache.filter(reaction => {
+								console.log(reaction.users.cache.array.length);
+								reaction.users.cache.array.length > 1;
+							});
 							try {
 								console.log(userReactions + ' try ' + userReactions.array.length);
 								for (const reaction of userReactions.values()) {
