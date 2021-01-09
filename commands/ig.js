@@ -99,7 +99,7 @@ module.exports = {
 								return reaction.emoji.name === EMOJI_ARRAY[index];
 							};
 
-							const picNumString = '';
+							let picNumString = '';
 							for (let i = 0; i < imageURLs.length; i++) {
 								if (i == index)
 								{
