@@ -156,7 +156,7 @@ module.exports = {
 									reaction.users.cache.forEach(async function(user, index)
 									{
 										console.log(user.id + ' vs ' + newMessage.author.id);
-										if (user.value.id != newMessage.author.id)
+										if (user.id != newMessage.author.id)
 										{
 											console.log(' a+ ');
 											await reaction.users.remove(user.value);
