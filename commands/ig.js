@@ -146,17 +146,13 @@ module.exports = {
 							newMessage.edit(instaEmbed);
 
 
+							const userReactions = newMessage.reactions.cache.filter(reaction => !reaction.users.cache.has(newMessage.user.id));
 							try {
-								for (const reaction of newMessage.reactions.cache) {
-									reaction.users.forEach(function (user, index) {
-										if (user.id != newMessage.user.id)
-										{
-											reaction.users.remove(user);
-										}
-									});
+								for (const reaction of userReactions.values()) {
+									await reaction.users.remove(newMessage.user.id);
 								}
 							} catch (error) {
-								console.error(error);
+								console.error('Failed to remove reactions.');
 							}
 						});
 						
