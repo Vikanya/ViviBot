@@ -147,8 +147,8 @@ module.exports = {
 
 
 							const userReactions = newMessage.reactions.cache.filter(reaction => {
-								console.log(reaction.users);
-								return (reaction.users.cache.has(newMessage.author));
+								console.log(userReactions.array.length);
+								return (userReactions.array.length > 0);
 							});
 							try {
 								console.log(userReactions + ' try ' + userReactions.array.length);
