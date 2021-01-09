@@ -146,7 +146,7 @@ module.exports = {
 							newMessage.edit(instaEmbed);
 
 
-							const userReactions = newMessage.reactions.cache.filter(reaction => {
+							const userReactions = await newMessage.reactions.cache.filter(reaction => {
 								console.log(userReactions.array.length);
 								return (userReactions.array.length > 0);
 							});
