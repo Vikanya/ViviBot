@@ -151,11 +151,11 @@ module.exports = {
 								return (reaction.count > 0);
 							});
 							try {
-								console.log(userReactions + ' try ' + userReactions.array.length);
+								console.log(userReactions + ' try ' + userReactions);
 								for (const reaction of userReactions.values()) {
 									reaction.users.cache.forEach(async function(user, index)
 									{
-										console.log(user.value.id + ' vs ' + newMessage.author.id);
+										console.log(user.id + ' vs ' + newMessage.author.id);
 										if (user.value.id != newMessage.author.id)
 										{
 											console.log(' a+ ');
