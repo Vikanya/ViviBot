@@ -63,6 +63,10 @@ module.exports = {
 
 		    const desc = $("div[class='desc']").text();
 
+		    let picMaxString = '';
+			for (let i = 1; i < imageURLs.length; i++) {
+				picMaxString += i + ' ';
+			}
 
 		    const instaEmbed = new Discord.MessageEmbed()
 				.setColor('#833AB4')
@@ -70,19 +74,19 @@ module.exports = {
 				.setURL('https://www.instagram.com/p/' + code)
 				.setAuthor(author.attr('alt'), author.attr('src'), 'https://www.instagram.com/' + author.attr('alt'))
 				.setDescription((desc.length > DESC_LENGTH) ? desc.substring(0, DESC_LENGTH) + '...' : desc)
-				.setImage(imageURLs[0])
+				.setImage(imageURLs[0]);
 
 			if (imageURLs[0].split('/').includes('e35'))
 			{
 				instaEmbed.fields = [];
 				instaEmbed.setImage(imageURLs[0])
-					.setFooter('__Picture__ ' + 0, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+					.setFooter('Picture 0️⃣ ' + picMaxString, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 			}
 			else 
 			{
 				const videoThumb = $("video[src='" + imageURLs[0] + "']");
 				instaEmbed.setImage(videoThumb.attr('poster')).addField('Video', '[link](' + imageURLs[0] + ')', true)
-					.setFooter('__Picture__ ' + 0, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
+					.setFooter('Picture 0️⃣ ' + picMaxString, 'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png');
 			}
 			//const collectors = new ReactionCollector();
 
@@ -102,7 +106,7 @@ module.exports = {
 							for (let i = 0; i < imageURLs.length; i++) {
 								if (i == index)
 								{
-									picNumString += '**' + i + '** ';
+									picNumString += EMOJI_ARRAY[i] + ' ';
 								}
 								else 
 								{
