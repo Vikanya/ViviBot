@@ -147,7 +147,7 @@ module.exports = {
 
 
 							try {
-								for (const reaction of newMessage.reactions.cache.values()) {
+								for (const reaction of newMessage.reactions.cache) {
 									reaction.users.forEach(function (user, index) {
 										if (user.id != newMessage.user.id)
 										{
