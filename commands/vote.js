@@ -4,11 +4,11 @@ module.exports = {
 	args: true,
 	usage: '<command name> add <emoji> <option name> [<emoji> <option name>...]\n<command name> remove <emoji> [<emoji> <emoji>...]\n<command name> start',
 	execute(message, args, keyv) {
-		if (this.previousVoteMessageId === ''){
+		if (this.previousVoteMessage === ''){
 			keyv.get('qergserrgsegs').then(messageID => {
 				if (messageID)
 				{
-					this.previousVoteMessageId = messageID;
+					this.previousVoteMessage = messageID;
 					//this.execute(message, args, keyv);
 					return;
 				}
@@ -41,15 +41,20 @@ module.exports = {
 			}
 		}
 	},
-	previousVoteMessageId: '',
+	previousVoteMessage: '',
 	fetch(message, keyv) {
 		console.log('fetching for vote message');
 		message.channel.messages.fetchPinned().then( messages =>
 		{
 			console.log('Received ' + messages.size + ' messages');
-			let botMessages = messages.filter(m => m.author.bot);
+			let botMessages = messages.filter(m => m.author.bot && m.content.startsWith('[VOTE]'));
 			console.log(botMessages.size + ' bot messages');
-
+			if (botMessages.size == 0){
+				message.channel.send('[VOTE]\nNo Vote options have been added.').then(voteMessage => {
+					previousVoteMessage = voteMessage;
+					previousVoteMessage.pin();
+				})
+			}
 		})
 	}
 };
