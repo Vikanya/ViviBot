@@ -9,13 +9,13 @@ module.exports = {
 				if (messageID)
 				{
 					this.previousVoteMessageId = messageID;
-					this.execute(message, args, keyv);
+					//this.execute(message, args, keyv);
 					return;
 				}
 				else 
 				{
 					this.fetch(message, keyv);
-					this.execute(message, args, keyv);
+					//this.execute(message, args, keyv);
 					return;
 				}
 			});
