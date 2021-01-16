@@ -5,7 +5,7 @@ module.exports = {
 	usage: '<command name> add <emoji> <option name> [<emoji> <option name>...]\n<command name> remove <emoji> [<emoji> <emoji>...]\n<command name> start',
 	execute(message, args, keyv) {
 		if (this.previousVoteMessageId === ''){
-			keyv.get('qergserrgsegs').then(async function(messageID) {
+			keyv.get('qergserrgsegs').then(function(messageID) {
 				if (messageID)
 				{
 					this.previousVoteMessageId = messageID;
