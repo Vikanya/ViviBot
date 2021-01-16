@@ -10,7 +10,7 @@ module.exports = {
 		}
 		else 
 		{
-			switch (args[1])
+			switch (args[1]){
 			  case 'add':
 			    // code block
 			    break;
