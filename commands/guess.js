@@ -1,5 +1,5 @@
-const fetch = require("node-fetch")
-const cheerio = require("cheerio")
+//const fetch = require("node-fetch")
+//const cheerio = require("cheerio")
 
 module.exports = {
 	name: 'guess',

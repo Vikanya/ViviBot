@@ -16,6 +16,11 @@ for (const file of commandFiles) {
 	// set a new item in the Collection
 	// with the key as the command name and the value as the exported module
 	client.commands.set(command.name, command);
+	try {
+		command.init();		
+	} catch (error) {
+	  console.error(command.name + ' does\'t have an init function: ' + error);
+	}
 }
 
 client.on('ready', () => {
@@ -45,7 +50,7 @@ client.on('message', message => {
 				});
 			}
 			else 
-			{
+			{/// ---------------------------- handle regular commands in dm ----------------------------
 				if (command.args && !args.length) {
 					let reply = `You didn't provide any arguments, ${message.author}  ᵇᵒˡᵒˢˢ`;
 					
@@ -91,7 +96,7 @@ client.on('message', message => {
 			});
 		}
 		else 
-		{
+		{/// ---------------------------- handle regular commands ----------------------------
 			if (command.args && !args.length) {
 				let reply = `You didn't provide any arguments, ${message.author}  ᵇᵒˡᵒˢˢ`;
 				
