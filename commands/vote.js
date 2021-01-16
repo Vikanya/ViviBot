@@ -8,13 +8,13 @@ module.exports = {
 			keyv.get('qergserrgsegs').then(messageID => {
 				if (messageID)
 				{
-					previousVoteMessageId = messageID;
+					this.previousVoteMessageId = messageID;
 					execute(message, args, keyv);
 					return;
 				}
 				else 
 				{
-					fetch(message, keyv);
+					this.fetch(message, keyv);
 					execute(message, args, keyv);
 					return;
 				}
