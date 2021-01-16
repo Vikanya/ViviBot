@@ -5,7 +5,7 @@ module.exports = {
 	usage: '<command name> add <emoji> <option name> [<emoji> <option name>...]\n<command name> remove <emoji> [<emoji> <emoji>...]\n<command name> start',
 	execute(message, args, keyv) {
 		if (this.previousVoteMessageId === ''){
-			keyv.get('qergserrgsegs').then(messageID => {
+			keyv.get('qergserrgsegs').then(async function(messageID) {
 				if (messageID)
 				{
 					this.previousVoteMessageId = messageID;
@@ -47,7 +47,7 @@ module.exports = {
 		message.channel.messages.fetchPinned().then( messages =>
 		{
 			console.log('Received ' + messages.size + ' messages');
-			let botMessages = messages.filter(m => m.bot);
+			let botMessages = messages.filter(m => m.author.bot);
 			console.log(botMessages.size + ' bot messages');
 
 		})
