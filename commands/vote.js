@@ -18,7 +18,7 @@ module.exports = {
 					execute(message, args, keyv);
 					return;
 				}
-			}
+			});
 		}
 		if (args.length < 1)
 		{
