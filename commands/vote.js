@@ -9,13 +9,13 @@ module.exports = {
 				if (messageID)
 				{
 					this.previousVoteMessageId = messageID;
-					execute(message, args, keyv);
+					this.execute(message, args, keyv);
 					return;
 				}
 				else 
 				{
 					this.fetch(message, keyv);
-					execute(message, args, keyv);
+					this.execute(message, args, keyv);
 					return;
 				}
 			});
@@ -47,6 +47,9 @@ module.exports = {
 		message.channel.messages.fetchPinned().then( messages =>
 		{
 			console.log('Received ' + messages.size + ' messages');
+			let botMessages = messages.filter(m => m.bot);
+			console.log(botMessages.size + ' bot messages');
+
 		})
 	}
 };
