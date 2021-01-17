@@ -67,8 +67,8 @@ module.exports = {
 			}
 			else 
 			{
-				console.log(botMessages[0] + ' message');
-				keyv.set('qergserrgsegs', botMessages[0].id);
+				console.log(botMessages.first() + ' message');
+				keyv.set('qergserrgsegs', botMessages.first().id);
 			}
 		})
 	},
