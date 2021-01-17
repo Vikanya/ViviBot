@@ -4,6 +4,7 @@ module.exports = {
 	args: true,
 	usage: '<command name> add <emoji> <option name> [<emoji> <option name>...]\n<command name> remove <emoji> [<emoji> <emoji>...]\n<command name> start',
 	execute(message, args, keyv) {
+		console.log(previousVoteMessage);
 		if (this.previousVoteMessage === ''){
 			keyv.get('qergserrgsegs').then(messageID => {
 				if (messageID)
@@ -56,6 +57,7 @@ module.exports = {
 					previousVoteMessage = voteMessage;
 					botmessages.add(previousVoteMessage);
 					previousVoteMessage.pin();
+					console.log(previousVoteMessage);
 				});
 			}
 		})
