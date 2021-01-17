@@ -14,7 +14,7 @@ module.exports = {
 				}
 				else 
 				{
-					this.fetch(message, keyv);
+					this.fetch(message, args, keyv);
 					//this.execute(message, args, keyv);
 					return;
 				}
@@ -42,19 +42,23 @@ module.exports = {
 		}
 	},
 	previousVoteMessage: '',
-	fetch(message, keyv) {
+	fetch(message, args, keyv) {
 		console.log('fetching for vote message');
 		message.channel.messages.fetchPinned().then( messages =>
 		{
 			console.log('Received ' + messages.size + ' messages');
 			let botMessages = messages.filter(m => m.author.bot && m.content.startsWith('[VOTE]'));
 			console.log(botMessages.size + ' bot messages');
-			if (botMessages.size == 0){
-				message.channel.send('[VOTE]\nNo Vote options have been added.').then(voteMessage => {
+			if (botMessages.size == 0)
+			{
+				message.channel.send('[VOTE]\nNo Vote options have been added.').then(voteMessage => 
+				{
 					previousVoteMessage = voteMessage;
+					botmessages.add(previousVoteMessage);
 					previousVoteMessage.pin();
-				})
+				});
 			}
 		})
-	}
+	},
+
 };
