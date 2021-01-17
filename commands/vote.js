@@ -4,7 +4,7 @@ module.exports = {
 	args: true,
 	usage: '<command name> add <emoji> <option name> [<emoji> <option name>...]\n<command name> remove <emoji> [<emoji> <emoji>...]\n<command name> start',
 	execute(message, args, keyv) {
-		console.log(previousVoteMessage);
+		console.log(this.previousVoteMessage);
 		if (this.previousVoteMessage === ''){
 			keyv.get('qergserrgsegs').then(messageID => {
 				if (messageID)
@@ -54,10 +54,10 @@ module.exports = {
 			{
 				message.channel.send('[VOTE]\nNo Vote options have been added.').then(voteMessage => 
 				{
-					previousVoteMessage = voteMessage;
+					this.previousVoteMessage = voteMessage;
 					botmessages.add(previousVoteMessage);
-					previousVoteMessage.pin();
-					console.log(previousVoteMessage);
+					this.previousVoteMessage.pin();
+					console.log(this.previousVoteMessage);
 				});
 			}
 		})
