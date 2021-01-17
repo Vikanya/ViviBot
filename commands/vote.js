@@ -59,7 +59,7 @@ module.exports = {
 				});
 			}
 			this.previousVoteMessage = botMessages[0];
-			console.log(this.previousVoteMessage);
+			console.log(this.previousVoteMessage.content);
 		})
 	},
 
