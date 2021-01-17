@@ -54,12 +54,12 @@ module.exports = {
 			{
 				message.channel.send('[VOTE]\nNo Vote options have been added.').then(voteMessage => 
 				{
-					this.previousVoteMessage = voteMessage;
 					botmessages.add(previousVoteMessage);
 					this.previousVoteMessage.pin();
-					console.log(this.previousVoteMessage);
 				});
 			}
+			this.previousVoteMessage = voteMessage;
+			console.log(this.previousVoteMessage);
 		})
 	},
 
