@@ -22,6 +22,12 @@ module.exports = {
 							remainingArgs = remainingArgs.trim().split('"');
 							remainingArgs.forEach(str => {
 								console.log(str);
+								if (str.length > 0)
+								{
+									let emoji = str[0];
+									let name = str.substring(1, str.length);
+									console.log("emoji: " + emoji + " /name: " + name);
+								}
 							});
 						    break;
 						  case 'remove':
@@ -34,7 +40,7 @@ module.exports = {
 							message.reply('Your command isn\'t using proper arguments. (type \'!help vote\' for more info)');
 						}
 					}
-				});
+				}).catch(this.fetch(message, args, keyv));
 				return;
 			}
 			else 
@@ -67,7 +73,7 @@ module.exports = {
 			}
 			else 
 			{
-				console.log(botMessages.first() + ' message');
+				console.log(botMessages.first().id + ' message');
 				keyv.set('qergserrgsegs', botMessages.first().id);
 			}
 		})
