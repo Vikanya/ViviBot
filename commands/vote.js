@@ -58,7 +58,7 @@ module.exports = {
 					this.previousVoteMessage.pin();
 				});
 			}
-			this.previousVoteMessage = voteMessage;
+			this.previousVoteMessage = botmessages[0];
 			console.log(this.previousVoteMessage);
 		})
 	},
