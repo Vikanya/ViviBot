@@ -7,7 +7,7 @@ module.exports = {
 		if (!keyv.get('qergserrgsegs').then(messageID => {
 			if (messageID)
 			{
-				console.log(messageID);
+				console.log('id from keyv : ' + messageID);
 				message.channel.messages.fetch(messageID).then(voteMessage => {
 					if (args.length < 1)
 					{
@@ -24,8 +24,8 @@ module.exports = {
 								console.log(str);
 								if (str.length > 0)
 								{
-									let emoji = str[0];
-									let name = str.substring(1, str.length);
+									let emoji = str.split('/')[0];
+									let name = str.split('/')[1];
 									console.log("emoji: " + emoji + " /name: " + name);
 								}
 							});
