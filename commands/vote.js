@@ -9,14 +9,12 @@ module.exports = {
 			keyv.get('qergserrgsegs').then(messageID => {
 				if (messageID)
 				{
-					this.previousVoteMessage = messageID;
-					//this.execute(message, args, keyv);
+					console.log(messageID);
 					return;
 				}
 				else 
 				{
 					this.fetch(message, args, keyv);
-					//this.execute(message, args, keyv);
 					return;
 				}
 			});
@@ -42,7 +40,6 @@ module.exports = {
 			}
 		}
 	},
-	previousVoteMessage: '',
 	fetch(message, args, keyv) {
 		console.log('fetching for vote message');
 		message.channel.messages.fetchPinned().then( messages =>
@@ -54,12 +51,15 @@ module.exports = {
 			{
 				message.channel.send('[VOTE]\nNo Vote options have been added.').then(voteMessage => 
 				{
-					botMessages.add(previousVoteMessage);
-					this.previousVoteMessage.pin();
+					botMessages.add(voteMessage);
+					voteMessage.pin();
+					keyv.set('qergserrgsegs', voteMessage.id);
 				});
 			}
-			this.previousVoteMessage = botMessages[0];
-			console.log(this.previousVoteMessage.content);
+			else 
+			{
+					keyv.set('qergserrgsegs', botMessages[0]);
+			}
 		})
 	},
 
