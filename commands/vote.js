@@ -1,8 +1,10 @@
 module.exports = {
 	name: 'vote',
-	description: 'Collection of commands to organise votes.',
+	description: 'Collection of commands to organise votes.\n__add__: edits the vote message ',
 	args: true,
-	usage: '<command name> add "<emoji> <option name>" ["<emoji> <option name>"...]\n<command name> remove <emoji> [<emoji> <emoji>...]\n<command name> start',
+	usage: '<command name> add "<emoji> <option name>" ["<emoji> <option name>"...]\n<command name> remove "<emoji>" ["<emoji>" "<emoji>"...]\n<command name> start',
+	
+	header: '[VOTE]',
 	execute(message, args, keyv, tryfetch = true) {
 		if (!keyv.get('qergserrgsegs').then(messageID => {
 			if (messageID)
@@ -19,10 +21,13 @@ module.exports = {
 						console.log(voteMessage.content);
 						let currentVotes = voteMessage.content.split('\n');
 						switch (args.shift().toLowerCase()){
+
 						  case 'add':
+						    
 						    let remainingArgs = '';
 							args.forEach(element => remainingArgs += element);
 							remainingArgs = remainingArgs.trim().split('"');
+							
 							let voteStr = '';
 							remainingArgs.forEach(async str => {
 								console.log(str);
@@ -35,11 +40,11 @@ module.exports = {
 									if (currentVotes.every(vote => !vote.includes(emoji)))
 									{
 										voteStr += '\n' + emoji + ' ' + name;
-									}
+									}/*
 									else 
 									{
 										message.react(emoji);
-									}
+									}*/
 
 									await voteMessage.react(emoji);
 									console.log("reacted ");
@@ -47,9 +52,34 @@ module.exports = {
 							});
 							voteMessage.edit(voteMessage.content + voteStr);
 						    break;
+
 						  case 'remove':
-						    // code block
+
+						    let remainingArgs = '';
+							args.forEach(element => remainingArgs += element);
+							remainingArgs = remainingArgs.trim().split('"');
+							
+							let voteStr = '';
+							remainingArgs.forEach(async str => {
+								console.log(str);
+								if (str.length > 0)
+								{
+									console.log("emoji: " + str);
+
+									currentVotes = currentVotes.filter(vote => !vote.includes(str));
+									/*
+									else 
+									{
+										message.react(emoji);
+									}*/
+
+									await voteMessage.reactions.cache.get(str).remove();
+									console.log("reacted ");
+								}
+							});
+							voteMessage.edit(this.header + currentVotes.concat());
 						    break;
+
 						  case 'start':
 						    // code block
 						    break;
@@ -91,11 +121,11 @@ module.exports = {
 		message.channel.messages.fetchPinned().then( messages =>
 		{
 			console.log('Received ' + messages.size + ' messages');
-			let botMessages = messages.filter(m => m.author.bot && m.content.startsWith('[VOTE]'));
+			let botMessages = messages.filter(m => m.author.bot && m.content.startsWith(this.header));
 			console.log(botMessages.size + ' bot messages ' + botMessages);
 			if (botMessages.size == 0)
 			{
-				message.channel.send('[VOTE]').then(voteMessage => 
+				message.channel.send(this.header).then(voteMessage => 
 				{
 					voteMessage.pin();
 					console.log('1/id ' + voteMessage.id);
