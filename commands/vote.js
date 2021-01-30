@@ -29,7 +29,7 @@ module.exports = {
 									let emoji = str.split('/')[0];
 									let name = str.split('/')[1];
 									console.log("emoji: " + emoji + " /name: " + name);
-									voteMessage.edit(votemessage.content + '\n' + emoji + ' ' + name).then(
+									voteMessage.edit(voteMessage.content + '\n' + emoji + ' ' + name).then(
 										voteMessage => {
 											voteMessage.react(emoji);
 										});
