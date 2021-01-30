@@ -74,7 +74,7 @@ module.exports = {
 		}
 		
 	},
-	fetch(message, args, keyv) {
+	async fetch(message, args, keyv) {
 		console.log('fetching for vote message');
 		message.channel.messages.fetchPinned().then( messages =>
 		{
@@ -83,7 +83,7 @@ module.exports = {
 			console.log(botMessages.size + ' bot messages ' + botMessages);
 			if (botMessages.size == 0)
 			{
-				message.channel.send('[VOTE]').then(voteMessage => 
+				await message.channel.send('[VOTE]').then(voteMessage => 
 				{
 					voteMessage.pin();
 					keyv.set('qergserrgsegs', voteMessage.id);
@@ -94,8 +94,7 @@ module.exports = {
 				console.log(botMessages.first().id + ' message');
 				keyv.set('qergserrgsegs', botMessages.first().id);
 			}
-		});
-		this.execute(message, args, keyv, false)
+		}).then(this.execute(message, args, keyv, false))
 	},
 
 };
