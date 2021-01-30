@@ -20,11 +20,13 @@ module.exports = {
 						console.log(voteMessage);
 						console.log(voteMessage.content);
 						let currentVotes = voteMessage.content.split('\n');
+
+					    let remainingArgs = '';
 						switch (args.shift().toLowerCase()){
 
 						  case 'add':
 						    
-						    let remainingArgs = '';
+						    remainingArgs = '';
 							args.forEach(element => remainingArgs += element);
 							remainingArgs = remainingArgs.trim().split('"');
 							
@@ -55,7 +57,7 @@ module.exports = {
 
 						  case 'remove':
 
-						    let remainingArgs = '';
+						    remainingArgs = '';
 							args.forEach(element => remainingArgs += element);
 							remainingArgs = remainingArgs.trim().split('"');
 							
