@@ -64,9 +64,9 @@ module.exports = {
 								console.log(str);
 								if (str.length > 0)
 								{
-									console.log("emoji: " + str);
-
+									console.log("removing a vote: " + str + " num : " + currentVotes.length);
 									currentVotes = currentVotes.filter(vote => !vote.includes(str));
+									console.log("after num : " + currentVotes.length);
 									/*
 									else 
 									{
@@ -74,7 +74,6 @@ module.exports = {
 									}*/
 
 									await voteMessage.reactions.cache.get(str).remove();
-									console.log("reacted ");
 								}
 							});
 							let resultString = this.header;
