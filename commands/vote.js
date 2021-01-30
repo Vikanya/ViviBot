@@ -22,6 +22,7 @@ module.exports = {
 						    let remainingArgs = '';
 							args.forEach(element => remainingArgs += element);
 							remainingArgs = remainingArgs.trim().split('"');
+							let voteStr = '';
 							remainingArgs.forEach(str => {
 								console.log(str);
 								if (str.length > 0)
@@ -29,12 +30,10 @@ module.exports = {
 									let emoji = str.split('/')[0];
 									let name = str.split('/')[1];
 									console.log("emoji: " + emoji + " /name: " + name);
-									voteMessage.edit(voteMessage.content + '\n' + emoji + ' ' + name).then(
-										voteMessage => {
-											voteMessage.react(emoji);
-										});
+									voteStr += '\n' + emoji + ' ' + name;
 								}
 							});
+							voteMessage.edit(voteMessage.content + voteStr);
 						    break;
 						  case 'remove':
 						    // code block
