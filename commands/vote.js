@@ -19,7 +19,7 @@ module.exports = {
 					{
 						console.log(voteMessage);
 						console.log(voteMessage.content);
-						let currentVotes = voteMessage.content.split('\n');
+						let currentVotes = voteMessage.content.replace(this.header, '').split('\n');
 
 					    let remainingArgs = '';
 						switch (args.shift().toLowerCase()){
@@ -74,11 +74,11 @@ module.exports = {
 										message.react(emoji);
 									}*/
 
-									await voteMessage.reactions.cache.get(str).remove();
+									await voteMessage.reactions.cache.get(str => str += '\n').remove();
 									console.log("reacted ");
 								}
 							});
-							voteMessage.edit(this.header + currentVotes.concat());
+							voteMessage.edit(this.header + currentVotes.map().concat());
 						    break;
 
 						  case 'start':
