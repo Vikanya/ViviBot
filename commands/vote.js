@@ -83,7 +83,7 @@ module.exports = {
 			console.log(botMessages.size + ' bot messages ' + botMessages);
 			if (botMessages.size == 0)
 			{
-				await message.channel.send('[VOTE]').then(voteMessage => 
+				message.channel.send('[VOTE]').then(voteMessage => 
 				{
 					voteMessage.pin();
 					keyv.set('qergserrgsegs', voteMessage.id);
