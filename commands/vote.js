@@ -77,7 +77,11 @@ module.exports = {
 									console.log("reacted ");
 								}
 							});
-							voteMessage.edit(this.header + currentVotes.map(str => str += '\n').concat());
+							let resultString = this.header;
+							currentVotes.forEach(str => {
+								resultString += '\n' + str;
+							});
+							voteMessage.edit(resultString);
 						    break;
 
 						  case 'start':
