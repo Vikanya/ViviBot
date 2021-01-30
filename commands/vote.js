@@ -75,15 +75,13 @@ module.exports = {
 
 									await voteMessage.reactions.cache.get(str).remove();
 								}
-								else 
-								{
-									console.log("removed");
-									remainingArgs.remove(str);
-								}
 							});
 							let resultString = this.header;
 							currentVotes.forEach(str => {
-								resultString += '\n' + str;
+								if (str.trim().length > 0)
+								{
+									resultString += '\n' + str;									
+								}
 							});
 							voteMessage.edit(resultString);
 						    break;
