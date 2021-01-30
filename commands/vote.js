@@ -75,7 +75,6 @@ module.exports = {
 			{
 				message.channel.send('[VOTE]').then(voteMessage => 
 				{
-					botMessages.add(voteMessage);
 					voteMessage.pin();
 					keyv.set('qergserrgsegs', voteMessage.id);
 				});
