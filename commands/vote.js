@@ -27,6 +27,10 @@ module.exports = {
 									let emoji = str.split('/')[0];
 									let name = str.split('/')[1];
 									console.log("emoji: " + emoji + " /name: " + name);
+									voteMessage.edit(votemessage.content + '\n' + emoji + ' ' + name).then(
+										voteMessage => {
+											voteMessage.react(emoji);
+										});
 								}
 							});
 						    break;
@@ -40,16 +44,21 @@ module.exports = {
 							message.reply('Your command isn\'t using proper arguments. (type \'!help vote\' for more info)');
 						}
 					}
-				}).catch(this.fetch(message, args, keyv));
+				}).catch(() => {
+					console.log('fetch 3');
+					this.fetch(message, args, keyv);
+				});
 				return;
 			}
 			else 
 			{
+				console.log('fetch 2');
 				this.fetch(message, args, keyv);
 				return;
 			}
 		}))
 		{
+			console.log('fetch 3');
 			this.fetch(message, args, keyv);
 			return;
 		}
@@ -64,7 +73,7 @@ module.exports = {
 			console.log(botMessages.size + ' bot messages ' + botMessages);
 			if (botMessages.size == 0)
 			{
-				message.channel.send('[VOTE]\nNo Vote options have been added.').then(voteMessage => 
+				message.channel.send('[VOTE]').then(voteMessage => 
 				{
 					botMessages.add(voteMessage);
 					voteMessage.pin();
