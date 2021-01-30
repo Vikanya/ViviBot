@@ -30,7 +30,7 @@ module.exports = {
 							args.forEach(element => remainingArgs += element);
 							remainingArgs = remainingArgs.trim().split('"');
 							
-							let voteStr = '';
+							let voteStr1 = '';
 							remainingArgs.forEach(async str => {
 								console.log(str);
 								if (str.length > 0)
@@ -41,7 +41,7 @@ module.exports = {
 
 									if (currentVotes.every(vote => !vote.includes(emoji)))
 									{
-										voteStr += '\n' + emoji + ' ' + name;
+										voteStr1 += '\n' + emoji + ' ' + name;
 									}/*
 									else 
 									{
@@ -52,7 +52,7 @@ module.exports = {
 									console.log("reacted ");
 								}
 							});
-							voteMessage.edit(voteMessage.content + voteStr);
+							voteMessage.edit(voteMessage.content + voteStr1);
 						    break;
 
 						  case 'remove':
@@ -61,7 +61,6 @@ module.exports = {
 							args.forEach(element => remainingArgs += element);
 							remainingArgs = remainingArgs.trim().split('"');
 							
-							let voteStr = '';
 							remainingArgs.forEach(async str => {
 								console.log(str);
 								if (str.length > 0)
