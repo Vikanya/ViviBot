@@ -86,15 +86,15 @@ module.exports = {
 				message.channel.send('[VOTE]').then(voteMessage => 
 				{
 					voteMessage.pin();
-					keyv.set('qergserrgsegs', voteMessage.id);
+					keyv.set('qergserrgsegs', voteMessage.id).then(this.execute(message, args, keyv, false));
 				});
 			}
 			else 
 			{
 				console.log(botMessages.first().id + ' message');
-				keyv.set('qergserrgsegs', botMessages.first().id);
+				keyv.set('qergserrgsegs', botMessages.first().id).then(this.execute(message, args, keyv, false));
 			}
-		}).then(this.execute(message, args, keyv, false))
+		})
 	},
 
 };
