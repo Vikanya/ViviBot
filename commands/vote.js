@@ -23,7 +23,7 @@ module.exports = {
 							args.forEach(element => remainingArgs += element);
 							remainingArgs = remainingArgs.trim().split('"');
 							let voteStr = '';
-							remainingArgs.forEach(str => {
+							remainingArgs.forEach(async str => {
 								console.log(str);
 								if (str.length > 0)
 								{
@@ -31,6 +31,8 @@ module.exports = {
 									let name = str.split('/')[1];
 									console.log("emoji: " + emoji + " /name: " + name);
 									voteStr += '\n' + emoji + ' ' + name;
+									await voteMessage.react(emoji);
+									console.log("reacted ");
 								}
 							});
 							voteMessage.edit(voteMessage.content + voteStr);
