@@ -44,8 +44,8 @@ module.exports = {
 							message.reply('Your command isn\'t using proper arguments. (type \'!help vote\' for more info)');
 						}
 					}
-				}).catch(() => {
-					console.log('fetch 3');
+				}).catch(err => {
+					console.log('fetch 1 ' + err);
 					this.fetch(message, args, keyv);
 				});
 				return;
