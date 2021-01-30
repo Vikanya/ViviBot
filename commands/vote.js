@@ -73,11 +73,11 @@ module.exports = {
 										message.react(emoji);
 									}*/
 
-									await voteMessage.reactions.cache.get(str => str += '\n').remove();
+									await voteMessage.reactions.cache.get(str).remove();
 									console.log("reacted ");
 								}
 							});
-							voteMessage.edit(this.header + currentVotes.map().concat());
+							voteMessage.edit(this.header + currentVotes.map(str => str += '\n').concat());
 						    break;
 
 						  case 'start':
