@@ -3,7 +3,7 @@ module.exports = {
 	description: 'Collection of commands to organise votes.',
 	args: true,
 	usage: '<command name> add "<emoji> <option name>" ["<emoji> <option name>"...]\n<command name> remove <emoji> [<emoji> <emoji>...]\n<command name> start',
-	execute(message, args, keyv) {
+	execute(message, args, keyv, tryfetch = true) {
 		if (!keyv.get('qergserrgsegs').then(messageID => {
 			if (messageID)
 			{
@@ -47,20 +47,29 @@ module.exports = {
 					}
 				}).catch(err => {
 					console.log('fetch 1 ' + err);
-					this.fetch(message, args, keyv);
+					if (tryfetch)
+					{
+						this.fetch(message, args, keyv);
+					}
 				});
 				return;
 			}
 			else 
 			{
 				console.log('fetch 2');
-				this.fetch(message, args, keyv);
+				if (tryfetch)
+				{
+					this.fetch(message, args, keyv);
+				}
 				return;
 			}
 		}))
 		{
 			console.log('fetch 3');
-			this.fetch(message, args, keyv);
+			if (tryfetch)
+			{
+				this.fetch(message, args, keyv);
+			}
 			return;
 		}
 		
@@ -85,7 +94,8 @@ module.exports = {
 				console.log(botMessages.first().id + ' message');
 				keyv.set('qergserrgsegs', botMessages.first().id);
 			}
-		})
+		});
+		this.execute(message, args, keyv, false)
 	},
 
 };
