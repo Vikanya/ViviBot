@@ -17,8 +17,7 @@ module.exports = {
 					}
 					else 
 					{
-						console.log(voteMessage);
-						console.log(voteMessage.content);
+						console.log('command is ' + args[0]);
 						let currentVotes = voteMessage.content.replace(this.header, '').split('\n');
 
 					    let remainingArgs = '';
