@@ -32,7 +32,7 @@ module.exports = {
 							let voteStr1 = '';
 							remainingArgs.forEach(async str => {
 								console.log(str);
-								if (str.length > 0)
+								if (str.trim().length > 0)
 								{
 									let emoji = str.split('/')[0];
 									let name = str.split('/')[1];
@@ -62,7 +62,7 @@ module.exports = {
 							
 							remainingArgs.forEach(async str => {
 								console.log(str);
-								if (str.length > 0)
+								if (str.trim().length > 0)
 								{
 									console.log("removing a vote: " + str + " num : " + currentVotes.length);
 									currentVotes = currentVotes.filter(vote => !vote.includes(str));
