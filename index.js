@@ -178,7 +178,7 @@ client.on('message', message => {
 			if (resultMessage.includes('merci')) {
 				return message.reply('de rien <:Finger_Guns:774245239178133515>');
 			}
-			return message.channel.send(':robot: *Fired up and ready to serve.*');
+			//return message.channel.send(':robot: *Fired up and ready to serve.*');
 		}
 	}
 });

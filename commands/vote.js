@@ -17,6 +17,7 @@ module.exports = {
 					{
 						console.log(voteMessage);
 						console.log(voteMessage.content);
+						let currentVotes = voteMessage.content.split('\n');
 						switch (args.shift().toLowerCase()){
 						  case 'add':
 						    let remainingArgs = '';
@@ -30,7 +31,16 @@ module.exports = {
 									let emoji = str.split('/')[0];
 									let name = str.split('/')[1];
 									console.log("emoji: " + emoji + " /name: " + name);
-									voteStr += '\n' + emoji + ' ' + name;
+
+									if (currentVotes.every(vote => !vote.includes(emoji)))
+									{
+										voteStr += '\n' + emoji + ' ' + name;
+									}
+									else 
+									{
+										message.react(emoji);
+									}
+
 									await voteMessage.react(emoji);
 									console.log("reacted ");
 								}
