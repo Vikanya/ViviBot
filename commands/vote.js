@@ -15,6 +15,8 @@ module.exports = {
 					}
 					else 
 					{
+						console.log(voteMessage);
+						console.log(voteMessage.content);
 						switch (args.shift().toLowerCase()){
 						  case 'add':
 						    let remainingArgs = '';
