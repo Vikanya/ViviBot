@@ -89,13 +89,13 @@ module.exports = {
 				{
 					voteMessage.pin();
 					console.log('1/id ' + voteMessage.id);
-					keyv.set('qergserrgsegs', voteMessage.id).then(this.execute(message, args, keyv, false));
+					keyv.set('qergserrgsegs', voteMessage.id).then(this.execute(message, args, keyv, true));
 				});
 			}
 			else 
 			{
 				console.log('2/id ' + botMessages.first().id);
-				keyv.set('qergserrgsegs', botMessages.first().id).then(this.execute(message, args, keyv, false));
+				keyv.set('qergserrgsegs', botMessages.first().id).then(this.execute(message, args, keyv, true));
 			}
 		})
 	},
