@@ -49,24 +49,42 @@ module.exports = {
 									}*/
 
 									await voteMessage.react(emoji).catch(err => 
+									{
+										message.channel.messages.fetch({ limit: 1, after: voteMessage.id }).then(async nextRes => 
 										{
-											message.channel.messages.fetch({ limit: 1, after: voteMessage.id }).then(async nextRes => 
+											nextMes = nextRes.first();
+											if (nextMes == undefined)
 											{
-												nextMes = nextRes.first();
-												if (nextMes == undefined)
+												message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>')
+												.then(createdMes =>
+													{
+									  					createdMes.react(emoji);
+													});
+											}
+											else
+											{
+									  			nextMes.react(emoji).catch(err => 
 												{
-													message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>')
-													.then(createdMes =>
+													message.channel.messages.fetch({ limit: 1, after: voteMessage.id }).then(async nextRes2 => 
+													{
+														nextMes2 = nextRes2.first();
+														if (nextMes2 == undefined)
 														{
-										  					createdMes.react(emoji);
-														});
-												}
-												else
-												{
-										  			nextMes.react(emoji);
-												}
-											});
+															message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>')
+															.then(createdMes =>
+																{
+												  					createdMes.react(emoji);
+																});
+														}
+														else
+														{
+												  			nextMes2.react(emoji);
+														}
+													});
+												});;
+											}
 										});
+									});
 									//console.log("reacted ");
 								}
 							});
