@@ -21,6 +21,7 @@ module.exports = {
 						let currentVotes = voteMessage.content.replace(this.header, '').split('\n');
 
 					    let remainingArgs = '';
+
 						switch (args.shift().toLowerCase()){
 
 						  case 'add':
@@ -80,17 +81,32 @@ module.exports = {
 							currentVotes.forEach(str => {
 								if (str.trim().length > 0)
 								{
-									resultString += '\n' + str;									
+									resultString += '\n' + str;
 								}
 							});
 							voteMessage.edit(resultString);
 						    break;
 
 						  case 'start':
-						    // code block
+
+							voteMessage.unpin();
+							message.channel.send(voteMessage.content).then(mes => {
+								mes.pin();
+								keyv.set('qergserrgsegs', mes.id);
+
+								currentVotes.forEach(str => {
+									if (str.trim().length > 0)
+									{
+										mes.react(str.split(' ')[0]);
+									}
+								});
+							});
+
+
+						    
 						    break;
 						  default:
-							message.reply('Your command isn\'t using proper arguments. (type \'!help vote\' for more info)');
+							message.reply('Your vote command isn\'t using proper arguments. (type \'!help vote\' for more info)');
 						}
 					}
 				}).catch(err => {
@@ -135,13 +151,13 @@ module.exports = {
 				{
 					voteMessage.pin();
 					console.log('1/id ' + voteMessage.id);
-					keyv.set('qergserrgsegs', voteMessage.id).then(this.execute(message, args, keyv, true));
+					keyv.set('qergserrgsegs', voteMessage.id).then(this.execute(message, args, keyv, false));
 				});
 			}
 			else 
 			{
 				console.log('2/id ' + botMessages.first().id);
-				keyv.set('qergserrgsegs', botMessages.first().id).then(this.execute(message, args, keyv, true));
+				keyv.set('qergserrgsegs', botMessages.first().id).then(this.execute(message, args, keyv, false));
 			}
 		})
 	},
