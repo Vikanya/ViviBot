@@ -99,9 +99,13 @@ module.exports = {
 									{
 										mes.react(str.split(' ')[0]).catch(err => 
 										{
-											message.channel.messages.fetch({ limit: 1, after: mes.id }).then(nextRes => 
+											message.channel.messages.fetch({ limit: 1, after: mes.id }).then(async nextRes => 
 											{
 												nextMes = nextRes.first();
+												if (nextMes == undefined)
+												{
+													await nextMes = message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>');
+												}
 										  		nextMes.react(str.split(' ')[0]);
 											});
 										});
