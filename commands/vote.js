@@ -17,7 +17,7 @@ module.exports = {
 					}
 					else 
 					{
-						console.log('command is ' + args[0]);
+						//console.log('command is ' + args[0]);
 						let currentVotes = voteMessage.content.replace(this.header, '').split('\n');
 
 					    let remainingArgs = '';
@@ -32,12 +32,12 @@ module.exports = {
 							
 							let voteStr1 = '';
 							remainingArgs.forEach(async str => {
-								console.log(str);
+								//console.log(str);
 								if (str.trim().length > 0)
 								{
 									let emoji = str.split('/')[0];
 									let name = str.split('/')[1];
-									console.log("emoji: " + emoji + " /name: " + name);
+									//console.log("emoji: " + emoji + " /name: " + name);
 
 									if (currentVotes.every(vote => !vote.includes(emoji)))
 									{
@@ -49,7 +49,7 @@ module.exports = {
 									}*/
 
 									await voteMessage.react(emoji);
-									console.log("reacted ");
+									//console.log("reacted ");
 								}
 							});
 							voteMessage.edit(voteMessage.content + voteStr1);
@@ -62,12 +62,12 @@ module.exports = {
 							remainingArgs = remainingArgs.trim().split('"');
 							
 							remainingArgs.forEach(async str => {
-								console.log(str);
+								//console.log(str);
 								if (str.trim().length > 0)
 								{
-									console.log("removing a vote: " + str + " num : " + currentVotes.length);
+									//console.log("removing a vote: " + str + " num : " + currentVotes.length);
 									currentVotes = currentVotes.filter(vote => !vote.includes(str));
-									console.log("after num : " + currentVotes.length);
+									//console.log("after num : " + currentVotes.length);
 									/*
 									else 
 									{
@@ -139,24 +139,24 @@ module.exports = {
 		
 	},
 	async fetch(message, args, keyv) {
-		console.log('fetching for vote message');
+		//console.log('fetching for vote message');
 		message.channel.messages.fetchPinned().then( messages =>
 		{
-			console.log('Received ' + messages.size + ' messages');
+			//console.log('Received ' + messages.size + ' messages');
 			let botMessages = messages.filter(m => m.author.bot && m.content.startsWith(this.header));
-			console.log(botMessages.size + ' bot messages ' + botMessages);
+			//console.log(botMessages.size + ' bot messages ' + botMessages);
 			if (botMessages.size == 0)
 			{
 				message.channel.send(this.header).then(voteMessage => 
 				{
 					voteMessage.pin();
-					console.log('1/id ' + voteMessage.id);
+					//console.log('1/id ' + voteMessage.id);
 					keyv.set('qergserrgsegs', voteMessage.id).then(this.execute(message, args, keyv, false));
 				});
 			}
 			else 
 			{
-				console.log('2/id ' + botMessages.first().id);
+				//console.log('2/id ' + botMessages.first().id);
 				keyv.set('qergserrgsegs', botMessages.first().id).then(this.execute(message, args, keyv, false));
 			}
 		})
