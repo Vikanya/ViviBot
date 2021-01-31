@@ -150,9 +150,9 @@ module.exports = {
 												{
 										  			nextMes.react(str.split(' ')[0]).catch(err => 
 													{
-														message.channel.messages.fetch({ limit: 1, after: mes.id }).then(async nextRes => 
+														message.channel.messages.fetch({ limit: 1, after: mes.id }).then(async nextRes2 => 
 														{
-															nextMes2 = nextRes.first();
+															nextMes2 = nextRes2.first();
 															if (nextMes2 == undefined)
 															{
 																message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>')
