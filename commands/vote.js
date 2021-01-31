@@ -148,7 +148,25 @@ module.exports = {
 												}
 												else
 												{
-										  			nextMes.react(str.split(' ')[0]);
+										  			nextMes.react(str.split(' ')[0]).catch(err => 
+													{
+														message.channel.messages.fetch({ limit: 1, after: mes.id }).then(async nextRes => 
+														{
+															nextMes2 = nextRes.first();
+															if (nextMes2 == undefined)
+															{
+																message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>')
+																.then(createdMes =>
+																	{
+													  					createdMes.react(str.split(' ')[0]);
+																	});
+															}
+															else
+															{
+													  			nextMes2.react(str.split(' ')[0]);
+															}
+														});
+													});
 												}
 											});
 										});
