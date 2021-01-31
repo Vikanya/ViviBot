@@ -48,7 +48,25 @@ module.exports = {
 										message.react(emoji);
 									}*/
 
-									await voteMessage.react(emoji);
+									await voteMessage.react(emoji).catch(err => 
+										{
+											message.channel.messages.fetch({ limit: 1, after: mes.id }).then(async nextRes => 
+											{
+												nextMes = nextRes.first();
+												if (nextMes == undefined)
+												{
+													message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>')
+													.then(createdMes =>
+														{
+										  					createdMes.react(emoji);
+														});
+												}
+												else
+												{
+										  			nextMes.react(emoji);
+												}
+											});
+										});
 									//console.log("reacted ");
 								}
 							});
