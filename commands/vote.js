@@ -97,7 +97,14 @@ module.exports = {
 								currentVotes.forEach(str => {
 									if (str.trim().length > 0)
 									{
-										mes.react(str.split(' ')[0]);
+										mes.react(str.split(' ')[0]).catch(err => 
+										{
+											message.channel.messages.fetch({ limit: 1, after: mes.id }).then(nextRes => 
+											{
+												nextMes = nextRes.first();
+										  		nextMes.react(str.split(' ')[0]);
+											});
+										});
 									}
 								});
 							});
