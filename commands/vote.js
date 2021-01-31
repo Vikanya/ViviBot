@@ -50,7 +50,7 @@ module.exports = {
 
 									await voteMessage.react(emoji).catch(err => 
 										{
-											message.channel.messages.fetch({ limit: 1, after: mes.id }).then(async nextRes => 
+											message.channel.messages.fetch({ limit: 1, after: voteMessage.id }).then(async nextRes => 
 											{
 												nextMes = nextRes.first();
 												if (nextMes == undefined)
