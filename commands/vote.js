@@ -156,9 +156,9 @@ module.exports = {
 															if (nextMes2 == undefined)
 															{
 																message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>')
-																.then(createdMes =>
+																.then(createdMes2 =>
 																	{
-													  					createdMes.react(str.split(' ')[0]);
+													  					createdMes2.react(str.split(' ')[0]);
 																	});
 															}
 															else
