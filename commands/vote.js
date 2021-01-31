@@ -104,9 +104,16 @@ module.exports = {
 												nextMes = nextRes.first();
 												if (nextMes == undefined)
 												{
-													await nextMes = message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>');
+													message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>')
+													.then(createdMes =>
+														{
+										  					createdMes.react(str.split(' ')[0]);
+														});
 												}
-										  		nextMes.react(str.split(' ')[0]);
+												else
+												{
+										  			nextMes.react(str.split(' ')[0]);
+												}
 											});
 										});
 									}
