@@ -32,12 +32,12 @@ client.on('message', message => {
 	if (message.author.bot) return;
 
 	if (message.channel.type === 'dm') {
-		/// ------------------------------------------------ HANDLE COMMANDS IN DM ------------------------------------------------
+		/// --------------------------------- HANDLE COMMANDS IN DM ---------------------------------
 		if (message.content.startsWith(prefix)) {
 			HandleCommands(message);
 		}
 		else 
-		{/// -------------------------------------------------- HANDLE OTHER DMS --------------------------------------------------
+		{/// ----------------------------------- HANDLE OTHER DMS -----------------------------------
 			console.log(message.author.username + ' ' + message.content);
 			return message.reply('Don\'t talk to me');
 		}
@@ -45,11 +45,11 @@ client.on('message', message => {
 	}
 	
 
-	/// ----------------------------------------------------- HANDLE COMMANDS -----------------------------------------------------
+	/// -------------------------------------- HANDLE COMMANDS --------------------------------------
 	if (message.content.startsWith(prefix)) {
 		HandleCommands(message);
 	}
-	/// ------------------------------------------------- CHECK FOR YOUTUBE EMBEDS ------------------------------------------------
+	/// ---------------------------------- CHECK FOR YOUTUBE EMBEDS ---------------------------------
 	else if (message.content.includes('http')){
 		setTimeout(function(){ 
 			if (!message.embeds || message.channel.name.toLowerCase() !== 'releases') return;
@@ -63,7 +63,7 @@ client.on('message', message => {
 		}, EMBED_WAIT);
 		
 	}
-	/// --------------------------------------------- CHECK MESSAGES IN WRONG CHANNEL ---------------------------------------------
+	/// ------------------------------ CHECK MESSAGES IN WRONG CHANNEL ------------------------------
 	else if (message.channel.name.toLowerCase() === 'releases-list') {
 		setTimeout(function(){ 
 			let wrongMessage = false;
@@ -103,7 +103,7 @@ client.on('message', message => {
 			
 		}, EMBED_WAIT);
 	}
-	/// ---------------------------------------------------- CHECK BOT MENTIONS ---------------------------------------------------
+	/// ------------------------------------- CHECK BOT MENTIONS ------------------------------------
 	else if (message.mentions.users.size) {
 		if (message.mentions.users.first().equals(client.user)) {
 			let resultMessage = message.cleanContent.replace(client.user.username, '').replace('@', '').toLowerCase().trim();
@@ -116,6 +116,7 @@ client.on('message', message => {
 	}
 });
 
+// ================================================================================================== HANDLE COMMANDS FUNCTION
 function HandleCommands(message){
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
@@ -124,18 +125,18 @@ function HandleCommands(message){
 	|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	if (!command)
-	{/// ---------------------------- handle commands from setcommand in dm ----------------------------
+	{/// ------------------------------ handle commands from setcommand ------------------------------
 		keyv.get(commandName).then(result => {
 			if (result)
 			{
 				return message.channel.send(result);				
 			}
 		}).catch(err => {
-			console.log("failde keyv get : " + err)
+			console.log("failed keyv get : " + err)
 		});
 	}
 	else 
-	{/// ---------------------------- handle regular commands in dm ----------------------------
+	{/// ---------------------------------- handle regular commands ----------------------------------
 		if (command.args && !args.length) {
 			let reply = `You didn't provide any arguments, ${message.author}  ᵇᵒˡᵒˢˢ`;
 			

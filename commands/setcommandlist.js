@@ -9,6 +9,8 @@ module.exports = {
 				keys.forEach(element => finalString += element.key.toString().replace('keyv:', '') + ', ');
 				//console.log(finalString);
 				return message.reply(finalString);
+			}).catch(err => {
+				console.log("failed keyv all query : " + err)
 			});
 		}
 		catch (error) 
