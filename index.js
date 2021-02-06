@@ -34,40 +34,7 @@ client.on('message', message => {
 	if (message.channel.type === 'dm') {
 		/// ------------------------------------------------ HANDLE COMMANDS IN DM ------------------------------------------------
 		if (message.content.startsWith(prefix)) {
-			const args = message.content.slice(prefix.length).trim().split(/ +/);
-			const commandName = args.shift().toLowerCase();
-			
-			const command = client.commands.get(commandName)
-			|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-
-			if (!command)
-			{/// ---------------------------- handle commands from setcommand in dm ----------------------------
-				keyv.get(commandName).then(result => {
-					if (result)
-					{
-						return message.channel.send(result);				
-					}
-				});
-			}
-			else 
-			{/// ---------------------------- handle regular commands in dm ----------------------------
-				if (command.args && !args.length) {
-					let reply = `You didn't provide any arguments, ${message.author}  ᵇᵒˡᵒˢˢ`;
-					
-					if (command.usage) {
-						reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
-					}
-
-					return message.channel.send(reply);
-				}
-				
-				try {
-					return command.execute(message, args, keyv);
-				} catch (error) {
-					console.error(error);
-					return message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
-				}
-			}
+			HandleCommands(message);
 		}
 		else 
 		{/// -------------------------------------------------- HANDLE OTHER DMS --------------------------------------------------
@@ -80,41 +47,7 @@ client.on('message', message => {
 
 	/// ----------------------------------------------------- HANDLE COMMANDS -----------------------------------------------------
 	if (message.content.startsWith(prefix)) {
-		const args = message.content.slice(prefix.length).trim().split(/ +/);
-		const commandName = args.shift().toLowerCase();
-		
-		const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-
-		if (!command)
-		{/// --------------------------------- handle commands from setcommand ---------------------------------
-			keyv.get(commandName).then(result => {
-				if (result)
-				{
-					return message.channel.send(result);				
-				}
-			});
-		}
-		else 
-		{/// ---------------------------- handle regular commands ----------------------------
-			if (command.args && !args.length) {
-				let reply = `You didn't provide any arguments, ${message.author}  ᵇᵒˡᵒˢˢ`;
-				
-				if (command.usage) {
-					reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
-				}
-
-				return message.channel.send(reply);
-			}
-
-			
-			try {
-				return command.execute(message, args, keyv);
-			} catch (error) {
-				console.error(error);
-				return message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
-			}
-		}
+		HandleCommands(message);
 	}
 	/// ------------------------------------------------- CHECK FOR YOUTUBE EMBEDS ------------------------------------------------
 	else if (message.content.includes('http')){
@@ -182,5 +115,42 @@ client.on('message', message => {
 		}
 	}
 });
+
+HandleCommands(message){
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const commandName = args.shift().toLowerCase();
+	
+	const command = client.commands.get(commandName)
+	|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+	if (!command)
+	{/// ---------------------------- handle commands from setcommand in dm ----------------------------
+		keyv.get(commandName).then(result => {
+			if (result)
+			{
+				return message.channel.send(result);				
+			}
+		});
+	}
+	else 
+	{/// ---------------------------- handle regular commands in dm ----------------------------
+		if (command.args && !args.length) {
+			let reply = `You didn't provide any arguments, ${message.author}  ᵇᵒˡᵒˢˢ`;
+			
+			if (command.usage) {
+				reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+			}
+
+			return message.channel.send(reply);
+		}
+		
+		try {
+			return command.execute(message, args, keyv);
+		} catch (error) {
+			console.error(error);
+			return message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
+		}
+	}
+}
 
 client.login(process.env.BOT_TOKEN);
