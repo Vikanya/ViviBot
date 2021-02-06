@@ -130,6 +130,8 @@ function HandleCommands(message){
 			{
 				return message.channel.send(result);				
 			}
+		}).catch(err => {
+			console.log("failde keyv get : " + err)
 		});
 	}
 	else 
