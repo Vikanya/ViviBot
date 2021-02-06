@@ -6,6 +6,8 @@ module.exports = {
 		{
 			console.log("keyv : " + keyv);
 			console.log("status : " + keyv.toString());
+			console.log("opts : " + keyv.opts.toString());
+			console.log("store : " + keyv.opts.store.toString());
 			keyv.opts.store.query('SELECT * FROM keyv;').then(keys => {
 				let finalString = '';
 				keys.forEach(element => finalString += element.key.toString().replace('keyv:', '') + ', ');
