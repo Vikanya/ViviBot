@@ -25,6 +25,8 @@ for (const file of commandFiles) {
 
 client.on('ready', () => {
 	console.log('I am ready!');
+	const keyv = new Keyv(process.env.DATABASE_URL);
+	//keyv.on('error', err => console.error('Keyv connection error:', err));
 });
 
 
