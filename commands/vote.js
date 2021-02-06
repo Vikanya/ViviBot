@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'vote',
-	description: 'Collection of commands to organise votes.\n__add__: edits the vote message ',
+	description: 'Collection of commands to organise votes:\n__add__: edits the vote message to add (a) new option(s).\n__remove__: edits the vote message to remove the specified option(s).\n__start__: copies the last vote message, unpins it, sends a new one and pins it.\n',
 	args: true,
-	usage: '<command name> add "<emoji> <option name>" ["<emoji> <option name>"...]\n<command name> remove "<emoji>" ["<emoji>" "<emoji>"...]\n<command name> start',
+	usage: 'add "**<emoji>** | **<option name>**" ["**<emoji>** | **<option name>**"...]\nOR\nremove "**<emoji>**" ["**<emoji>**" "**<emoji>**"...]\nOR\nstart',
 	
 	header: '[VOTE]',
 	execute(message, args, keyv, tryfetch = true) {
@@ -35,9 +35,9 @@ module.exports = {
 								//console.log(str);
 								if (str.trim().length > 0)
 								{
-									let emoji = str.split('/')[0];
-									let name = str.split('/')[1];
-									//console.log("emoji: " + emoji + " /name: " + name);
+									let emoji = str.split('|')[0];
+									let name = str.split('|')[1];
+									console.log("add new vote emoji: " + emoji + " /name: " + name);
 
 									if (currentVotes.every(vote => !vote.includes(emoji)))
 									{
@@ -101,6 +101,7 @@ module.exports = {
 								//console.log(str);
 								if (str.trim().length > 0)
 								{
+									console.log("remove vote emoji: " + str);
 									//console.log("removing a vote: " + str + " num : " + currentVotes.length);
 									currentVotes = currentVotes.filter(vote => !vote.includes(str));
 									//console.log("after num : " + currentVotes.length);
@@ -110,7 +111,17 @@ module.exports = {
 										message.react(emoji);
 									}*/
 
-									await voteMessage.reactions.cache.get(str).remove();
+									await voteMessage.reactions.cache.get(str).remove().catch(err => 
+									{
+										message.channel.messages.fetch({ limit: 1, after: voteMessage.id }).then(async nextVoteRes => 
+										{
+											nextVoteMes = nextVoteRes.first();
+											if (nextVoteMes != undefined)
+											{
+												nextVoteMes.reactions.cache.get(str).remove();
+											}
+										}
+									});
 								}
 							});
 							let resultString = this.header;
@@ -125,6 +136,7 @@ module.exports = {
 
 						  case 'start':
 
+							console.log("starting new vote");
 							voteMessage.unpin();
 							message.channel.send(voteMessage.content).then(mes => {
 								mes.pin();
