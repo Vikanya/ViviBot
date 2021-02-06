@@ -6,7 +6,9 @@ module.exports = {
 	
 	header: '[VOTE]',
 	execute(message, args, keyv, tryfetch = true) {
-		if (!keyv.get('qergserrgsegs').then(messageID => {
+		console.log("vote command started by " + message.author.username);
+		if (!keyv.get('qergserrgsegs').then(messageID => 
+		{
 			if (messageID)
 			{
 				console.log('id from keyv : ' + messageID);
@@ -58,12 +60,12 @@ module.exports = {
 												message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>')
 												.then(createdMes =>
 													{
-									  					createdMes.react(emoji);
+														createdMes.react(emoji);
 													});
 											}
 											else
 											{
-									  			nextMes.react(emoji).catch(err => 
+												nextMes.react(emoji).catch(err => 
 												{
 													message.channel.messages.fetch({ limit: 1, after: voteMessage.id }).then(async nextRes2 => 
 													{
@@ -73,12 +75,12 @@ module.exports = {
 															message.channel.send('trop de votes la <:viviDisapproval:696755029830533230>')
 															.then(createdMes =>
 																{
-												  					createdMes.react(emoji);
+																	createdMes.react(emoji);
 																});
 														}
 														else
 														{
-												  			nextMes2.react(emoji);
+															nextMes2.react(emoji);
 														}
 													});
 												});;
@@ -89,7 +91,7 @@ module.exports = {
 								}
 							});
 							voteMessage.edit(voteMessage.content + voteStr1);
-						    break;
+							break;
 
 						  case 'remove':
 
