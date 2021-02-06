@@ -120,7 +120,7 @@ module.exports = {
 											{
 												nextVoteMes.reactions.cache.get(str).remove();
 											}
-										}
+										});
 									});
 								}
 							});
