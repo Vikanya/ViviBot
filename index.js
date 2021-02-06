@@ -116,7 +116,7 @@ client.on('message', message => {
 	}
 });
 
-HandleCommands(message){
+function HandleCommands(message){
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 	
