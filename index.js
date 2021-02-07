@@ -25,8 +25,6 @@ for (const file of commandFiles) {
 
 client.on('ready', () => {
 	console.log('I am ready!');
-	const keyv = new Keyv(process.env.DATABASE_URL);
-	keyv.on('error', err => console.error('Keyv connection error:', err));
 });
 
 
@@ -119,7 +117,7 @@ client.on('message', message => {
 });
 
 // ================================================================================================== HANDLE COMMANDS FUNCTION
-function HandleCommands(message){
+async function HandleCommands(message){
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 	
@@ -128,14 +126,15 @@ function HandleCommands(message){
 
 	if (!command)
 	{/// ------------------------------ handle commands from setcommand ------------------------------
-		keyv.get(commandName).then(result => {
-			if (result)
-			{
-				return message.channel.send(result);				
-			}
-		}).catch(err => {
-			console.log("failed keyv get : " + err)
-		});
+		let commandKeyv = await keyv.get(commandName);
+		if (commandKeyv)
+		{
+			return message.channel.send(result);				
+		}
+		else
+		{
+			console.log("failed keyv get : " + err);
+		}
 	}
 	else 
 	{/// ---------------------------------- handle regular commands ----------------------------------
