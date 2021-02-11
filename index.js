@@ -127,7 +127,7 @@ async function HandleCommands(message){
 	if (!command)
 	{/// ------------------------------ handle commands from setcommand ------------------------------
 		console.log("try get command ");
-		let commandKeyv = await keyv.get(commandName);
+		let commandKeyv = keyv.get(commandName);
 		console.log("command : " + commandKeyv);
 		if (commandKeyv)
 		{
