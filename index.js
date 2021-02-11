@@ -129,6 +129,7 @@ async function HandleCommands(message){
 		console.log("try get command ");
 		let commandKeyv = keyv.get(commandName);
 		console.log("command : " + commandKeyv);
+		return;
 		if (commandKeyv)
 		{
 			return message.channel.send(commandKeyv);				
