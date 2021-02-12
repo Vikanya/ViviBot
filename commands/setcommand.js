@@ -4,7 +4,7 @@ module.exports = {
 	     			+ 'Replace <message> with \'delete\' to delete a command.',
 	args: true,
 	usage: '<command name> <message>',
-	execute(message, args, keyv) {
+	execute(message, args, redis) {
 		if (args.length < 2)
 		{
 			message.reply('You need 2 arguments for this command. (type \'!help setcommand\' for more info)');
@@ -19,7 +19,7 @@ module.exports = {
 			/// ----------------------------------------------------- DELETE COMMANDS -----------------------------------------------------
 			if (remainingArgs.localeCompare('delete') == 0)
 			{
-				keyv.delete(newCommandName).then (delResult => {
+				redis.delete(newCommandName).then (delResult => {
 					if (delResult)
 					{
 						return message.reply(newCommandName + ' command deleted.');
@@ -31,7 +31,7 @@ module.exports = {
 				});
 				return;
 			}
-			keyv.get(newCommandName).then(resultGet => {
+			redis.get(newCommandName).then(resultGet => {
 				if (resultGet)
 			/// ----------------------------------------------------- REPLACE COMMANDS -----------------------------------------------------
 				{
@@ -45,7 +45,7 @@ module.exports = {
 
 									newMessage.awaitReactions(filter, { max: 1, time: 100000, errors: ['time'] })
 									.then(collected => {
-										const result = keyv.set(newCommandName, remainingArgs);
+										const result = redis.set(newCommandName, remainingArgs);
 										console.log(message.author.username + '/ ' + 'new command ' + newCommandName + ' : ' + remainingArgs);
 										if (result)
 										{
@@ -98,7 +98,7 @@ module.exports = {
 				else 
 				{
 			/// ----------------------------------------------------- NEW COMMANDS -----------------------------------------------------
-					const result = keyv.set(newCommandName, remainingArgs);
+					const result = redis.set(newCommandName, remainingArgs);
 					if (result)
 					{
 						console.log(message.author.username + '/ ' + 'new command ' + newCommandName + ' : ' + remainingArgs);

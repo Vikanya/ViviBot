@@ -1,12 +1,12 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const Keyv = require('keyv');
+const Redis = require("ioredis");
 const prefix = process.env.PREFIX;
 const EMBED_WAIT = 5000;
 
 const client = new Discord.Client();
-const keyv = new Keyv(process.env.DATABASE_URL);
-keyv.on('error', err => console.error('Keyv connection error:', err));
+const redis = new Redis(process.env.REDIS_URL);
+redis.on('error', err => console.error('Redis connection error:', err));
 
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -127,16 +127,16 @@ async function HandleCommands(message){
 	if (!command)
 	{/// ------------------------------ handle commands from setcommand ------------------------------
 		console.log("try get command ");
-		let commandKeyv = keyv.get(commandName);
-		console.log("command : " + commandKeyv);
+		let commandRedis = redis.get(commandName);
+		console.log("command : " + commandRedis);
 		return;
-		if (commandKeyv)
+		if (commandRedis)
 		{
-			return message.channel.send(commandKeyv);				
+			return message.channel.send(commandRedis);				
 		}
 		else
 		{
-			console.log("failed keyv get : " + err);
+			console.log("failed redis get : " + err);
 		}
 	}
 	else 
@@ -152,7 +152,7 @@ async function HandleCommands(message){
 		}
 		
 		try {
-			return command.execute(message, args, keyv);
+			return command.execute(message, args, redis);
 		} catch (error) {
 			console.error(error);
 			return message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');

@@ -5,13 +5,13 @@ module.exports = {
 	usage: 'add "**<emoji>** | **<option name>**" ["**<emoji>** | **<option name>**"...]\nOR\nremove "**<emoji>**" ["**<emoji>**" "**<emoji>**"...]\nOR\nstart',
 	
 	header: '[VOTE]',
-	execute(message, args, keyv, tryfetch = true) {
+	execute(message, args, redis, tryfetch = true) {
 		console.log("vote command started by " + message.author.username);
-		if (!keyv.get('qergserrgsegs').then(messageID => 
+		if (!redis.get('qergserrgsegs').then(messageID => 
 		{
 			if (messageID)
 			{
-				console.log('id from keyv : ' + messageID);
+				console.log('id from redis : ' + messageID);
 				message.channel.messages.fetch(messageID).then(voteMessage => {
 					if (args.length < 1)
 					{
@@ -142,7 +142,7 @@ module.exports = {
 							voteMessage.unpin();
 							message.channel.send(voteMessage.content).then(mes => {
 								mes.pin();
-								keyv.set('qergserrgsegs', mes.id);
+								redis.set('qergserrgsegs', mes.id);
 
 								currentVotes.forEach(str => {
 									if (str.trim().length > 0)
@@ -199,7 +199,7 @@ module.exports = {
 					console.log('fetch 1 ' + err);
 					if (tryfetch)
 					{
-						this.fetch(message, args, keyv);
+						this.fetch(message, args, redis);
 					}
 				});
 				return;
@@ -209,7 +209,7 @@ module.exports = {
 				console.log('fetch 2');
 				if (tryfetch)
 				{
-					this.fetch(message, args, keyv);
+					this.fetch(message, args, redis);
 				}
 				return;
 			}
@@ -218,13 +218,13 @@ module.exports = {
 			console.log('fetch 3');
 			if (tryfetch)
 			{
-				this.fetch(message, args, keyv);
+				this.fetch(message, args, redis);
 			}
 			return;
 		}
 		
 	},
-	async fetch(message, args, keyv) {
+	async fetch(message, args, redis) {
 		//console.log('fetching for vote message');
 		message.channel.messages.fetchPinned().then( messages =>
 		{
@@ -237,13 +237,13 @@ module.exports = {
 				{
 					voteMessage.pin();
 					//console.log('1/id ' + voteMessage.id);
-					keyv.set('qergserrgsegs', voteMessage.id).then(this.execute(message, args, keyv, false));
+					redis.set('qergserrgsegs', voteMessage.id).then(this.execute(message, args, redis, false));
 				});
 			}
 			else 
 			{
 				//console.log('2/id ' + botMessages.first().id);
-				keyv.set('qergserrgsegs', botMessages.first().id).then(this.execute(message, args, keyv, false));
+				redis.set('qergserrgsegs', botMessages.first().id).then(this.execute(message, args, redis, false));
 			}
 		})
 	},

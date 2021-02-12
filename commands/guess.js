@@ -4,7 +4,7 @@
 module.exports = {
 	name: 'guess',
 	description: 'Chantier',
-	execute(message, args, keyv) {
+	execute(message, args, redis) {
 		/*
 		fetch('https://dbkpop.com/db/female-k-pop-idols').then(res => res.text())
 		.then(html => {

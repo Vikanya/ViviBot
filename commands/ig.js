@@ -12,7 +12,7 @@ module.exports = {
 	description: 'Embeds an instagram post.',
 	args: true,
 	usage: '<full instagram link or instagram post ID (the 11 characters code at the end of the link)>',
-	execute(message, args, keyv) {
+	execute(message, args, redis) {
 		
 		console.log('try fetch ' + args);
 

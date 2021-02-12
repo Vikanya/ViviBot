@@ -1,20 +1,16 @@
 module.exports = {
 	name: 'setcommandlist',
 	description: 'Lists all commands added with !setcommand.',
-	execute(message, args, keyv) {
+	execute(message, args, redis) {
 		try
 		{
-			console.log("keyv : " + keyv);
-			console.log("status : " + keyv.toString());
-			console.log("opts : " + keyv.opts.toString());
-			console.log("store : " + keyv.opts.store.toString());
-			keyv.opts.store.query('SELECT * FROM keyv;').then(keys => {
+			redis.opts.store.query('SELECT * FROM redis;').then(keys => {
 				let finalString = '';
-				keys.forEach(element => finalString += element.key.toString().replace('keyv:', '') + ', ');
+				keys.forEach(element => finalString += element.key.toString().replace('redis:', '') + ', ');
 				//console.log(finalString);
 				return message.reply(finalString);
 			}).catch(err => {
-				console.log("failed keyv all query : " + err)
+				console.log("failed redis all query : " + err)
 			});
 		}
 		catch (error) 
