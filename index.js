@@ -127,7 +127,7 @@ async function HandleCommands(message){
 	if (!command)
 	{/// ------------------------------ handle commands from setcommand ------------------------------
 		console.log("try get command ");
-		let commandRedis = redis.get(commandName);
+		let commandRedis = await redis.get(commandName);
 		console.log("command : " + commandRedis);
 		return;
 		if (commandRedis)
