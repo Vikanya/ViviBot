@@ -7,7 +7,7 @@ module.exports = {
 		try
 		{
 			var listMess = '';
-			redis.keys('*').then(res => message.reply(res));
+			redis.keys('*').then(res => message.reply(res.replace("\n", " | ")));
 
 			//
 			/*redis.opts.store.query('SELECT * FROM redis;').then(keys => {
