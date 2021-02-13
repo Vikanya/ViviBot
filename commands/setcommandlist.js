@@ -9,8 +9,8 @@ module.exports = {
 			var listMess = '';
 			redis.keys('*').then(res => {
 				console.log(res.toString());
-				console.log(res.toString().replaceAll(',', " | "));
-				message.reply(res.toString().replaceAll(',', " | "));
+				console.log(res.toString().replace(/,/g, " | "));
+				message.reply(res.toString().replace(/,/g, " | "));
 			});
 
 			//
