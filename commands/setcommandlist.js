@@ -7,9 +7,9 @@ module.exports = {
 		try
 		{
 			var listMess = '';
-			redis.keys('*').then(res => console.log("res " + res));
+			redis.keys('*').then(res => message.reply(res));
 
-			//message.reply(listMess);
+			//
 			/*redis.opts.store.query('SELECT * FROM redis;').then(keys => {
 				let finalString = '';
 				keys.forEach(element => finalString += element.key.toString().replace('redis:', '') + ', ');
