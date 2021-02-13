@@ -19,7 +19,7 @@ module.exports = {
 			/// ----------------------------------------------------- DELETE COMMANDS -----------------------------------------------------
 			if (remainingArgs.localeCompare('delete') == 0)
 			{
-				redis.delete(newCommandName).then (delResult => {
+				redis.del(newCommandName).then (delResult => {
 					if (delResult)
 					{
 						return message.reply(newCommandName + ' command deleted.');
