@@ -10,11 +10,6 @@ module.exports = {
 		        redis: redis,
 		        each_callback: function (type, key, subkey, value, cb) {
 		            console.log(type, key, subkey, value);
-		            cb();
-		        },
-		        done_callback: function (err) {
-		            console.log("-=-=-=-=-=--=-=-=-");
-		            redis.quit();
 		        }
 		    });
 			/*redis.opts.store.query('SELECT * FROM redis;').then(keys => {
