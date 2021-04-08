@@ -138,6 +138,7 @@ async function HandleCommands(message){
 	
 	if (message.author.id == "115733686694969351")
 	{
+		console.log("author det");
 		const adminCommand = client.adminCommands.get(commandName)
 		|| client.adminCommands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
@@ -167,16 +168,16 @@ async function HandleCommands(message){
 
 	if (!command)
 	{/// ------------------------------ handle commands from setcommand ------------------------------
-		console.log("try get command " + commandName);
+		//console.log("try get command " + commandName);
 		let commandRedis = await redis.get(commandName);
-		console.log("command : " + commandRedis);
+		//console.log("command : " + commandRedis);
 		if (commandRedis)
 		{
 			return message.channel.send(commandRedis);				
 		}
 		else
 		{
-			console.log("failed redis get : " + err);
+			console.log("failed redis get : " + commandRedis);
 		}
 	}
 	else 

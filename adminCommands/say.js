@@ -1,12 +1,11 @@
 module.exports = {
-	name: 'purge',
-	aliases: ['prune'],
-	description: 'Deletes <value> amount of messages.',
+	name: 'say',
+	description: 'Makes the bot say a message in trhe specified channel.',
 	args: true,
-	usage: '<value between 1-100>',
+	usage: '<server id> <channel id> <mesage>',
 	execute(message, args) {
 		
-		
+		console.log("say");
 
 	},
 };
