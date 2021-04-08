@@ -7,11 +7,13 @@ module.exports = {
 		server = message.guild;
 		channel = message.channel;
 
+		console.log("say " + message.client);
+
 		if (args[0].length == 18 && !isNaN(args[0]))
 		{
 			if (args[1].length == 18 && !isNaN(args[1]))
 			{
-				server = client.guilds.resolve(args.shift());
+				server = message.client.guilds.resolve(args.shift());
 				channel = server.channels.resolve(args.shift());
 			}
 			else 
@@ -26,7 +28,6 @@ module.exports = {
 
 		channel.send(remainingArgs);
 			
-		console.log("say");
 
 	},
 };
