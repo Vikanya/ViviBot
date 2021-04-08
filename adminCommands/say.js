@@ -11,12 +11,12 @@ module.exports = {
 		{
 			if (args[1].length == 18 && !isNaN(args[1]))
 			{
-				server = client.guilds.get(args.shift());
-				channel = server.channels.get(args.shift());
+				server = client.guilds.resolve(args.shift());
+				channel = server.channels.resolve(args.shift());
 			}
 			else 
 			{
-				channel = server.channels.get(args.shift());
+				channel = server.channels.resolve(args.shift());
 			}
 		}
 
