@@ -23,6 +23,21 @@ for (const file of commandFiles) {
 	}*/
 }
 
+client.adminCommands = new Discord.Collection();
+const adminCommandFiles = fs.readdirSync('./adminCommands').filter(file => file.endsWith('.js'));
+for (const file of adminCommandFiles) {
+	const adminCommand = require(`./adminCommands/${file}`);
+
+	// set a new item in the Collection
+	// with the key as the command name and the value as the exported module
+	client.adminCommands.set(adminCommand.name, adminCommand);
+	/*try {
+		command.init();		
+	} catch (error) {
+	  console.error(command.name + ' does\'t have an init function: ' + error);
+	}*/
+}
+
 client.on('ready', () => {
 	console.log('I am ready!');
 });
@@ -121,12 +136,38 @@ async function HandleCommands(message){
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 	
+	if (message.author.id == "115733686694969351")
+	{
+		const adminCommand = client.adminCommands.get(commandName)
+		|| client.adminCommands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+		if (adminCommand)
+		{
+			if (adminCommand.args && !args.length) {
+				let reply = `You didn't provide any arguments, ${message.author}  ᵇᵒˡᵒˢˢ`;
+				
+				if (adminCommand.usage) {
+					reply += `\nThe proper usage would be: \`${prefix}${adminCommand.name} ${adminCommand.usage}\``;
+				}
+
+				return message.channel.send(reply);
+			}
+			
+			try {
+				return adminCommand.execute(message, args, redis);
+			} catch (error) {
+				console.error(error);
+				return message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
+			}
+		}
+	}
+
 	const command = client.commands.get(commandName)
 	|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	if (!command)
 	{/// ------------------------------ handle commands from setcommand ------------------------------
-		console.log("try get command ");
+		console.log("try get command " + commandName);
 		let commandRedis = await redis.get(commandName);
 		console.log("command : " + commandRedis);
 		if (commandRedis)
