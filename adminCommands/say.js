@@ -4,7 +4,28 @@ module.exports = {
 	args: true,
 	usage: '<server id> <channel id> <mesage>',
 	execute(message, args) {
-		
+		server = message.guild;
+		channel = message.channel;
+
+		if (args[0].length == 18 && !isNaN(args[0]))
+		{
+			if (args[1].length == 18 && !isNaN(args[1]))
+			{
+				server = client.guilds.get(args.shift());
+				channel = server.channels.get(args.shift());
+			}
+			else 
+			{
+				channel = server.channels.get(args.shift());
+			}
+		}
+
+		let remainingArgs = '';
+		args.forEach(element => remainingArgs += element + ' ');
+		remainingArgs = remainingArgs.trim();
+
+		channel.send(remainingArgs);
+			
 		console.log("say");
 
 	},
