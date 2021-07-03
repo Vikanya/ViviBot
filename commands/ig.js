@@ -41,9 +41,9 @@ module.exports = {
 			});
 
 		  	const page = await browser.newPage();
-	        await page.goto('https://www.instagram.com/p/' + code + '/');
+	        await page.goto('https://www.instagram.com/p/' + code + '/media/?size=l');
 
-		  	console.log('Dimensions:', page);
+		  	console.log('url : ', page.url());
 
 		  	await browser.close();
 		})();
