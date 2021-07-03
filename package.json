@@ -24,6 +24,7 @@
     "keyv": "^4.0.3",
     "node-fetch": "^2.6.1",
     "redisscan": "^2.0.0",
+    "puppeteer": "^1.13.0",
     "user-instagram": "^2.1.9"
   }
 }
