@@ -29,14 +29,14 @@ module.exports = {
 			code = argArray[argArray.indexOf('p')+1];
 		}
 		//console.log('code is : ' + code);
-		//console.log('link is : ' + 'https://imginn.com/p/' + code + '/');
+		console.log('link is : ' + 'https://imginn.com/p/' + code + '/');
 
 
 		fetch('https://imginn.com/p/' + code + '/').then(res => res.text())
 		.then(html => {
-		    //console.log(html)
+		    console.log(html)
 		    const $ = cheerio.load(html)
-		    const title = $("div[class='fullname']")[0]
+		    const title = $("title")
 		    console.log('1 : ' + title)
 		    const titleText = $(title).find('a').text();
 		    console.log('2 : ' + titleText)
