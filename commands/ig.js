@@ -36,7 +36,7 @@ module.exports = {
 		.then(html => {
 		    console.log(html)
 		    const $ = cheerio.load(html)
-		    const title = $("title")
+		    const title = $("div[class=swiper-wrapper]")
 		    console.log('1 : ' + title)
 		    const titleText = $(title).find('a').text();
 		    console.log('2 : ' + titleText)
