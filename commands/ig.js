@@ -32,7 +32,7 @@ module.exports = {
 		console.log('link is : ' + 'https://imginn.com/p/' + code + '/');
 
 
-		fetch('https://imginn.com/p/' + code + '/').then(res => res.text())
+		fetch('https://www.instagram.com/p/' + code + '/').then(res => res.text())
 		.then(html => {
 		    console.log(html)
 		    const $ = cheerio.load(html)
