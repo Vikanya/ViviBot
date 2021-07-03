@@ -34,6 +34,7 @@ module.exports = {
 
 		(async () => {
 		  	const browser = await puppeteer.launch({
+            	'slowMo': 250,
 		  		'args' : [
 				    '--no-sandbox',
 				    '--disable-setuid-sandbox'
@@ -41,7 +42,17 @@ module.exports = {
 			});
 
 		  	const page = await browser.newPage();
-	        await page.goto('https://www.instagram.com/p/' + code + '/media/?size=l');
+		  	await page.goto('https://www.instagram.com/')
+		    console.log('-> RECHERCHE bouton cookie')
+		    const [button2] = await page.$x("//button[contains(., 'Accepter')]");
+		    if (button2) {
+		            console.log('-> TROUVE bouton cookie')
+		            await button2.click()
+		    }
+		    else {
+		      console.log('-> NON TROUVE bouton cookie ')
+		    }
+	        //await page.goto('https://www.instagram.com/p/' + code + '/media/?size=l');
 
 		  	console.log('url : ', page.url());
 
