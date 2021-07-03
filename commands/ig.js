@@ -36,14 +36,15 @@ module.exports = {
 		.then(html => {
 		    //console.log(html)
 		    const $ = cheerio.load(html)
-		    const title = $("div[class='fullname']")[0]
+		    const title = $("div[class='swiper-slide swiper-slide-active']")[0]
+		    console.log('2 : ' + title)
 		    const titleText = $(title).find('a').text();
-		    //console.log('2 : ' + titleText)
+		    console.log('2 : ' + titleText)
 
 		    const author = $("div[class='user']").find('div a img');
-		    //console.log(author);
-		    //console.log(author.attr('alt'));
-		    //console.log(author.attr('src'));
+		    console.log(author);
+		    console.log(author.attr('alt'));
+		    console.log(author.attr('src'));
 
 			/*
 		    const images = $("div[class='downloads']").find('a');
