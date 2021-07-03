@@ -42,6 +42,7 @@ module.exports = {
 			});
 
 		  	const page = await browser.newPage();
+		  	/*
 		  	await page.goto('https://www.instagram.com/')
 		    console.log('-> RECHERCHE bouton cookie')
 		    const [button2] = await page.$x("//button[contains(., 'Accepter')]");
@@ -52,9 +53,12 @@ module.exports = {
 		    else {
 		      console.log('-> NON TROUVE bouton cookie ')
 		    }
-	        //await page.goto('https://www.instagram.com/p/' + code + '/media/?size=l');
+		    */
+		    let picURL = 'https://www.instagram.com/p/' + code + '/media/?size=l'
+	        await page.goto(picURL);
 
-		  	console.log('url : ', page.url());
+		  	console.log('goto url : ', picURL);
+		  	console.log('result url : ', page.url());
 
 		  	await browser.close();
 		})();
