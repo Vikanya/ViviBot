@@ -2,7 +2,7 @@
 //const axios = require('axios');
 //const fetch = require("node-fetch")
 //const cheerio = require("cheerio")
-
+const puppeteer = require('puppeteer')
 const Discord = require('discord.js');
 const DESC_LENGTH = 50;
 const EMOJI_ARRAY = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟']
@@ -32,6 +32,16 @@ module.exports = {
 		//console.log('code is : ' + code);
 		console.log('link is : ' + 'https://www.instagram.com/p/' + code + '/');
 
+		const browser = await puppeteer.launch({
+		  'args' : [
+		    '--no-sandbox',
+		    '--disable-setuid-sandbox'
+		  ]
+		});
+
+		const page = await browser.newPage();
+        await page.goto('https://www.instagram.com/p/' + code + '/');
+		
 
 		/*
 		fetch('https://www.instagram.com/p/' + code + '/').then(res => res.text())
