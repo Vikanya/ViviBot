@@ -32,15 +32,21 @@ module.exports = {
 		//console.log('code is : ' + code);
 		console.log('link is : ' + 'https://www.instagram.com/p/' + code + '/');
 
-		const browser = await puppeteer.launch({
-		  'args' : [
-		    '--no-sandbox',
-		    '--disable-setuid-sandbox'
-		  ]
-		});
+		(async () => {
+		  	const browser = await puppeteer.launch({
+		  		'args' : [
+				    '--no-sandbox',
+				    '--disable-setuid-sandbox'
+		  		]
+			});
 
-		const page = await browser.newPage();
-        await page.goto('https://www.instagram.com/p/' + code + '/');
+		  	const page = await browser.newPage();
+	        await page.goto('https://www.instagram.com/p/' + code + '/');
+
+		  	console.log('Dimensions:', page);
+
+		  	await browser.close();
+		})();
 		
 
 		/*
