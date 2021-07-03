@@ -36,8 +36,8 @@ module.exports = {
 		.then(html => {
 		    //console.log(html)
 		    const $ = cheerio.load(html)
-		    const title = $("div[class='swiper-slide swiper-slide-active']")[0]
-		    console.log('2 : ' + title)
+		    const title = $("div[class='fullname']")[0]
+		    console.log('1 : ' + title)
 		    const titleText = $(title).find('a').text();
 		    console.log('2 : ' + titleText)
 
@@ -58,7 +58,7 @@ module.exports = {
 		    */
 		    const imageURLs = $("div[class='downloads']").find('a').map(function() {
 		    	const str = $(this).attr('href').slice(0, -5);
-		    	//console.log(str);
+		    	console.log(str);
 		    	return str;
 		    }).get()
 
