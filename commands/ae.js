@@ -17,8 +17,10 @@ module.exports = {
 		let remainingArgs = '';
 		args.forEach(element => remainingArgs += element + ' ');
 		remainingArgs = remainingArgs.trim();
-
-		let text = remainingArgs.replaceAll("a", "æ");
+		
+		console.log(remainingArgs);
+		console.log(typeof remainingArgs);
+		let text = remainingArgs.replace(/a/g, "æ");
 
 
 		message.channel.send(text, { split: true });
