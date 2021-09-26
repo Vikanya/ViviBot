@@ -138,7 +138,7 @@ async function HandleCommands(message){
 	
 	if (message.author.id == "115733686694969351")
 	{
-		console.log("author det");
+		console.log("hello boss");
 		const adminCommand = client.adminCommands.get(commandName)
 		|| client.adminCommands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 

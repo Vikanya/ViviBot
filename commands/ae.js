@@ -1,7 +1,7 @@
 const prefix = process.env.PREFIX;
 
 module.exports = {
-	name: 'help',
+	name: 'ae',
 	description: 'Naevis it\'s my Naevis, you lead, we follow.',
 	args: true,
 	usage: '_[aefication level] <phrase>',
