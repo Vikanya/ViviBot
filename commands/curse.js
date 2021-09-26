@@ -9,7 +9,7 @@ module.exports = {
 		const data = [];
 		const { commands } = message.client;
 
-		let level = 2;
+		let level = 5;
 
 		if (args[0][0] == "_") {
 			level = args.shift().replace("_", "");
