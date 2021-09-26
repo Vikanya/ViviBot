@@ -12,11 +12,11 @@ module.exports = {
 
 		if (args[0][0] == "_") {
 			level = args.shift();
-
-			let remainingArgs = '';
-			args.forEach(element => remainingArgs += element + ' ');
-			remainingArgs = remainingArgs.trim();
 		}
+
+		let remainingArgs = '';
+		args.forEach(element => remainingArgs += element + ' ');
+		remainingArgs = remainingArgs.trim();
 
 		let text = remainingArgs.replaceAll("a", "æ");
 
