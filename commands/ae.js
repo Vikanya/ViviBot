@@ -21,10 +21,10 @@ module.exports = {
 		console.log(remainingArgs);
 		console.log(typeof remainingArgs);
 		let text = remainingArgs.replace(/ae/g, "æ");
-		let text = text.replace(/a/g, "æ");
-		let text = remainingArgs.replace(/Ae/g, "Æ");
-		let text = remainingArgs.replace(/AE/g, "Æ");
-		let text = text.replace(/A/g, "Æ");
+		text = text.replace(/a/g, "æ");
+		text = text.replace(/Ae/g, "Æ");
+		text = text.replace(/AE/g, "Æ");
+		text = text.replace(/A/g, "Æ");
 
 
 		message.channel.send(text, { split: true });
