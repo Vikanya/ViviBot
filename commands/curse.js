@@ -32,6 +32,7 @@ module.exports = {
 			} 
  			text += remainingArgs.slice(i);
 
+ 			remainingArgs = text;
  			//remainingArgs = remainingArgs.slice(0, i) + String.fromCharCode(Math.ceil(Math.random() * (879 - 768) + 768)) + remainingArgs.slice(i);
 			console.log("after  " + remainingArgs);
 		}
