@@ -42,4 +42,8 @@ module.exports = {
 
 		message.channel.send(text, { split: true });
 	},
+/*
+	getrandomcode(){
+		let codes = ["\u0313", "\u0301", "\u0308", "\u030C", "\u20DE", "\u0327", "\u0302", "\u0328", "\u0304", "\u0332", "\u0303", "\u030B", "\u036D", "\u0313", "\u0307", "\u", "\u", "\u"];
+	},*/
 };
