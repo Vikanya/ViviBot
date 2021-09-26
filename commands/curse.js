@@ -14,12 +14,12 @@ module.exports = {
 		args.forEach(element => remainingArgs += element + ' ');
 		remainingArgs = remainingArgs.trim();
 		
-		console.log(remainingArgs);
+		console.log(remainingArgs + " " + remainingArgs.length);
 
-		for (let i = remainingArgs.Length - 1; i >= 0; i--) 
+		for (let i = remainingArgs.length - 1; i >= 0; i--) 
 		{
 			console.log("before " + remainingArgs);
- 			remainingArgs = remainingArgs.slice(0, i) + (Math.ceil(Math.random() * (879 - 768) + 768)).toString(16) + txt1.slice(i);
+ 			remainingArgs = remainingArgs.slice(0, i) + (Math.ceil(Math.random() * (879 - 768) + 768)).toString(16) + remainingArgs.slice(i);
 			console.log("after  " + remainingArgs);
 		}
 
