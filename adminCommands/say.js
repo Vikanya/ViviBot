@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'say',
-	description: 'Makes the bot say a message in trhe specified channel.',
+	description: 'Makes the bot say a message in the specified channel.',
 	args: true,
 	usage: '<server id> <channel id> <mesage>',
 	execute(message, args) {
