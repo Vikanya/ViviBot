@@ -16,10 +16,10 @@ module.exports = {
 		
 		console.log(remainingArgs + " " + remainingArgs.length);
 
-		for (let i = remainingArgs.length - 1; i >= 0; i--) 
+		for (let i = remainingArgs.length; i > 0; i--) 
 		{
 			console.log("before " + remainingArgs);
- 			remainingArgs = remainingArgs.slice(0, i) + "\\" + "u0" + (Math.ceil(Math.random() * (879 - 768) + 768)).toString(16) + remainingArgs.slice(i);
+ 			remainingArgs = remainingArgs.slice(0, i) + String.fromCharCode((Math.ceil(Math.random() * (879 - 768) + 768))/*.toString(16)*/) + remainingArgs.slice(i);
 			console.log("after  " + remainingArgs);
 		}
 
