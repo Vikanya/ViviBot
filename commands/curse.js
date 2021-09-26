@@ -23,7 +23,7 @@ module.exports = {
 
 		for (let i = remainingArgs.length; i > 0; i--) 
 		{
-			console.log("before " + remainingArgs);
+			//console.log("before " + remainingArgs);
 			let text = remainingArgs.slice(0, i);
 
 			for (let j = 0; j < level; j++)
@@ -34,7 +34,7 @@ module.exports = {
 
  			remainingArgs = text;
  			//remainingArgs = remainingArgs.slice(0, i) + String.fromCharCode(Math.ceil(Math.random() * (879 - 768) + 768)) + remainingArgs.slice(i);
-			console.log("after  " + remainingArgs);
+			//console.log("after  " + remainingArgs);
 		}
 
 		
