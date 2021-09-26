@@ -19,7 +19,7 @@ module.exports = {
 		for (let i = remainingArgs.length - 1; i >= 0; i--) 
 		{
 			console.log("before " + remainingArgs);
- 			remainingArgs = remainingArgs.slice(0, i) + "\u0" + (Math.ceil(Math.random() * (879 - 768) + 768)).toString(16) + remainingArgs.slice(i);
+ 			remainingArgs = remainingArgs.slice(0, i) + "\\" + "u0" + (Math.ceil(Math.random() * (879 - 768) + 768)).toString(16) + remainingArgs.slice(i);
 			console.log("after  " + remainingArgs);
 		}
 
