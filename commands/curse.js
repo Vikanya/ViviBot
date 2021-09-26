@@ -9,6 +9,11 @@ module.exports = {
 		const data = [];
 		const { commands } = message.client;
 
+		let level = 2;
+
+		if (args[0][0] == "_") {
+			level = args.shift().replace("_", "");
+		}
 
 		let remainingArgs = '';
 		args.forEach(element => remainingArgs += element + ' ');
@@ -19,7 +24,15 @@ module.exports = {
 		for (let i = remainingArgs.length; i > 0; i--) 
 		{
 			console.log("before " + remainingArgs);
- 			remainingArgs = remainingArgs.slice(0, i) + String.fromCharCode((Math.ceil(Math.random() * (879 - 768) + 768))/*.toString(16)*/) + remainingArgs.slice(i);
+			let text = remainingArgs.slice(0, i);
+
+			for (let j = 0; j < level; j++)
+			{
+ 				text += String.fromCharCode(Math.ceil(Math.random() * (879 - 768) + 768));
+			} 
+ 			text += remainingArgs.slice(i);
+
+ 			//remainingArgs = remainingArgs.slice(0, i) + String.fromCharCode(Math.ceil(Math.random() * (879 - 768) + 768)) + remainingArgs.slice(i);
 			console.log("after  " + remainingArgs);
 		}
 
