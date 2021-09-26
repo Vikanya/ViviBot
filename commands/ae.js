@@ -28,7 +28,7 @@ module.exports = {
 		text = text.replace(/A/g, "Æ");
 		if (level >= 2)
 		{
-			text = remainingArgs.replace(/oe/g, "œ");
+			text = text.replace(/oe/g, "œ");
 			text = text.replace(/o/g, "œ");
 			text = text.replace(/Oe/g, "Œ");
 			text = text.replace(/OE/g, "Œ");
@@ -36,10 +36,15 @@ module.exports = {
 		}
 		if (level >= 3)
 		{
-			text = remainingArgs.replace("œ", "œ\u0313");
-			text = text.replace("Œ", "Œ\u0313");
+			text = text.replace(/œ/g, "œ\u0313");
+			text = text.replace(/Œ/g, "Œ\u0313");
 		}
 
 		message.channel.send(text, { split: true });
+		message.channel.send("a\u0313\u0301\u0308\u030C\u20DE\u0327\u0302\u0328\u0304\u0332\u0303\u030B\u036D\u0313\u0307", { split: true });
+	},
+
+	getrandomcode(){
+		let codes = ["\u0313", "\u0301", "\u0308", "\u030C", "\u20DE", "\u0327", "\u0302", "\u0328", "\u0304", "\u0332", "\u0303", "\u030B", "\u036D", "\u0313", "\u0307", "\u", "\u", "\u"];
 	},
 };
