@@ -2,7 +2,7 @@ const prefix = process.env.PREFIX;
 
 module.exports = {
 	name: 'ae',
-	description: 'Naevis it\'s my Naevis, you lead, we follow.',
+	description: 'That\'s my Nævis it\'s my Nævis, you lead, we follow.',
 	args: true,
 	usage: '_[aefication level] <phrase>',
 	execute(message, args) {
@@ -20,7 +20,11 @@ module.exports = {
 		
 		console.log(remainingArgs);
 		console.log(typeof remainingArgs);
-		let text = remainingArgs.replace(/a/g, "æ");
+		let text = remainingArgs.replace(/ae/g, "æ");
+		let text = text.replace(/a/g, "æ");
+		let text = remainingArgs.replace(/Ae/g, "Æ");
+		let text = remainingArgs.replace(/AE/g, "Æ");
+		let text = text.replace(/A/g, "Æ");
 
 
 		message.channel.send(text, { split: true });
