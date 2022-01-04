@@ -26,7 +26,7 @@ module.exports = {
 
 			console.log("author id " + authorId);
 
-			const filter = m => (m.author.id === authorId);
+			const filter = m => m.content.includes('discord');
 			const collector = message.channel.createMessageCollector({ filter, time: maxTime*1000 });
 
 			collector.on('collect', m => {
@@ -34,7 +34,7 @@ module.exports = {
 			});
 
 			collector.on('end', collected => {
-				console.log(`Collected ${collected.size} items`);
+				console.log("fini");
 			});
 	},
 };
