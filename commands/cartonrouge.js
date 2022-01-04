@@ -13,7 +13,7 @@ module.exports = {
 
 			let maxMessage = 15;
 			let maxTime = 120;
-			let authorId = message.mentions.users.first().id;
+			let mentionId = message.mentions.users.first().id;
 
 			if (args[0] && !isNaN(args[0]))
 			{
@@ -24,17 +24,19 @@ module.exports = {
 				maxTime = Math.min(args[1], 300);
 			}
 
-			console.log("author id " + authorId);
+			console.log("author id " + mentionId);
 
-			const filter = m => m.content.includes('discord');
+			const filter = m => (m.author.id === mentionId);
 			const collector = message.channel.createMessageCollector(filter, { time: maxTime*1000 });
 
 			collector.on('collect', m => {
-				console.log("hey");
+				m.react('🟥');
 			});
 
+			/*
 			collector.on('end', collected => {
 				console.log("fini");
 			});
+			*/
 	},
 };
