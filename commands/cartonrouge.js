@@ -27,9 +27,9 @@ module.exports = {
 			console.log("author id " + mentionId);
 
 			const filter = m => (m.author.id === mentionId);
-			const collector = message.channel.createMessageCollector(filter, { time: maxTime*1000 });
+			const collector = message.channel.createMessageCollector(filter, { time: maxTime*1000, max: maxMessage });
 
-			collector.on('collect', m => {
+			collector.on('collect', (m, collected) => {
 				m.react('🟥');
 			});
 
