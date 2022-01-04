@@ -30,7 +30,7 @@ module.exports = {
 			const collector = message.channel.createMessageCollector({ filter, time: maxTime*1000 });
 
 			collector.on('collect', m => {
-				console.log(`Collected ${m.content}`);
+				console.log("hey");
 			});
 
 			collector.on('end', collected => {
