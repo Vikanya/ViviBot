@@ -24,8 +24,10 @@ module.exports = {
 				maxTime = Math.min(args[1], 300);
 			}
 
+			console.log("author id " + authorId);
+
 			const filter = m => (m.author.id === authorId);
-			const collector = message.channel.createMessageCollector({ filter, time: maxTime*1000 });
+			const collector = new message.channel.createMessageCollector({ filter, time: maxTime*1000 });
 
 			collector.on('collect', m => {
 				console.log(`Collected ${m.content}`);
