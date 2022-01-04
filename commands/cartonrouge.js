@@ -13,6 +13,7 @@ module.exports = {
 
 			let maxMessage = 15;
 			let maxTime = 120;
+			let authorId = message.mentions.users.at(0);
 
 			if (args[0] && !isNaN(args[0]))
 			{
@@ -23,7 +24,7 @@ module.exports = {
 				maxTime = Math.min(args[1], 300);
 			}
 
-			const filter = m => (m.author == message.mentions.users[1]);
+			const filter = m => (m.author.id == authorId);
 			const collector = message.channel.createMessageCollector({ filter, time: maxTime });
 
 			collector.on('collect', m => {
