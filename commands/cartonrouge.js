@@ -13,7 +13,7 @@ module.exports = {
 
 			let maxMessage = 15;
 			let maxTime = 120;
-			let authorId = message.mentions.users.at(0);
+			let authorId = message.mentions.users.first();
 
 			if (args[0] && !isNaN(args[0]))
 			{
