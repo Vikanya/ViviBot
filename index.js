@@ -1,11 +1,12 @@
 const fs = require('fs');
 const Discord = require('discord.js');
+const config = require("./config.json");
 const Redis = require("ioredis");
-const prefix = process.env.PREFIX;
+const prefix = "!";
 const EMBED_WAIT = 5000;
 
-const client = new Discord.Client();
-const redis = new Redis(process.env.REDIS_URL);
+const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
+const redis = new Redis(config.BOT_TOKEN);
 redis.on('error', err => console.error('Redis connection error:', err));
 
 client.commands = new Discord.Collection();
@@ -43,7 +44,7 @@ client.on('ready', () => {
 });
 
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.author.bot) return;
 
 	if (message.channel.type === 'dm') {

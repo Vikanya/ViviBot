@@ -1,7 +1,8 @@
-//const userInstagram = require("user-instagram");
+/*//const userInstagram = require("user-instagram");
 //const axios = require('axios');
 //const fetch = require("node-fetch")
 //const cheerio = require("cheerio")
+
 const puppeteer = require('puppeteer')
 const Discord = require('discord.js');
 const DESC_LENGTH = 50;
@@ -42,18 +43,18 @@ module.exports = {
 			});
 
 		  	const page = await browser.newPage();
-		  	/*
-		  	await page.goto('https://www.instagram.com/')
-		    console.log('-> RECHERCHE bouton cookie')
-		    const [button2] = await page.$x("//button[contains(., 'Accepter')]");
-		    if (button2) {
-		            console.log('-> TROUVE bouton cookie')
-		            await button2.click()
-		    }
-		    else {
-		      console.log('-> NON TROUVE bouton cookie ')
-		    }
-		    */
+		  	
+		  	//await page.goto('https://www.instagram.com/')
+		    //console.log('-> RECHERCHE bouton cookie')
+		    //const [button2] = await page.$x("//button[contains(., 'Accepter')]");
+		    //if (button2) {
+		    //        console.log('-> TROUVE bouton cookie')
+		    //        await button2.click()
+		    //}
+		    //else {
+		    //  console.log('-> NON TROUVE bouton cookie ')
+		    //}
+		    
 		    let picURL = 'https://www.instagram.com/p/' + code + '/media/?size=l'
 	        await page.goto(picURL);
 
@@ -64,7 +65,7 @@ module.exports = {
 		})();
 		
 
-		/*
+		
 		fetch('https://www.instagram.com/p/' + code + '/').then(res => res.text())
 		.then(html => {
 		    console.log(html)
@@ -199,7 +200,7 @@ module.exports = {
 					});
 				}
 			});
-		});*/
+		});
 	},
 
-};
+};*/
