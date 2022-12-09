@@ -1,4 +1,4 @@
-module.exports = {
+/*module.exports = {
 	name: 'setcommand',
 	description: 'creates/changes a command that will make the bot say <message>. '
 	     			+ 'Replace <message> with \'delete\' to delete a command.',
@@ -112,4 +112,4 @@ module.exports = {
 			});
 		}
 	},
-};
+};*/

@@ -17,14 +17,8 @@
   },
   "homepage": "https://github.com/Vikanya/ViviBot#readme",
   "dependencies": {
-    "@keyv/postgres": "^1.0.16",
-    "cheerio": "^1.0.0-rc.5",
+    "cheerio": "^1.0.0-rc.12",
     "discord.js": "^12.5.1",
-    "ioredis": "^4.22.0",
-    "keyv": "^4.0.3",
-    "node-fetch": "^2.6.1",
-    "redisscan": "^2.0.0",
-    "puppeteer": "^1.13.0",
-    "user-instagram": "^2.1.9"
+    "node-fetch": "^2.6.7"
   }
 }

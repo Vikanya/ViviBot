@@ -1,13 +1,15 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const config = require("./config.json");
-const Redis = require("ioredis");
-const prefix = "!";
+//const Redis = require("ioredis");
+const prefix = '!';
 const EMBED_WAIT = 5000;
 
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
-const redis = new Redis(config.BOT_TOKEN);
-redis.on('error', err => console.error('Redis connection error:', err));
+console.log(config.BOT_TOKEN);
+//const redis = new Redis(config.BOT_TOKEN);
+console.log("error");
+//redis.on('error', err => console.error('Redis connection error:', err));
 
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -44,7 +46,7 @@ client.on('ready', () => {
 });
 
 
-client.on('messageCreate', message => {
+client.on('message', message => {
 	if (message.author.bot) return;
 
 	if (message.channel.type === 'dm') {
@@ -156,7 +158,7 @@ async function HandleCommands(message){
 			}
 			
 			try {
-				return adminCommand.execute(message, args, redis);
+				return adminCommand.execute(message, args/*, redis*/);
 			} catch (error) {
 				console.error(error);
 				return message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
@@ -166,7 +168,7 @@ async function HandleCommands(message){
 
 	const command = client.commands.get(commandName)
 	|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-
+/*
 	if (!command)
 	{/// ------------------------------ handle commands from setcommand ------------------------------
 		//console.log("try get command " + commandName);
@@ -181,7 +183,7 @@ async function HandleCommands(message){
 			console.log("failed redis get : " + commandRedis);
 		}
 	}
-	else 
+	else */
 	{/// ---------------------------------- handle regular commands ----------------------------------
 		if (command.args && !args.length) {
 			let reply = `You didn't provide any arguments, ${message.author}  ᵇᵒˡᵒˢˢ`;
@@ -194,7 +196,7 @@ async function HandleCommands(message){
 		}
 		
 		try {
-			return command.execute(message, args, redis);
+			return command.execute(message, args/*, redis*/);
 		} catch (error) {
 			console.error(error);
 			return message.reply('There was an error trying to execute that command! (' + error.name + ': ' + error.message +')');
@@ -202,4 +204,4 @@ async function HandleCommands(message){
 	}
 }
 
-client.login(process.env.BOT_TOKEN);
+client.login(config.BOT_TOKEN);

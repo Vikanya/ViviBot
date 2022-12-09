@@ -1,4 +1,4 @@
-var redisScan = require('redisscan');
+/*var redisScan = require('redisscan');
 
 module.exports = {
 	name: 'setcommandlist',
@@ -14,14 +14,6 @@ module.exports = {
 			});
 
 			//
-			/*redis.opts.store.query('SELECT * FROM redis;').then(keys => {
-				let finalString = '';
-				keys.forEach(element => finalString += element.key.toString().replace('redis:', '') + ', ');
-				//console.log(finalString);
-				return message.reply(finalString);
-			}).catch(err => {
-				console.log("failed redis all query : " + err)
-			});*/
 		}
 		catch (error) 
 		{
@@ -29,4 +21,4 @@ module.exports = {
 			message.reply('Oups y a un truc qui a raté');
 		}
 	},
-};
+};*/
